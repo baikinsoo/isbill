@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>TITLE</title>
+</head>
+<body>
+<div>
+    <form role="form" method="post" th:object="${billFormDto}">
+        <div>
+            <span>채무자</span>
+            <input type="text" th:field="*{name}" placeholder="채무자 이름을 입력해주세요">
+        </div>
+        <div>
+            <button type="submit">저장</button>
+        </div>
+    </form>
+</div>
+</body>

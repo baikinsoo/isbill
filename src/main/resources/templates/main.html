@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+</head>
+<body>
+<table>
+    <thead>
+    <tr>
+        <th>채무자</th>
+        <th>빌린 돈</th>
+        <th>갚은 돈</th>
+    </tr>
+    </thead>
+    <tr th:each="bill : ${bill}">
+        <td th:text="${bill.name}">이름</td>
+    </tr>
+</table>
+</body>
+</html>
