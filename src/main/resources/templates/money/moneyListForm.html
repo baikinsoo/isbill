@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
+    <title>TITLE</title>
 </head>
 <style>
     /* 공통 버튼 스타일 */
@@ -35,29 +36,25 @@
 </style>
 <body>
 <div>
-    <a href="http://localhost:8080/bill/new" class="button">채무자 등록</a>
-    <a href="http://localhost:8080/money/new" class="button">금액 입력</a>
-</div>
-<div>
     <table>
         <thead>
         <tr>
             <th>채무자</th>
-            <th>총 빌린 돈</th>
-            <th>총 갚은 돈</th>
+            <th>빌린 돈</th>
+            <th>갚은 돈</th>
             <th>갚아야 할 돈</th>
-            <th>내역 확인</th>
         </tr>
         </thead>
-        <tr th:each="Money : ${lastMoney}">
-            <td th:text="${Money.getBill().getName()}">채무자</td>
-            <td th:text="${Money.getBorrowMoneyAll()}">총 빌린 돈</td>
-            <td th:text="${Money.getPayMoneyAll()}">총 갚은 돈</td>
-            <td th:text="${Money.getRemainMoney()}">갚아야 할 돈</td>
-    <!--        중간에 수정이나 삭제하게되면 어떻게 되는거지...? -->
-            <td><a th:href="@{'http://localhost:8080/money/list/' + ${Money.getBill().getId()}}">확인</a></td>
+        <tr th:each="list : ${moneyList}">
+            <td th:text="${list.getBill().getName()}">채무자</td>
+            <td th:text="${list.getBorrowMoney()}">빌린 돈</td>
+            <td th:text="${list.getPayMoney()}">갚은 돈</td>
+            <td th:text="${list.getRemainMoney()}">갚아야 할 돈</td>
         </tr>
     </table>
+</div>
+<div>
+    <a href="http://localhost:8080/" class="button">홈</a>
 </div>
 </body>
 </html>

@@ -8,7 +8,7 @@ import lombok.Setter;
 @Setter
 public class MoneyFormDto {
 
-    private String name;
-    private Integer borrowMoney;
-    private Integer payMoney;
+    private Long billId;
+    private Integer borrowMoney = 0;
+    private Integer payMoney = 0;
 }

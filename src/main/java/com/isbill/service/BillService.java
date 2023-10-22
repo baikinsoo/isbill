@@ -15,17 +15,28 @@ import java.util.List;
 @RequiredArgsConstructor
 public class BillService {
 
+    private final MoneyService moneyService;
     private final BillRepository billRepository;
+    private final MoneyRepository moneyRepository;
 
     public void saveBill(BillFormDto billFormDto) {
-        Bill bill = Bill.builder()
-                .name(billFormDto.getName())
-                .build();
+
+        Bill bill = new Bill();
+        bill.setName(billFormDto.getName());
+
+        Money money = new Money();
+        money.setBill(bill);
 
         billRepository.save(bill);
+        moneyRepository.save(money);
     }
 
-    public List<Bill> findBill() {
+    public List<Bill> findBills() {
         return billRepository.findAll();
+    }
+
+    public Bill findBill(Long id) {
+        return billRepository.findById(id)
+                .orElseThrow(RuntimeException::new);
     }
 }
