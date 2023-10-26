@@ -35,8 +35,8 @@
 </style>
 <body>
 <div>
-    <a href="http://http://52.78.242.230:8080//bill/new" class="button">채무자 등록</a>
-    <a href="http://http://52.78.242.230:8080//money/new" class="button">금액 입력</a>
+    <a href="http://52.78.242.230:8080/bill/new" class="button">채무자 등록</a>
+    <a href="http://52.78.242.230:8080/money/new" class="button">금액 입력</a>
 </div>
 <div>
     <table>
@@ -55,7 +55,7 @@
             <td th:text="${Money.getPayMoneyAll()}">총 갚은 돈</td>
             <td th:text="${Money.getRemainMoney()}">갚아야 할 돈</td>
     <!--        중간에 수정이나 삭제하게되면 어떻게 되는거지...? -->
-            <td><a th:href="@{'http://http://52.78.242.230:8080//money/list/' + ${Money.getBill().getId()}}">확인</a></td>
+            <td><a th:href="@{'http://52.78.242.230:8080/money/list/' + ${Money.getBill().getId()}}">확인</a></td>
         </tr>
     </table>
 </div>
