@@ -39,4 +39,13 @@ public class BillService {
         return billRepository.findById(id)
                 .orElseThrow(RuntimeException::new);
     }
+
+    public String findName(String name) {
+        Bill bill = billRepository.findByName(name);
+        if (bill != null) {
+            return bill.getName();
+        } else {
+            return "존재하지 않는 채무자";
+        }
+    }
 }

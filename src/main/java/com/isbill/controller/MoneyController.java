@@ -2,6 +2,7 @@ package com.isbill.controller;
 
 import com.isbill.domain.Bill;
 import com.isbill.domain.Money;
+import com.isbill.dto.BillFormDto;
 import com.isbill.dto.MoneyFormDto;
 import com.isbill.service.BillService;
 import com.isbill.service.MoneyService;
@@ -9,6 +10,8 @@ import com.sun.org.apache.xpath.internal.operations.Mod;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -32,7 +35,12 @@ public class MoneyController {
     }
 
     @PostMapping("/new")
-    public String moneyNew(MoneyFormDto moneyFormDto) {
+    public String moneyNew(@Validated @ModelAttribute MoneyFormDto moneyFormDto, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            List<Bill> bills = billService.findBills();
+            model.addAttribute("bills", bills);
+            return "money/moneyForm";
+        }
         moneyService.saveMoney(moneyFormDto);
         return "redirect:/";
     }

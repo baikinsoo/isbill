@@ -40,9 +40,9 @@ public class MoneyService {
 //        --------------------------- 여기 없어도 상관 없음-----------------------
 
         //이게 꼭 이렇게 작성해야 하는지 한 번 생각해보기...
-        Integer remainMoney = lastMoney.getRemainMoney();
-        Integer borrowMoneyAll = lastMoney.getBorrowMoneyAll();
-        Integer payMoneyAll = lastMoney.getPayMoneyAll();
+        Long remainMoney = lastMoney.getRemainMoney();
+        Long borrowMoneyAll = lastMoney.getBorrowMoneyAll();
+        Long payMoneyAll = lastMoney.getPayMoneyAll();
 
         //money 객체 생성
         Money money = new Money();

@@ -17,15 +17,15 @@ public class Money {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private Integer borrowMoney = 0;
+    private Long borrowMoney = 0L;
 
-    private Integer payMoney = 0;
+    private Long payMoney = 0L;
 
-    private Integer remainMoney = 0;
+    private Long remainMoney = 0L;
 
-    private Integer borrowMoneyAll = 0;
+    private Long borrowMoneyAll = 0L;
 
-    private Integer payMoneyAll = 0;
+    private Long payMoneyAll = 0L;
 
     private String borrowItemName = "     ";
 
