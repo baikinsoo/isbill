@@ -19,7 +19,7 @@ public class BillController {
     @GetMapping("/new")
     public String billForm(Model model) {
         model.addAttribute("billFormDto", new BillFormDto());
-        return "/bill/billForm";
+        return "bill/billForm";
     }
 
     @PostMapping("/new")

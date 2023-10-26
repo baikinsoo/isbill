@@ -28,7 +28,7 @@ public class MoneyController {
 
         model.addAttribute("bills", bills);
         model.addAttribute("moneyFormDto", new MoneyFormDto());
-        return "/money/moneyForm";
+        return "money/moneyForm";
     }
 
     @PostMapping("/new")
@@ -41,6 +41,6 @@ public class MoneyController {
     public String moneyList(@PathVariable("billId") Long billId, Model model) {
         List<Money> moneyList = moneyService.findMoneyList(billId);
         model.addAttribute("moneyList", moneyList);
-        return "/money/moneyListForm";
+        return "money/moneyListForm";
     }
 }
