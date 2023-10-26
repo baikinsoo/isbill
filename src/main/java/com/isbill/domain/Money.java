@@ -4,7 +4,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 
@@ -27,6 +26,10 @@ public class Money {
     private Integer borrowMoneyAll = 0;
 
     private Integer payMoneyAll = 0;
+
+    private String borrowItemName = "     ";
+
+    private String payItemName = "     ";
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "bill_id")

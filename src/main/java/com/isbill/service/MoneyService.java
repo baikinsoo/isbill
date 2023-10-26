@@ -25,6 +25,7 @@ public class MoneyService {
         Bill bill = billRepository.findById(moneyFormDto.getBillId())
                 .orElseThrow(RuntimeException::new);
 
+//        --------------------------- 여기 없어도 상관 없음-----------------------
         Money lastMoney = null;
         //얘도 사실 미리 값을 만들어서 꼭 필요한 코드는 아님...
 
@@ -36,8 +37,9 @@ public class MoneyService {
         } else {
             throw new RuntimeException("결과가 없습니다.");
         }
+//        --------------------------- 여기 없어도 상관 없음-----------------------
 
-        //
+        //이게 꼭 이렇게 작성해야 하는지 한 번 생각해보기...
         Integer remainMoney = lastMoney.getRemainMoney();
         Integer borrowMoneyAll = lastMoney.getBorrowMoneyAll();
         Integer payMoneyAll = lastMoney.getPayMoneyAll();
@@ -50,6 +52,11 @@ public class MoneyService {
         money.setRemainMoney(remainMoney + moneyFormDto.getBorrowMoney() - moneyFormDto.getPayMoney());
         money.setBorrowMoneyAll(borrowMoneyAll + moneyFormDto.getBorrowMoney());
         money.setPayMoneyAll(payMoneyAll + moneyFormDto.getPayMoney());
+        money.setBorrowItemName(moneyFormDto.getBorrowItemName());
+        money.setPayItemName(moneyFormDto.getPayItemName());
+        // 이것도 엔티티에서 생성자로 만들어서 코드를 줄 일 수 있을 것 같음...
+
+        // 사실 DB에 최종 빌린 돈 갚은 돈을 저장 안하면 위와 같이 귀찮게 계산하는 코드를 짤 필요가 없긴하다.
 
         moneyRepository.save(money);
     }
@@ -75,6 +82,10 @@ public class MoneyService {
 
     public List<Money> findMoneyList(Long id) {
         return moneyRepository.findByBill_Id(id);
+    }
+
+    public Money findMoney(Long id) {
+        return moneyRepository.findById(id).orElseThrow(RuntimeException::new);
     }
 }
 

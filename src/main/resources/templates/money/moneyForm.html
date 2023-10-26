@@ -39,7 +39,7 @@
     <form role="form" method="post" th:object="${moneyFormDto}">
         <div>
             <span>채무자</span>
-            <select name="billId">
+            <select name="billId" id="billIdSelect">
                 <option value="">채무자 선택</option>
                 <option th:each="bill : ${bills}"
                         th:value="${bill.id}"
@@ -47,21 +47,47 @@
             </select>
         </div>
         <div>
+            <span>빌린 사유</span>
+            <input type="text" th:field="*{borrowItemName}" placeholder="빌린 사유를 입력해주세요"/>
+        </div>
+        <div>
             <span>빌린 돈</span>
-            <input type="number" th:field="*{borrowMoney}" placeholder="빌린 돈을 입력해주세요">
+            <input type="number" th:field="*{borrowMoney}" placeholder="빌린 돈을 입력해주세요"/>
+        </div>
+        <div>
+            <span>갚은 사유</span>
+            <input type="text" th:field="*{payItemName}" placeholder="빌린 사유를 입력해주세요"/>
         </div>
         <div>
             <span>갚은 돈</span>
-            <input type="number" th:field="*{payMoney}" placeholder="갚은 돈을 입력해주세요">
+            <input type="number" th:field="*{payMoney}" placeholder="갚은 돈을 입력해주세요"/>
         </div>
 
         <div>
-            <button type="submit" class="button">저장</button>
+<!--            <button type="submit" class="button">저장</button>-->
+            <button type="button" class="button" onclick="showConfirmation()">저장</button>
             <a href="http://localhost:8080/" class="button">홈</a>
         </div>
     </form>
 </div>
 <script>
+    function showConfirmation() {
+        const billIdSelect = document.querySelector('#billIdSelect');
+        const selectedBillOption = billIdSelect.options[billIdSelect.selectedIndex];
+        const selectedBillName = selectedBillOption.textContent;
+        const borrowItemName = document.querySelector('input[name="borrowItemName"]').value;
+        const borrowMoney = document.querySelector('input[name="borrowMoney"]').value;
+        const payItemName = document.querySelector('input[name="payItemName"]').value;
+        const payMoney = document.querySelector('input[name="payMoney"]').value;
+
+        const message = `채무자: ${selectedBillName}\n빌린 사유: ${borrowItemName}\n빌린 돈: ${borrowMoney}\n갚은 사유: ${payItemName}\n갚은 돈: ${payMoney}`;
+
+        if (confirm(message)) {
+            document.querySelector('form').submit();
+        } else {
+            window.location.reload();
+        }
+    }
     document.querySelector('input[name="borrowMoney"]').value = 0;
     document.querySelector('input[name="payMoney"]').value = 0;
 </script>

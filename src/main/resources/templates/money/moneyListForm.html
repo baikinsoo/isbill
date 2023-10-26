@@ -40,14 +40,18 @@
         <thead>
         <tr>
             <th>채무자</th>
+            <th>빌린 사유</th>
             <th>빌린 돈</th>
+            <th>갚은 사유</th>
             <th>갚은 돈</th>
             <th>갚아야 할 돈</th>
         </tr>
         </thead>
         <tr th:each="list : ${moneyList}">
             <td th:text="${list.getBill().getName()}">채무자</td>
+            <td th:text="${list.getBorrowItemName()}">빌린 사유</td>
             <td th:text="${list.getBorrowMoney()}">빌린 돈</td>
+            <td th:text="${list.getPayItemName()}">갚은 사유</td>
             <td th:text="${list.getPayMoney()}">갚은 돈</td>
             <td th:text="${list.getRemainMoney()}">갚아야 할 돈</td>
         </tr>
