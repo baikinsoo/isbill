@@ -36,6 +36,7 @@ public class MoneyController {
 
     @PostMapping("/new")
     public String moneyNew(@Validated @ModelAttribute MoneyFormDto moneyFormDto, BindingResult bindingResult, Model model) {
+
         if (bindingResult.hasErrors()) {
             List<Bill> bills = billService.findBills();
             model.addAttribute("bills", bills);

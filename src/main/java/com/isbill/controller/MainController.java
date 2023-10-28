@@ -20,7 +20,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MainController {
 
-    private final BillService billService;
     private final MoneyService moneyService;
 
     @GetMapping("/")

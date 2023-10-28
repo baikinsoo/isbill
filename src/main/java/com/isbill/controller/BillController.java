@@ -26,13 +26,20 @@ public class BillController {
     }
 
     @PostMapping("/new")
-    public String billForm(@Validated BillFormDto billFormDto, BindingResult bindingResult) {
+    public String createBill(@Validated BillFormDto billFormDto, BindingResult bindingResult, Model model) {
+        // 유효성 검사 수행
+        if (bindingResult.hasErrors()) {
+            return "bill/billForm"; // 에러가 있을 때 다시 입력 폼을 보여줌
+        }
+
         String name1 = billService.findName(billFormDto.getName());
         String name2 = billFormDto.getName();
+
         if (name1.equals(name2)) {
-            bindingResult.rejectValue("name","error.billFormDto", "이미 존재하는 채무자 이름입니다.");
+            bindingResult.rejectValue("name", "error.billFormDto", "이미 존재하는 채무자 이름입니다.");
             return "bill/billForm";
         }
+
         billService.saveBill(billFormDto);
         return "redirect:/";
     }

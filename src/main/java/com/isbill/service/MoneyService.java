@@ -7,12 +7,14 @@ import com.isbill.repository.BillRepository;
 import com.isbill.repository.MoneyRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class MoneyService {
 
@@ -20,14 +22,17 @@ public class MoneyService {
     private final BillRepository billRepository;
 
     public void saveMoney(MoneyFormDto moneyFormDto) {
+        // 지금 DB에서 마지막 이전과 비교해서 저장하다 보니 뭔가 서비스 코드가 매우 지저분하다... 음... List로 전부 더하면 계산할때 마다 연산이..
+        // 내가 고려할 사항이 아닌가...? 이정도는 요즘 장비로 다 커버 가능하겠지..?
 
         // 전달 받은 DTO의 billId를 통해 bill 객체를 가져온다.
         Bill bill = billRepository.findById(moneyFormDto.getBillId())
                 .orElseThrow(RuntimeException::new);
 
-//        --------------------------- 여기 없어도 상관 없음-----------------------
+
+        //-------------------------------
         Money lastMoney = null;
-        //얘도 사실 미리 값을 만들어서 꼭 필요한 코드는 아님...
+        //얘도 사실 미리 값을 만들어서 음... 없앨 방법을 찾아보자...
 
         List<Money> moneyList = moneyRepository.findByBill_Id(moneyFormDto.getBillId());
 //        사실 미리 값을 하나 생성해서 넣기 때문에 삭제 기능을 넣지 않아서 뭐... 아래 코드는 딱히 필요하지 않을듯...
@@ -37,13 +42,14 @@ public class MoneyService {
         } else {
             throw new RuntimeException("결과가 없습니다.");
         }
-//        --------------------------- 여기 없어도 상관 없음-----------------------
 
+        //--------------------
         //이게 꼭 이렇게 작성해야 하는지 한 번 생각해보기...
         Long remainMoney = lastMoney.getRemainMoney();
         Long borrowMoneyAll = lastMoney.getBorrowMoneyAll();
         Long payMoneyAll = lastMoney.getPayMoneyAll();
 
+        //---------------------------
         //money 객체 생성
         Money money = new Money();
         money.setBill(bill);
@@ -68,16 +74,14 @@ public class MoneyService {
     public List<Money> findLastMoney() {
         List<Bill> billList = billRepository.findAll();
         List<Money> monies = new ArrayList<>();
-        if (billList.isEmpty()) {
-            return null;
-        } else {
-            for (Bill bill : billList) {
-                List<Money> moneyList = moneyRepository.findByBill_Id(bill.getId());
+        for (Bill bill : billList) {
+            List<Money> moneyList = moneyRepository.findByBill_Id(bill.getId());
+            if (!moneyList.isEmpty()) {
                 Money lastMoney = moneyList.get(moneyList.size() - 1);
                 monies.add(lastMoney);
             }
         }
-        return monies;
+        return monies.isEmpty() ? null : monies;
     }
 
     public List<Money> findMoneyList(Long id) {

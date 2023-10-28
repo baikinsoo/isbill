@@ -1,100 +1,68 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8"/>
-    <title>TITLE</title>
-</head>
-<style>
-    /* 공통 버튼 스타일 */
-    .button {
-        display: inline-block;
-        padding: 10px 20px;
-        background-color: #0074d9; /* 배경색 지정 */
-        color: #fff; /* 텍스트 색상 지정 */
-        text-decoration: none; /* 밑줄 제거 */
-        border-radius: 5px; /* 둥근 모서리 설정 */
-        cursor: pointer; /* 마우스 커서를 포인터로 변경 (선택 사항) */
-        border: none; /* 버튼의 테두리 제거 */
-    }
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout=http://www.ultraq.net.nz/thymeleaf/layout
+      layout:decorate="~{layouts/layout1}">
+<div layout:fragment="content">
+    <div>
+        <form role="form" method="post" th:object="${moneyFormDto}">
+            <div>
+                <span>채무자</span>
+                <select th:field="*{billId}">
+                    <option value="">채무자 선택</option>
+                    <option th:each="bill : ${bills}"
+                            th:value="${bill.id}"
+                            th:text="${bill.name}"/>
+                </select>
+                <span th:if="${#fields.hasErrors('billId')}" th:errors="*{billId}"></span>
+            </div>
+            <div>
+                <span>빌린 사유</span>
+                <input type="text" th:field="*{borrowItemName}" placeholder="빌린 사유를 입력해주세요"/>
+                <span th:if="${#fields.hasErrors('borrowItemName')}" th:errors="*{borrowItemName}"></span>
+            </div>
+            <div>
+                <span>빌린 돈</span>
+                <input type="number" th:field="*{borrowMoney}" placeholder="빌린 돈을 입력해주세요"/>
+                <span th:if="${#fields.hasErrors('borrowMoney')}" th:errors="*{borrowMoney}"></span>
+            </div>
+            <div>
+                <span>갚은 사유</span>
+                <input type="text" th:field="*{payItemName}" placeholder="빌린 사유를 입력해주세요"/>
+                <span th:if="${#fields.hasErrors('payItemName')}" th:errors="*{payItemName}"></span>
+            </div>
+            <div>
+                <span>갚은 돈</span>
+                <input type="number" th:field="*{payMoney}" placeholder="갚은 돈을 입력해주세요"/>
+                <span th:if="${#fields.hasErrors('payMoney')}" th:errors="*{payMoney}"></span>
+            </div>
 
-    /* 버튼에 호버 효과 추가 */
-    .button:hover {
-        background-color: #0056b3; /* 호버 시 배경색 변경 */
-    }
+            <div>
+                <!--            <button type="submit" class="button">저장</button>-->
+                <button type="button" class="button" onclick="showConfirmation()">저장</button>
+            </div>
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+        </form>
+    </div>
+    <script>
+        function showConfirmation() {
+            const billIdSelect = document.querySelector('#billId');
+            const selectedBillOption = billIdSelect.options[billIdSelect.selectedIndex];
+            const selectedBillName = selectedBillOption.textContent;
+            const borrowItemName = document.querySelector('input[name="borrowItemName"]').value;
+            const borrowMoney = document.querySelector('input[name="borrowMoney"]').value;
+            const payItemName = document.querySelector('input[name="payItemName"]').value;
+            const payMoney = document.querySelector('input[name="payMoney"]').value;
 
-    /* 링크 스타일 */
-    a.button {
-        text-decoration: none; /* 밑줄 제거 */
-        color: #fff; /* 텍스트 색상 지정 */
-    }
+            const message = `채무자: ${selectedBillName}\n빌린 사유: ${borrowItemName}\n빌린 돈: ${borrowMoney}\n갚은 사유: ${payItemName}\n갚은 돈: ${payMoney}`;
 
-    /* 링크 호버 효과 추가 */
-    a.button:hover {
-        text-decoration: none; /* 호버 시 밑줄 제거 */
-        color: #fff; /* 호버 시 텍스트 색상 변경 (선택 사항) */
-    }
-</style>
-<body>
-<div>
-    <form role="form" method="post" th:object="${moneyFormDto}">
-        <div>
-            <span>채무자</span>
-            <select th:field="*{billId}">
-                <option value="">채무자 선택</option>
-                <option th:each="bill : ${bills}"
-                        th:value="${bill.id}"
-                        th:text="${bill.name}"/>
-            </select>
-            <span th:if="${#fields.hasErrors('billId')}" th:errors="*{billId}"></span>
-        </div>
-        <div>
-            <span>빌린 사유</span>
-            <input type="text" th:field="*{borrowItemName}" placeholder="빌린 사유를 입력해주세요"/>
-            <span th:if="${#fields.hasErrors('borrowItemName')}" th:errors="*{borrowItemName}"></span>
-        </div>
-        <div>
-            <span>빌린 돈</span>
-            <input type="number" th:field="*{borrowMoney}" placeholder="빌린 돈을 입력해주세요"/>
-            <span th:if="${#fields.hasErrors('borrowMoney')}" th:errors="*{borrowMoney}"></span>
-        </div>
-        <div>
-            <span>갚은 사유</span>
-            <input type="text" th:field="*{payItemName}" placeholder="빌린 사유를 입력해주세요"/>
-            <span th:if="${#fields.hasErrors('payItemName')}" th:errors="*{payItemName}"></span>
-        </div>
-        <div>
-            <span>갚은 돈</span>
-            <input type="number" th:field="*{payMoney}" placeholder="갚은 돈을 입력해주세요"/>
-            <span th:if="${#fields.hasErrors('payMoney')}" th:errors="*{payMoney}"></span>
-        </div>
-
-        <div>
-<!--            <button type="submit" class="button">저장</button>-->
-            <button type="button" class="button" onclick="showConfirmation()">저장</button>
-            <a href="/" class="button">홈</a>
-        </div>
-    </form>
-</div>
-<script>
-    function showConfirmation() {
-        const billIdSelect = document.querySelector('#billId');
-        const selectedBillOption = billIdSelect.options[billIdSelect.selectedIndex];
-        const selectedBillName = selectedBillOption.textContent;
-        const borrowItemName = document.querySelector('input[name="borrowItemName"]').value;
-        const borrowMoney = document.querySelector('input[name="borrowMoney"]').value;
-        const payItemName = document.querySelector('input[name="payItemName"]').value;
-        const payMoney = document.querySelector('input[name="payMoney"]').value;
-
-        const message = `채무자: ${selectedBillName}\n빌린 사유: ${borrowItemName}\n빌린 돈: ${borrowMoney}\n갚은 사유: ${payItemName}\n갚은 돈: ${payMoney}`;
-
-        if (confirm(message)) {
-            document.querySelector('form').submit();
-        } else {
-            window.location.reload();
+            if (confirm(message)) {
+                document.querySelector('form').submit();
+            } else {
+                window.location.reload();
+            }
         }
-    }
-    document.querySelector('input[name="borrowMoney"]').value = 0;
-    document.querySelector('input[name="payMoney"]').value = 0;
-</script>
-</body>
+        document.querySelector('input[name="borrowMoney"]').value = 0;
+        document.querySelector('input[name="payMoney"]').value = 0;
+    </script>
+</div>
 </html>
