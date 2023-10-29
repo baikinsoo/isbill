@@ -1,7 +1,5 @@
 package com.isbill.domain;
 
-import com.isbill.dto.MoneyFormDto;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -33,16 +31,14 @@ public class Money {
     private String payItemName = "     ";
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "bill_id")
-    private Bill bill;
+    @JoinColumn(name = "registrebill_id")
+    private RegistreBill registreBill;
 
-//    public static Money createMoney(MoneyFormDto moneyFormDto, Bill bill) {
-//        Money money = new Money();
-//        money.setBill(bill);
-//        money.setBorrowMoney(moneyFormDto.getBorrowMoney());
-//        money.setPayMoney(moneyFormDto.getPayMoney());
-//        money.setBorrowItemName(moneyFormDto.getBorrowItemName());
-//        money.setPayItemName(moneyFormDto.getPayItemName());
-//        return money;
-//    }
+    public static Money createMoney(RegistreBill registreBill) {
+        Money money = new Money();
+        money.setRegistreBill(registreBill);
+        return money;
+    }
 }
+
+

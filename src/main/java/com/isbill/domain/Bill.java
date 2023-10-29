@@ -24,6 +24,6 @@ public class Bill {
     @Nullable
     private String name;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "bill")
-    private List<Money> monies = new ArrayList<>();
+    @OneToMany(mappedBy = "bill", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<RegistreBill> registreBills = new ArrayList<>();
 }

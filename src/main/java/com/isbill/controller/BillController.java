@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.validation.Valid;
+
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/bill")
@@ -26,7 +28,7 @@ public class BillController {
     }
 
     @PostMapping("/new")
-    public String createBill(@Validated BillFormDto billFormDto, BindingResult bindingResult, Model model) {
+    public String createBill(@Valid BillFormDto billFormDto, BindingResult bindingResult, Model model) {
         // 유효성 검사 수행
         if (bindingResult.hasErrors()) {
             return "bill/billForm"; // 에러가 있을 때 다시 입력 폼을 보여줌

@@ -15,10 +15,16 @@ public class RegistreBill {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "Registre_id")
+    @JoinColumn(name = "registre_id")
     private Registre registre;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "item_id")
+    @JoinColumn(name = "bill_id")
     private Bill bill;
+
+    public static RegistreBill createRegistreBill(Registre registre, Bill bill) {
+        RegistreBill registreBill = new RegistreBill();
+        registreBill.setRegistre(registre);
+        return registreBill;
+    }
 }

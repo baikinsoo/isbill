@@ -26,11 +26,12 @@ public class BillService {
         Bill bill = new Bill();
         bill.setName(billFormDto.getName());
 
-        Money money = new Money();
-        money.setBill(bill);
+//        Money money = new Money();
+//        money.setBill(bill);
+
 
         billRepository.save(bill);
-        moneyRepository.save(money);
+//        moneyRepository.save(money);
     }
 
     public List<Bill> findBills() {

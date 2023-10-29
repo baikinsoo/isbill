@@ -34,6 +34,10 @@ public class Member {
     //기본적으로 Enum은 순서가 저장되는데, enum의 순서가 바뀔 경우 문제가 발생할 수 있으므로 String으로 비교하기 위해 EnumType를 STRING으로 한다.
     private Role role;
 
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "registre_id")
+    private Registre registre;
+
     public static Member createMember(MemberFormDto memberFormDto, PasswordEncoder passwordEncoder) {
         Member member = new Member();
         member.setName(memberFormDto.getName());
