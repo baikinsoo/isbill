@@ -1,17 +1,20 @@
 package com.isbill.controller;
 
 import com.isbill.domain.Member;
+import com.isbill.domain.Registre;
 import com.isbill.dto.MemberFormDto;
+import com.isbill.repository.RegistreRepository;
 import com.isbill.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.validation.Valid;
 
 @RequestMapping("/members")
 @Controller
@@ -20,6 +23,7 @@ public class MemberController {
 
     private final MemberService memberService;
     private final PasswordEncoder passwordEncoder;
+    private final RegistreRepository registreRepository;
 
     @GetMapping("/new")
     public String memberForm(Model model) {
@@ -28,7 +32,7 @@ public class MemberController {
     }
 
     @PostMapping("/new")
-    public String memberForm(@Validated MemberFormDto memberFormDto, BindingResult bindingResult, Model model) {
+    public String memberForm(@Valid MemberFormDto memberFormDto, BindingResult bindingResult, Model model) {
 
         if (bindingResult.hasErrors()) {
             return "member/memberForm";
@@ -37,6 +41,8 @@ public class MemberController {
         try {
             Member member = Member.createMember(memberFormDto, passwordEncoder);
             memberService.saveMember(member);
+            Registre registre = Registre.createRegistre(member);
+            registreRepository.save(registre);
         } catch (IllegalStateException e) {
             model.addAttribute("errorMessage", e.getMessage());
             return "member/memberForm";

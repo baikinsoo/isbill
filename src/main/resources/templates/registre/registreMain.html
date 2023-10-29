@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout=http://www.ultraq.net.nz/thymeleaf/layout
+      layout:decorate="~{layouts/layout1}">
+
+<div layout:fragment="content">
+    <div>
+        <table>
+            <thead>
+            <tr>
+                <th>채무자</th>
+                <th>총 빌린 돈</th>
+                <th>총 갚은 돈</th>
+                <th>갚아야 할 돈</th>
+                <th>내역 확인</th>
+            </tr>
+            </thead>
+            <tr th:each="MoneyList : ${moneyList}">
+                <td th:text="${MoneyList.getRegistreBill().getBill().getName()}">채무자</td>
+                <td th:text="${MoneyList.getBorrowMoneyAll()}">총 빌린 돈</td>
+                <td th:text="${MoneyList.getPayMoneyAll()}">총 갚은 돈</td>
+                <td th:text="${MoneyList.getRemainMoney()}">갚아야 할 돈</td>
+                <!--        중간에 수정이나 삭제하게되면 어떻게 되는거지...? -->
+                <td><a th:href="@{'/money/list/' + ${MoneyList.getRegistreBill().getId()}}">확인</a></td>
+            </tr>
+        </table>
+    </div>
+</div>
+</html>

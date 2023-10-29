@@ -1,9 +1,7 @@
 package com.isbill.service;
 
 import com.isbill.domain.Bill;
-import com.isbill.domain.Money;
 import com.isbill.dto.BillFormDto;
-import com.isbill.dto.MoneyFormDto;
 import com.isbill.repository.BillRepository;
 import com.isbill.repository.MoneyRepository;
 import lombok.RequiredArgsConstructor;
@@ -17,20 +15,13 @@ import java.util.List;
 @RequiredArgsConstructor
 public class BillService {
 
-    private final MoneyService moneyService;
     private final BillRepository billRepository;
-    private final MoneyRepository moneyRepository;
 
     public void saveBill(BillFormDto billFormDto) {
 
         Bill bill = new Bill();
         bill.setName(billFormDto.getName());
-
-        Money money = new Money();
-        money.setBill(bill);
-
         billRepository.save(bill);
-        moneyRepository.save(money);
     }
 
     public List<Bill> findBills() {

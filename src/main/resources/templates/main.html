@@ -4,41 +4,20 @@
       layout:decorate="~{layouts/layout1}">
 
 <div layout:fragment="content">
-<!--    <div>-->
-<!--        <a href="/bill/new" class="button">채무자 등록</a>-->
-<!--        <a href="/money/new" class="button">금액 입력</a>-->
-<!--    </div>-->
-<!-- header로 옮김~~~ -->
     <div>
         <table>
             <thead>
             <tr>
-                <th>채무자</th>
-                <th>총 빌린 돈</th>
-                <th>총 갚은 돈</th>
-                <th>갚아야 할 돈</th>
+                <th>장부</th>
                 <th>내역 확인</th>
             </tr>
             </thead>
-            <tr th:each="Money : ${lastMoney}">
-                <td th:text="${Money.getBill().getName()}">채무자</td>
-                <td th:text="${Money.getBorrowMoneyAll()}">총 빌린 돈</td>
-                <td th:text="${Money.getPayMoneyAll()}">총 갚은 돈</td>
-                <td th:text="${Money.getRemainMoney()}">갚아야 할 돈</td>
+            <tr th:each="Registres : ${registres}">
+                <td th:text="${Registres.getName()}">장부</td>
                 <!--        중간에 수정이나 삭제하게되면 어떻게 되는거지...? -->
-                <td><a th:href="@{'/money/list/' + ${Money.getBill().getId()}}">확인</a></td>
+                <td><a th:href="@{'/registre/list/' + ${Registres.getId()}}">확인</a></td>
             </tr>
         </table>
-    </div>
-    <br>
-    <br>
-    <br>
-    <div>
-        필독<br>
-        TEST용 웹 페이지<br>
-        관리자 - ID : money@money.com / PW : 15131513<br>
-        채무자 및 금액을 입력하고 싶으면 위의 관리자 아이디로 접속해야 가능하다.<br>
-        그 외 ID는 회원가입은 되지만 그냥 회원 가입만 가능하다.<br>
     </div>
 </div>
 </html>

@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-<!--layout 기능을 사용하기 위해서 html 태그에 layout 네임스페이스를 추가한다. -->
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -20,14 +19,11 @@
 
 </head>
 <body>
-
 <div th:replace="fragments/header::header"></div>
 
-<div layout:fragment="content">
+<div layout:fragment="content" class="content">
 
 </div>
-
 <div th:replace="fragments/footer::footer"></div>
-
 </body>
 </html>
