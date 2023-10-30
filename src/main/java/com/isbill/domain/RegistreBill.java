@@ -21,10 +21,4 @@ public class RegistreBill {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "bill_id")
     private Bill bill;
-
-    public static RegistreBill createRegistreBill(Registre registre, Bill bill) {
-        RegistreBill registreBill = new RegistreBill();
-        registreBill.setRegistre(registre);
-        return registreBill;
-    }
 }

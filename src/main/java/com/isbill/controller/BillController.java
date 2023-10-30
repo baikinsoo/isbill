@@ -1,6 +1,5 @@
 package com.isbill.controller;
 
-import com.isbill.domain.Bill;
 import com.isbill.dto.BillFormDto;
 import com.isbill.service.BillService;
 import lombok.RequiredArgsConstructor;
