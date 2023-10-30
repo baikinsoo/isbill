@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout=http://www.ultraq.net.nz/thymeleaf/layout
+      layout:decorate="~{layouts/layout1}">
+
+<div layout:fragment="content">
+    <div>
+        <table>
+            <thead>
+            <tr>
+                <th>작성자</th>
+                <th>제목</th>
+                <th>내용</th>
+            </tr>
+            </thead>
+            <tr th:each="List : ${freeBoard}">
+                <td th:text="${List.getMember().getName()}">작성자</td>
+                <td th:text="${List.getTitle()}">제목</td>
+                <td th:text="${List.getContent()}">내용</td>
+            </tr>
+        </table>
+    </div>
+</div>
+</html>

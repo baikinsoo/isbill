@@ -26,9 +26,9 @@ public class BillController {
 
     @PostMapping("/new")
     public String createBill(@Validated BillFormDto billFormDto, BindingResult bindingResult, Model model) {
-        // 유효성 검사 수행
+
         if (bindingResult.hasErrors()) {
-            return "bill/billForm"; // 에러가 있을 때 다시 입력 폼을 보여줌
+            return "bill/billForm";
         }
 
         String name1 = billService.findName(billFormDto.getName());

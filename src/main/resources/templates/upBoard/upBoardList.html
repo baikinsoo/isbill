@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout=http://www.ultraq.net.nz/thymeleaf/layout
+      layout:decorate="~{layouts/layout1}">
+
+<div layout:fragment="content">
+
+    <button sec:authorize="isAuthenticated()">
+        <a href="/upBoard/new">게시글 작성</a>
+    </button>
+    <button sec:authorize="isAuthenticated()">
+        <a href="/upBoard/new">등업 요청</a>
+    </button>
+
+    <div>
+        <table>
+            <thead>
+            <tr>
+                <th>작성자</th>
+                <th>제목</th>
+                <th>내용</th>
+            </tr>
+            </thead>
+            <tr th:each="List : ${upBoardList}">
+                <td th:text="${List.getMember().getName()}">작성자</td>
+                <td th:text="${List.getTitle()}">제목</td>
+                <td><a th:href="@{'/upBoard/' + ${List.getId()}}">확인</a></td>
+            </tr>
+        </table>
+    </div>
+</div>
+</html>
