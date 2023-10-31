@@ -1,12 +1,7 @@
 package com.isbill.controller;
 
-import com.isbill.constant.Role;
 import com.isbill.domain.Member;
-import com.isbill.domain.Registre;
 import com.isbill.dto.MemberFormDto;
-import com.isbill.repository.MemberRepository;
-import com.isbill.repository.MoneyRepository;
-import com.isbill.repository.RegistreRepository;
 import com.isbill.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -18,7 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
-import java.security.Principal;
 
 @RequestMapping("/members")
 @Controller
@@ -27,8 +21,6 @@ public class MemberController {
 
     private final MemberService memberService;
     private final PasswordEncoder passwordEncoder;
-    private final RegistreRepository registreRepository;
-    private final MemberRepository memberRepository;
 
     @GetMapping("/new")
     public String memberForm(Model model) {

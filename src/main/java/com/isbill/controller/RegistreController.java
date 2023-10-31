@@ -23,7 +23,6 @@ import java.util.List;
 public class RegistreController {
 
     private final RegistreBillRepository registreBillRepository;
-    private final BillRepository billRepository;
     private final MoneyService moneyService;
 
     @GetMapping("/list/{registreId}")

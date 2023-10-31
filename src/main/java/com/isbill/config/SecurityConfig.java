@@ -34,7 +34,8 @@ public class SecurityConfig {
         http.authorizeRequests()
                 .mvcMatchers("/**","/css/**", "/js/**").permitAll()
                 .antMatchers("/", "/members/**", "/money/list/**").permitAll()
-                .mvcMatchers("/bill/new","/money/new").hasRole("ADMIN")
+                .mvcMatchers("/bill/new","/money/new").hasAnyRole("USER","ADMIN")
+                .mvcMatchers("/upBoard/list").hasRole("ADMIN")
                 .anyRequest().authenticated();
 
         http.exceptionHandling()

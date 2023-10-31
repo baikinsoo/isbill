@@ -1,5 +1,6 @@
 package com.isbill.controller;
 
+import com.isbill.constant.Role;
 import com.isbill.domain.FreeBoard;
 import com.isbill.domain.Member;
 import com.isbill.dto.FreeBoardFormDto;
@@ -27,6 +28,7 @@ public class FreeBoardController {
 
     private final FreeBoardService freeBoardService;
     private final PrincipalService principalService;
+
 
     @GetMapping()
     public String freeBoard(Model model) {
@@ -71,7 +73,12 @@ public class FreeBoardController {
 
     @GetMapping("/newContent")
     public ResponseEntity newContent(Principal principal) {
+        Member member = null;
         if (principal != null) {
+            member = principalService.findMember(principal);
+            if (member.getRole() == Role.NONE) {
+                return new ResponseEntity(HttpStatus.I_AM_A_TEAPOT);
+            }
             return new ResponseEntity(HttpStatus.OK);
         } else {
             return new ResponseEntity(HttpStatus.UNAUTHORIZED);

@@ -1,6 +1,7 @@
 package com.isbill.domain;
 
 import com.isbill.constant.Role;
+import com.isbill.constant.Upgrade;
 import com.isbill.dto.MemberFormDto;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -30,6 +31,9 @@ public class Member {
     //기본적으로 Enum은 순서가 저장되는데, enum의 순서가 바뀔 경우 문제가 발생할 수 있으므로 String으로 비교하기 위해 EnumType를 STRING으로 한다.
     private Role role;
 
+    @Enumerated(EnumType.STRING)
+    private Upgrade upgrade;
+
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "registre_id")
     private Registre registre;
@@ -40,7 +44,8 @@ public class Member {
         member.setEmail(memberFormDto.getEmail());
         String password = passwordEncoder.encode(memberFormDto.getPassword());
         member.setPassword(password);
-        member.setRole(Role.USER);
+        member.setRole(Role.NONE);
+        member.setUpgrade(Upgrade.NO);
         return member;
     }
 }

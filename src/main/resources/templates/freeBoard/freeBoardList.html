@@ -33,7 +33,10 @@
                     if(jqXHR.status == 401){
                         alert('로그인 후 이용해주세요');
                         location.href='/members/login';
-                    } else{
+                    } else if (jqXHR.status == 418) {
+                        alert('등업 후 이용해주세요');
+                        location.href = '/upBoard';
+                    } else {
                         alert(jqXHR.responseText);
                     }
                 }
