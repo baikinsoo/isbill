@@ -2,11 +2,13 @@ package com.isbill.service;
 
 import com.isbill.constant.Role;
 import com.isbill.constant.Upgrade;
+import com.isbill.domain.Registre;
 import com.isbill.domain.UpBoard;
 import com.isbill.domain.Member;
 import com.isbill.dto.UpBoardFormDto;
 import com.isbill.dto.UpgradeDto;
 import com.isbill.repository.MemberRepository;
+import com.isbill.repository.RegistreRepository;
 import com.isbill.repository.UpBoardRepository;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -25,6 +27,7 @@ public class UpBoardService {
 
     private final UpBoardRepository upBoardRepository;
     private final MemberRepository memberRepository;
+    private final RegistreRepository registreRepository;
 
     public void saveContent(UpBoardFormDto upBoardFormDto, Member member) {
 
@@ -49,6 +52,8 @@ public class UpBoardService {
         Long memberId = upgradeDto.getMemberId();
         Member member = memberRepository.findById(memberId).orElseThrow(RuntimeException::new);
         member.setRole(Role.USER);
+        Registre registre = Registre.createRegistre(member);
+        registreRepository.save(registre);
         memberRepository.save(member);
     }
 

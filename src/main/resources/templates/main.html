@@ -1,9 +1,49 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout=http://www.ultraq.net.nz/thymeleaf/layout
+      xmlns:sec="http://www.w3.org/1999/xhtml"
       layout:decorate="~{layouts/layout1}">
 
+<head>
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+</head>
+
+<th:block layout:fragment="script">
+<script th:inline="javascript">
+
+    function myRegistre(){
+        var token = $("meta[name='_csrf']").attr("content");
+        var header = $("meta[name='_csrf_header']").attr("content");
+
+        var url = "/registre/myRegistre";
+
+        $.ajax({
+            url      : url,
+            type     : "GET",
+            beforeSend : function(xhr){
+                xhr.setRequestHeader(header, token);
+            },
+            cache   : false,
+            success  : function(result, status){
+                var userId = result.userId;
+                if (userId) {
+                    location.href ='/registre/list/' + userId;
+                } else {
+                    alert('사용자 ID를 받아오지 못했습니다.');
+                }
+            },
+            error : function(jqXHR, status, error){
+            }
+        });
+    }
+</script>
+</th:block>
+
 <div layout:fragment="content">
+    <button class="nav-item" sec:authorize="hasAnyAuthority('ROLE_USER')">
+        <a class="nav-link" onclick="myRegistre()">내 장부 확인</a>
+    </button>
     <div>
         <table>
             <thead>

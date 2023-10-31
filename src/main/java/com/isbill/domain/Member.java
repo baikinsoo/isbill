@@ -34,10 +34,6 @@ public class Member {
     @Enumerated(EnumType.STRING)
     private Upgrade upgrade;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "registre_id")
-    private Registre registre;
-
     public static Member createMember(MemberFormDto memberFormDto, PasswordEncoder passwordEncoder) {
         Member member = new Member();
         member.setName(memberFormDto.getName());

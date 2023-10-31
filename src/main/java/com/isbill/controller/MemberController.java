@@ -38,10 +38,6 @@ public class MemberController {
         try {
             Member member = Member.createMember(memberFormDto, passwordEncoder);
             memberService.saveMember(member);
-//            if (equals(member.getRole() == Role.ADMIN)) {
-//                Registre registre = Registre.createRegistre(member);
-//                registreRepository.save(registre);
-//            }
         } catch (IllegalStateException e) {
             model.addAttribute("errorMessage", e.getMessage());
             return "member/memberForm";

@@ -51,11 +51,13 @@ public class MoneyController {
             return "money/moneyForm";
         }
         String name = principal.getName();
+
         Member member = memberRepository.findByEmail(name);
         Registre registre = registreRepository.findByMemberId(member.getId());
         Bill bill = billRepository.findById(moneyFormDto.getBillId())
                 .orElseThrow(RuntimeException::new);
-        RegistreBill registreBill = registreBillRepository.findByRegistre_IdAndBill_Id(registre.getId(), bill.getId());
+        RegistreBill registreBill = null;
+        registreBill = registreBillRepository.findByRegistre_IdAndBill_Id(registre.getId(), bill.getId());
         if (registreBill == null) {
             registreBillService.saveRB(registre, bill);
         }
