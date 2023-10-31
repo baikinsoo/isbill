@@ -33,9 +33,9 @@ public class MoneyController {
     private final RegistreBillService registreBillService;
 
     @GetMapping("/new")
-    public String moneyFrom(Model model) {
+    public String moneyFrom(Model model, Principal principal) {
 
-        List<Bill> bills = billService.findBills();
+        List<Bill> bills = billService.findMemberBills(principal);
 
         model.addAttribute("bills", bills);
         model.addAttribute("moneyFormDto", new MoneyFormDto());
@@ -46,7 +46,7 @@ public class MoneyController {
     public String moneyNew(@Valid @ModelAttribute MoneyFormDto moneyFormDto, BindingResult bindingResult, Model model, Principal principal) {
 
         if (bindingResult.hasErrors()) {
-            List<Bill> bills = billService.findBills();
+            List<Bill> bills = billService.findMemberBills(principal);
             model.addAttribute("bills", bills);
             return "money/moneyForm";
         }

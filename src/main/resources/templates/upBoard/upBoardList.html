@@ -19,6 +19,7 @@
 
         .button-container {
             margin-top: 20px;
+            display: flex; /* 버튼을 가로로 정렬하기 위한 스타일 */
         }
 
         button {
@@ -106,12 +107,13 @@
 </th:block>
 
 <div layout:fragment="content">
-
-    <button onclick="newContent()">게시글 작성</button>
-    <form role="form" method="post">
-        <button sec:authorize="hasAnyAuthority('ROLE_NONE')" onclick="showPop()">등업 요청</button>
-        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
-    </form>
+    <div class="button-container"> <!-- 버튼을 가로로 정렬하기 위한 div -->
+        <button onclick="newContent()">게시글 작성</button>
+        <form role="form" method="post">
+            <button sec:authorize="hasAnyAuthority('ROLE_NONE')" onclick="showPop()">등업 요청</button>
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+        </form>
+    </div>
 
     <div>
         <table>

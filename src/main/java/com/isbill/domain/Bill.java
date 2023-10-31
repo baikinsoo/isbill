@@ -23,6 +23,10 @@ public class Bill {
     @Nullable
     private String name;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "member_id")
+    private Member member;
+
     @OneToMany(mappedBy = "bill", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<RegistreBill> registreBills = new ArrayList<>();
 }
