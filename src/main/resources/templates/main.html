@@ -7,6 +7,56 @@
 <head>
     <meta name="_csrf" th:content="${_csrf.token}"/>
     <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+    <style>
+        /* Add your custom CSS styles here */
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        button.nav-item {
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        button.nav-item:hover {
+            background-color: #2980b9;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #3498db;
+            color: #fff;
+        }
+
+        td a {
+            text-decoration: none;
+            color: #3498db;
+        }
+
+        td a:hover {
+            color: #2980b9;
+        }
+
+        /* Custom style for the "내 장부 보기" link */
+        button.nav-item a {
+            color: #fff; /* Change the text color to white */
+            text-decoration: none;
+        }
+    </style>
 </head>
 
 <th:block layout:fragment="script">

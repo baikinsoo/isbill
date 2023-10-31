@@ -3,6 +3,47 @@
       xmlns:layout=http://www.ultraq.net.nz/thymeleaf/layout
       layout:decorate="~{layouts/layout1}">
 
+<head>
+    <style>
+        /* Apply custom CSS styles here */
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #3498db;
+            color: #fff;
+        }
+
+        td form {
+            display: inline-block; /* Allows multiple forms to appear side by side */
+        }
+
+        button[type="submit"] {
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+
 <div layout:fragment="content">
     <div>
         <table>
