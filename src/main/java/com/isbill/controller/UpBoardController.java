@@ -6,6 +6,8 @@ import com.isbill.dto.UpBoardFormDto;
 import com.isbill.service.UpBoardService;
 import com.isbill.service.PrincipalService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -65,5 +67,14 @@ public class UpBoardController {
         model.addAttribute("upBoard", upBoard);
 
         return "upBoard/UBContent";
+    }
+
+    @GetMapping("/newContent")
+    public ResponseEntity newContent(Principal principal) {
+        if (principal != null) {
+            return new ResponseEntity(HttpStatus.OK);
+        } else {
+            return new ResponseEntity(HttpStatus.UNAUTHORIZED);
+        }
     }
 }
