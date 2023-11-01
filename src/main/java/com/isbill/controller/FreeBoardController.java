@@ -99,4 +99,16 @@ public class FreeBoardController {
             return new ResponseEntity(HttpStatus.UNAUTHORIZED);
         }
     }
+
+    @DeleteMapping("/{freeBoardId}/delete")
+    public ResponseEntity<String> delete(@PathVariable("freeBoardId") Long freeBoardId) {
+        freeCommentService.deleteFBComment(freeBoardId);
+        try {
+            freeBoardService.delete(freeBoardId);
+            return ResponseEntity.ok("삭제되었습니다.");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("삭제에 실패했습니다.");
+        }
+    }
+
 }

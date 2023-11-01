@@ -9,6 +9,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -30,6 +31,11 @@ public class FreeCommentService {
 
     public List<FreeComment> findCotent(Long id) {
         return freeCommentRepository.findByFreeBoard_Id(id);
+    }
+
+    @Transactional
+    public void deleteFBComment(Long id) {
+        freeCommentRepository.deleteAllByFreeBoard_Id(id);
     }
 
 }

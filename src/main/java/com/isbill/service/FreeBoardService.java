@@ -4,6 +4,7 @@ import com.isbill.domain.FreeBoard;
 import com.isbill.domain.Member;
 import com.isbill.dto.FreeBoardFormDto;
 import com.isbill.repository.FreeBoardRepository;
+import com.isbill.repository.FreeCommentRepository;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -36,5 +37,9 @@ public class FreeBoardService {
     public FreeBoard findOne(Long id) {
         return freeBoardRepository.findById(id)
                 .orElseThrow(RuntimeException::new);
+    }
+
+    public void delete(Long id) {
+        freeBoardRepository.deleteById(id);
     }
 }
