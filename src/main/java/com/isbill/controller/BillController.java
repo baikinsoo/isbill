@@ -1,11 +1,14 @@
 package com.isbill.controller;
 
+import com.isbill.constant.Role;
 import com.isbill.domain.Bill;
 import com.isbill.domain.Member;
 import com.isbill.dto.BillFormDto;
 import com.isbill.service.BillService;
 import com.isbill.service.PrincipalService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -33,8 +36,6 @@ public class BillController {
     @PostMapping("/new")
     public String createBill(@Validated BillFormDto billFormDto, BindingResult bindingResult, Model model, Principal principal) {
 
-
-
         if (bindingResult.hasErrors()) {
             return "bill/billForm";
         }
@@ -49,5 +50,19 @@ public class BillController {
 
         billService.saveBill(billFormDto, principal);
         return "redirect:/";
+    }
+
+    @GetMapping("billNew")
+    public ResponseEntity billNew(Principal principal) {
+        Member member = null;
+        if (principal != null) {
+            member = principalService.findMember(principal);
+            if (member.getRole() == Role.NONE) {
+                return new ResponseEntity(HttpStatus.I_AM_A_TEAPOT);
+            }
+            return new ResponseEntity(HttpStatus.OK);
+        } else {
+            return new ResponseEntity(HttpStatus.UNAUTHORIZED);
+        }
     }
 }
