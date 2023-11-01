@@ -66,7 +66,7 @@ public class PatchBoardController {
 
         patchBoardService.saveContent(patchBoardFormDto, member);
 
-        return "redirect:/upBoard";
+        return "redirect:/patch";
     }
 
     @GetMapping("/{patchBoardId}")
@@ -74,8 +74,8 @@ public class PatchBoardController {
 
         PatchBoard one = patchBoardService.findOne(patchBoardId);
 
-        model.addAttribute("patchBoard", one);
+        model.addAttribute("patch", one);
 
-        return "/patch/PBContent";
+        return "patch/PBContent";
     }
 }

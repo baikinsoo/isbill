@@ -63,23 +63,23 @@
 </head>
 
 <div layout:fragment="content">
-  <div>
-    <table>
-      <thead>
-      <tr>
-        <th>작성자</th>
-        <th>제목</th>
-      </tr>
-      </thead>
-      <tr th:each="List : ${patchBoard}">
-        <td th:text="${List.getMember().getName()}">작성자</td>
-        <td th:text="${List.getTitle()}">제목</td>
-      </tr>
-    </table>
-  </div>
+    <div>
+      <table>
+        <thead>
+        <tr>
+          <th>작성자</th>
+          <th>제목</th>
+        </tr>
+        </thead>
+          <tr th:each="patch : ${patch}">
+          <td th:text="${patch.getMember().getName()}">작성자</td>
+          <td th:text="${patch.getTitle()}">제목</td>
+        </tr>
+      </table>
+    </div>
   <div class="long-content-div">
     <!-- DB에서 받아온 내용을 <pre> 태그를 사용하여 그대로 표시 -->
-    <pre th:text="${patchBoard.getContent()}" class="long-content"></pre>
+    <pre th:text="${patch.getContent()}" class="long-content"></pre>
   </div>
 </div>
 
