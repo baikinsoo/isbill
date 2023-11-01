@@ -7,7 +7,6 @@ import com.isbill.domain.Member;
 import com.isbill.dto.UpBoardFormDto;
 import com.isbill.dto.UpgradeDto;
 import com.isbill.repository.MemberRepository;
-import com.isbill.service.MemberService;
 import com.isbill.service.UpBoardService;
 import com.isbill.service.PrincipalService;
 import lombok.RequiredArgsConstructor;
@@ -35,7 +34,6 @@ public class UpBoardController {
 
     private final UpBoardService upBoardService;
     private final PrincipalService principalService;
-    private final MemberService memberService;
     private final MemberRepository memberRepository;
 
     @GetMapping()
@@ -58,16 +56,18 @@ public class UpBoardController {
 
         model.addAttribute("upBoardForm", new UpBoardFormDto());
 
-        return "upBoard/NewContent";
+        return "upBoard/newContent";
     }
 
     @PostMapping("/new")
     public String saveContent(@Valid UpBoardFormDto upBoardFormDto,
                               BindingResult bindingResult,
-                              Principal principal) {
+                              Principal principal,
+                              Model model) {
 
         if (bindingResult.hasErrors()) {
-            return "upBoard/NewContent";
+            model.addAttribute("upBoardForm", upBoardFormDto);
+            return "upBoard/newContent";
         }
 
         Member member = principalService.findMember(principal);
@@ -111,7 +111,7 @@ public class UpBoardController {
             }
         }
         model.addAttribute("members", members);
-        return "upBoard/UpgradeList";
+        return "upBoard/upgradeList";
     }
 
     @PostMapping("/admin")

@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.Lob;
 import javax.validation.constraints.NotBlank;
 
 @Getter
@@ -11,9 +12,10 @@ import javax.validation.constraints.NotBlank;
 @RequiredArgsConstructor
 public class FreeBoardFormDto {
 
-    @NotBlank(message = "이름은 필수 입력 값입니다.")
+    @NotBlank(message = "제목을 입력해주세요.")
     private String title;
 
-    @NotBlank(message = "이름은 필수 입력 값입니다.")
+    @Lob
+    @NotBlank(message = "내용을 입력해주세요.")
     private String content;
 }

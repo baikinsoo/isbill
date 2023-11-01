@@ -5,6 +5,14 @@
 
 <head>
     <style>
+        .text-area {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            resize: vertical;
+            min-height: 200px; /* 큰 내용 입력란 높이 설정 */
+        }
+
         /* Apply custom CSS styles here */
         body {
             font-family: Arial, sans-serif;
@@ -18,7 +26,7 @@
             padding: 20px;
             border: 1px solid #ddd;
             margin-top: 20px;
-            width: 300px;
+            width: 800px; /* 폭을 2배로 조절 */
             margin: 0 auto;
         }
 
@@ -36,6 +44,7 @@
             width: 100%;
             padding: 10px;
             border: 1px solid #ddd;
+            /* height: 40px; 제목 입력 칸의 높이 설정 삭제 */
         }
 
         span.errors {
@@ -53,22 +62,33 @@
         .button:hover {
             background-color: #2980b9;
         }
+
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            min-height: 200px; /* 큰 내용 입력란 높이 설정 */
+        }
     </style>
 </head>
 
 <div layout:fragment="content">
     <div>
-        <form role="form" method="post" th:object="${upBoardForm}">
+        <form role="form" method="post" th:object="${freeBoardForm}">
+            <!-- 제목 입력란 -->
             <div>
                 <span>제목</span>
                 <input type="text" th:field="*{title}" placeholder="제목을 입력해주세요">
-                <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
+                <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="errors"></span>
             </div>
+
+            <!-- 내용 입력란 -->
             <div>
                 <span>내용</span>
-                <input type="text" th:field="*{content}" placeholder="내용을 입력해주세요">
-                <span th:if="${#fields.hasErrors('content')}" th:errors="*{content}"></span>
+                <textarea th:field="*{content}" placeholder="내용을 입력해주세요" class="text-area"></textarea>
+                <span th:if="${#fields.hasErrors('content')}" th:errors="*{content}" class="errors"></span>
             </div>
+
             <div>
                 <button type="submit" class="button">저장</button>
             </div>
@@ -76,4 +96,5 @@
         </form>
     </div>
 </div>
+
 </html>

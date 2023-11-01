@@ -10,12 +10,13 @@ import javax.validation.constraints.NotBlank;
 @Getter
 @Setter
 @RequiredArgsConstructor
-public class UpBoardFormDto {
+public class PatchBoardFormDto {
 
     @NotBlank(message = "제목은 필수 입력 값입니다.")
     private String title;
 
     @Lob
-    @NotBlank(message = "내용은 필수 입력 값입니다.")
+    @NotBlank(message = "제목은 필수 입력 값입니다.")
     private String content;
+
 }
