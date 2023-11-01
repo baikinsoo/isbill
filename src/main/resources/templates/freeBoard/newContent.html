@@ -74,7 +74,7 @@
 
 <div layout:fragment="content">
     <div>
-        <form role="form" method="post" th:object="${freeBoardForm}">
+        <form role="form" method="post" th:object="${freeBoardFormDto}">
             <!-- 제목 입력란 -->
             <div>
                 <span>제목</span>
@@ -88,7 +88,6 @@
                 <textarea th:field="*{content}" placeholder="내용을 입력해주세요" class="text-area"></textarea>
                 <span th:if="${#fields.hasErrors('content')}" th:errors="*{content}" class="errors"></span>
             </div>
-
             <div>
                 <button type="submit" class="button">저장</button>
             </div>

@@ -7,22 +7,22 @@ import lombok.Setter;
 import javax.persistence.*;
 
 @Entity
+@RequiredArgsConstructor
 @Getter
 @Setter
-@RequiredArgsConstructor
-public class FreeBoard {
+public class FreeComment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "freeBoard_id")
-    private Long id;
+    private Long Id;
 
-    private String title;
-
-    @Lob
     private String content;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
+    @JoinColumn(name = "freeBoard_id")
+    private FreeBoard freeBoard;
+
+    @ManyToOne
     @JoinColumn(name = "member_id")
     private Member member;
 }

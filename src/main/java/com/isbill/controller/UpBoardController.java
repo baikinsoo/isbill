@@ -54,7 +54,7 @@ public class UpBoardController {
     @GetMapping("/new")
     public String newContent(Model model) {
 
-        model.addAttribute("upBoardForm", new UpBoardFormDto());
+        model.addAttribute("upBoardFormDto", new UpBoardFormDto());
 
         return "upBoard/newContent";
     }
@@ -66,7 +66,6 @@ public class UpBoardController {
                               Model model) {
 
         if (bindingResult.hasErrors()) {
-            model.addAttribute("upBoardForm", upBoardFormDto);
             return "upBoard/newContent";
         }
 

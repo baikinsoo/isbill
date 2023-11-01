@@ -9,7 +9,6 @@ import javax.validation.constraints.NotBlank;
 
 @Getter
 @Setter
-@RequiredArgsConstructor
 public class FreeBoardFormDto {
 
     @NotBlank(message = "제목을 입력해주세요.")

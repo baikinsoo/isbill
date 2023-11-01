@@ -9,7 +9,6 @@ import javax.validation.constraints.NotBlank;
 
 @Getter
 @Setter
-@RequiredArgsConstructor
 public class PatchBoardFormDto {
 
     @NotBlank(message = "제목은 필수 입력 값입니다.")

@@ -1,7 +1,52 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout=http://www.ultraq.net.nz/thymeleaf/layout
+      xmlns:layout=http://www.ultraq.net.nz/thymeleaf/layout xmlns:sec="http://www.w3.org/1999/xhtml"
       layout:decorate="~{layouts/layout1}">
+
+<div layout:fragment="content">
+    <div>
+        <table>
+            <thead>
+            <tr>
+                <th>작성자</th>
+                <th>제목</th>
+            </tr>
+            </thead>
+            <tr th:each="List : ${freeBoard}">
+                <td th:text="${List.getMember().getName()}">작성자</td>
+                <td th:text="${List.getTitle()}">제목</td>
+            </tr>
+        </table>
+    </div>
+    <div class="long-content-div">
+        <!-- DB에서 받아온 내용을 <pre> 태그를 사용하여 그대로 표시 -->
+        <pre th:text="${freeBoard.getContent()}" class="long-content"></pre>
+    </div>
+    <div>
+        <table class="comments-table">
+            <thead>
+            <tr>
+                <th>작성자</th>
+                <th>댓글</th>
+            </tr>
+            </thead>
+            <tr th:each="Comments : ${freeComments}">
+                <td th:text="${Comments.getMember().getName()}" class="comment-author">작성자</td>
+                <td th:text="${Comments.getContent()}" class="comment-content">내용</td>
+            </tr>
+        </table>
+    </div>
+    <form role="form" method="post"  th:object="${freeCommentDto}" sec:authorize="hasAnyAuthority('ROLE_USER')">
+        <textarea th:field="*{content}" placeholder="내용을 입력해주세요" class="text-area"></textarea>
+        <span th:if="${#fields.hasErrors('content')}" th:errors="*{content}" class="errors"></span>
+        <button type="submit">댓글 입력</button>
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+    </form>
+</div>
+
+
+
+
 
 <head>
     <style>
@@ -59,28 +104,87 @@
         .long-content {
             word-wrap: break-word;
         }
+
+        /* 댓글 테이블 스타일 */
+        .comments-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .comments-table th, .comments-table td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .comments-table th {
+            background-color: #3498db;
+            color: #fff;
+        }
+
+        .comments-table td {
+            background-color: #fff;
+        }
+
+        .comments-table td:nth-child(odd) {
+            background-color: #f2f2f2;
+        }
+
+        /* 댓글 작성자 스타일 */
+        .comment-author {
+            font-weight: bold;
+            color: #3498db;
+            font-size: 12px; /* 작은 크기로 설정 */
+        }
+
+        /* 댓글 내용 스타일 */
+        .comment-content {
+            word-wrap: break-word;
+            font-size: 14px; /* 보통 크기로 설정 */
+            /* 필요한 스타일을 추가하세요 */
+        }
+
+        /* 댓글 입력 폼 스타일 */
+        .form-container {
+            max-width: 600px; /* 폼 최대 너비 지정 (원하는 크기로 조절) */
+            margin: 20px auto; /* 중앙 정렬 및 위아래 여백 추가 */
+            padding: 20px; /* 폼 내부 여백 추가 */
+            border: 1px solid #ddd; /* 테두리 추가 (선택 사항) */
+            background-color: #fff; /* 폼 배경색 지정 (선택 사항) */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 그림자 효과 추가 (선택 사항) */
+            text-align: center; /* 폼 내부 텍스트 가운데 정렬 */
+        }
+
+        /* 입력란 스타일 */
+        .text-area {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            margin-bottom: 10px;
+            min-height: 100px; /* 내용 입력란 최소 높이 (선택 사항) */
+        }
+
+        /* 오류 메시지 스타일 */
+        .errors {
+            color: red;
+            font-size: 12px;
+            font-weight: normal;
+        }
+
+        /* 버튼 스타일 */
+        button[type="submit"] {
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #2980b9;
+        }
     </style>
 </head>
-
-<div layout:fragment="content">
-    <div>
-        <table>
-            <thead>
-            <tr>
-                <th>작성자</th>
-                <th>제목</th>
-            </tr>
-            </thead>
-            <tr th:each="List : ${freeBoard}">
-                <td th:text="${List.getMember().getName()}">작성자</td>
-                <td th:text="${List.getTitle()}">제목</td>
-            </tr>
-        </table>
-    </div>
-    <div class="long-content-div">
-        <!-- DB에서 받아온 내용을 <pre> 태그를 사용하여 그대로 표시 -->
-        <pre th:text="${freeBoard.getContent()}" class="long-content"></pre>
-    </div>
-</div>
 
 </html>

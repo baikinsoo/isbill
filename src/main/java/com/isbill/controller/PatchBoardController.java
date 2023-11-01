@@ -47,7 +47,7 @@ public class PatchBoardController {
     public String newContent(Model model) {
 
         PatchBoardFormDto patchBoardFormDto = new PatchBoardFormDto();
-        model.addAttribute("patchBoard", patchBoardFormDto);
+        model.addAttribute("patchBoardFormDto", patchBoardFormDto);
 
         return "patch/newContent";
     }

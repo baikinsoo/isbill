@@ -2,9 +2,12 @@ package com.isbill.controller;
 
 import com.isbill.constant.Role;
 import com.isbill.domain.FreeBoard;
+import com.isbill.domain.FreeComment;
 import com.isbill.domain.Member;
 import com.isbill.dto.FreeBoardFormDto;
+import com.isbill.dto.FreeCommentDto;
 import com.isbill.service.FreeBoardService;
+import com.isbill.service.FreeCommentService;
 import com.isbill.service.PrincipalService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -13,10 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.List;
@@ -28,7 +28,7 @@ public class FreeBoardController {
 
     private final FreeBoardService freeBoardService;
     private final PrincipalService principalService;
-
+    private final FreeCommentService freeCommentService;
 
     @GetMapping()
     public String freeBoard(Model model) {
@@ -40,7 +40,7 @@ public class FreeBoardController {
     @GetMapping("/new")
     public String newContent(Model model) {
 
-        model.addAttribute("freeBoardForm", new FreeBoardFormDto());
+        model.addAttribute("freeBoardFormDto", new FreeBoardFormDto());
 
         return "freeBoard/newContent";
     }
@@ -51,7 +51,6 @@ public class FreeBoardController {
                               Principal principal, Model model) {
 
         if (bindingResult.hasErrors()) {
-            model.addAttribute("freeBoardForm", new FreeBoardFormDto());
             return "freeBoard/newContent";
         }
 
@@ -66,10 +65,25 @@ public class FreeBoardController {
     public String Content(@PathVariable("freeBoardId") Long freeBoardId, Model model) {
 
         FreeBoard freeBoard = freeBoardService.findOne(freeBoardId);
+        List<FreeComment> freeComments = freeCommentService.findCotent(freeBoardId);
 
         model.addAttribute("freeBoard", freeBoard);
+        model.addAttribute("freeCommentDto", new FreeCommentDto());
+        model.addAttribute("freeComments", freeComments);
 
         return "freeBoard/FBContent";
+    }
+
+    @PostMapping("/{freeBoardId}")
+    public String comment(@PathVariable("freeBoardId") Long freeBoardId,
+                          @Validated @ModelAttribute("freeCommentDto") FreeCommentDto freeCommentDto,
+                          Principal principal) {
+
+        FreeBoard one = freeBoardService.findOne(freeBoardId);
+        Member member = principalService.findMember(principal);
+        freeCommentService.saveComment(one, member, freeCommentDto);
+
+        return "redirect:/freeBoard/" + freeBoardId;
     }
 
     @GetMapping("/newContent")
