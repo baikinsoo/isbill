@@ -91,7 +91,7 @@
             <tr th:each="Comments : ${freeComments}">
                 <td th:text="${Comments.getMember().getName()}" class="comment-author">작성자</td>
                 <td th:text="${Comments.getContent()}" class="comment-content">내용</td>
-                <td><div th:if="${#authentication.name == freeBoard.getMember().getEmail()}">
+                <td><div th:if="${#authentication.name == Comments.getMember().getEmail()}">
                     <button th:onclick="'deleteComment(' + ${Comments.getId()} + ',' + ${freeBoard.getId()} + ')'" class="comment-delete-button" >삭제</button>
                 </div></td>
             </tr>
