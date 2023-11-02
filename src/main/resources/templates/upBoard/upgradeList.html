@@ -4,49 +4,13 @@
       layout:decorate="~{layouts/layout1}">
 
 <head>
-    <style>
-        /* Apply custom CSS styles here */
-        body {
-            font-family: Arial, sans-serif;
-        }
+    <link rel="stylesheet" type="text/css" href="/css/allCss.css"/>
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-
-        th, td {
-            padding: 10px;
-            text-align: left;
-        }
-
-        th {
-            background-color: #3498db;
-            color: #fff;
-        }
-
-        td form {
-            display: inline-block; /* Allows multiple forms to appear side by side */
-        }
-
-        button[type="submit"] {
-            background-color: #3498db;
-            color: #fff;
-            border: none;
-            padding: 5px 10px;
-            cursor: pointer;
-        }
-
-        button[type="submit"]:hover {
-            background-color: #2980b9;
-        }
-    </style>
 </head>
 
-<div layout:fragment="content">
+<div layout:fragment="content" class="upgradeList">
     <div>
-        <table>
+        <table class="upgradeList-table">
             <thead>
             <tr>
                 <th>사용자</th>
@@ -58,7 +22,7 @@
                 <td>
                     <form role="form" method="post">
                         <input type="hidden" th:name="memberId" th:value="${member.getId()}">
-                        <button type="submit">등업</button>
+                        <button type="submit" class="upgrade-button">등업</button>
                         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
                     </form>
                 </td>
@@ -66,4 +30,6 @@
         </table>
     </div>
 </div>
+
+
 </html>

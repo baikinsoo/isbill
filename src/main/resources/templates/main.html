@@ -7,56 +7,8 @@
 <head>
     <meta name="_csrf" th:content="${_csrf.token}"/>
     <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
-    <style>
-        /* Add your custom CSS styles here */
-        body {
-            font-family: Arial, sans-serif;
-        }
 
-        button.nav-item {
-            background-color: #3498db;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            margin-right: 10px;
-            cursor: pointer;
-        }
-
-        button.nav-item:hover {
-            background-color: #2980b9;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-
-        th, td {
-            padding: 10px;
-            text-align: left;
-        }
-
-        th {
-            background-color: #3498db;
-            color: #fff;
-        }
-
-        td a {
-            text-decoration: none;
-            color: #3498db;
-        }
-
-        td a:hover {
-            color: #2980b9;
-        }
-
-        /* Custom style for the "내 장부 보기" link */
-        button.nav-item a {
-            color: #fff; /* Change the text color to white */
-            text-decoration: none;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="/css/allCss.css"/>
 </head>
 
 <th:block layout:fragment="script">
@@ -90,12 +42,12 @@
 </script>
 </th:block>
 
-<div layout:fragment="content">
+<div layout:fragment="content" class="HomeList">
     <button class="nav-item" sec:authorize="hasAnyAuthority('ROLE_USER')">
         <a class="nav-link" onclick="myRegistre()">내 장부 확인</a>
     </button>
-    <div>
-        <table>
+    <div class="table-container">
+        <table class="HomeList-table">
             <thead>
             <tr>
                 <th>장부</th>
@@ -104,10 +56,12 @@
             </thead>
             <tr th:each="Registres : ${registres}">
                 <td th:text="${Registres.getName()}">장부</td>
-                <!--        중간에 수정이나 삭제하게되면 어떻게 되는거지...? -->
                 <td><a th:href="@{'/registre/list/' + ${Registres.getId()}}">확인</a></td>
             </tr>
         </table>
     </div>
 </div>
+
+
+
 </html>

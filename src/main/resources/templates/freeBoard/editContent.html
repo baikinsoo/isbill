@@ -5,28 +5,26 @@
 
 <head>
     <link rel="stylesheet" type="text/css" href="/css/allCss.css"/>
-
 </head>
 
-<div layout:fragment="content" class="UBnewContent">
+<div layout:fragment="content" class="PnewContent">
     <div>
-        <form role="form" method="post" th:object="${upBoardFormDto}" class="UBnewContent-form">
+        <form role="form" method="post" th:object="${freeBoard}">
             <!-- 제목 입력란 -->
-            <div class="UBnewContent-input">
+            <div>
                 <span>제목</span>
-                <input type="text" th:field="*{title}" placeholder="제목을 입력해주세요">
+                <input type="text" th:field="*{title}" placeholder="제목을 입력해주세요" class="custom-input">
                 <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="errors"></span>
             </div>
 
             <!-- 내용 입력란 -->
-            <div class="UBnewContent-input">
+            <div>
                 <span>내용</span>
                 <textarea th:field="*{content}" placeholder="내용을 입력해주세요" class="text-area"></textarea>
                 <span th:if="${#fields.hasErrors('content')}" th:errors="*{content}" class="errors"></span>
             </div>
-
-            <div class="UBnewContent-button">
-                <button type="submit" class="custom-button">저장</button>
+            <div>
+                <button type="submit" class="custom-button">수정</button>
             </div>
             <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
         </form>

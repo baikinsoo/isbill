@@ -38,4 +38,8 @@ public class FreeCommentService {
         freeCommentRepository.deleteAllByFreeBoard_Id(id);
     }
 
+    public void deleteOne(Long id) {
+        freeCommentRepository.deleteById(id);
+    }
+
 }

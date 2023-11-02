@@ -2,8 +2,10 @@ package com.isbill.controller;
 
 import com.isbill.constant.Role;
 import com.isbill.constant.Upgrade;
+import com.isbill.domain.FreeBoard;
 import com.isbill.domain.UpBoard;
 import com.isbill.domain.Member;
+import com.isbill.dto.FreeBoardFormDto;
 import com.isbill.dto.UpBoardFormDto;
 import com.isbill.dto.UpgradeDto;
 import com.isbill.repository.MemberRepository;
@@ -16,10 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.security.Principal;
@@ -119,5 +118,35 @@ public class UpBoardController {
         upBoardService.upgrade(upgradeDto);
 
         return "redirect:/upBoard/admin";
+    }
+
+    @DeleteMapping("/{upBoardId}/delete")
+    public ResponseEntity<String> delete(@PathVariable("upBoardId") Long upBoardId) {
+
+        try {
+            upBoardService.delete(upBoardId);
+            return ResponseEntity.ok("삭제되었습니다.");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("삭제에 실패했습니다.");
+        }
+    }
+
+    @GetMapping("/{upBoardId}/edit")
+    public String editFreeBoardForm(@PathVariable("upBoardId") Long upBoardId, Model model) {
+
+        UpBoard one = upBoardService.findOne(upBoardId);
+
+        model.addAttribute("upBoard", one);
+
+        return "upBoard/editContent";
+    }
+
+    @PostMapping("/{upBoardId}/edit")
+    public String editFreeBoard(@PathVariable("upBoardId") Long upBoardId, @ModelAttribute("upBoard") UpBoardFormDto upBoardFormDto) {
+
+        UpBoard one = upBoardService.findOne(upBoardId);
+        upBoardService.editContent(one, upBoardFormDto);
+
+        return "redirect:/upBoard/" + upBoardId;
     }
 }

@@ -4,49 +4,10 @@
       layout:decorate="~{layouts/layout1}">
 
 <head>
-    <style>
-        /* Apply custom CSS styles here */
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-
-        th, td {
-            padding: 10px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-
-        th {
-            background-color: #3498db;
-            color: #fff;
-        }
-
-        td:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-
-        td a {
-            text-decoration: none;
-            color: #3498db;
-            font-weight: bold;
-        }
-
-        td a:hover {
-            color: #2980b9;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="/css/allCss.css"/>
 </head>
 
-<div layout:fragment="content">
+<div layout:fragment="content" class="moneyListForm">
     <div>
         <table>
             <thead>
@@ -70,4 +31,5 @@
         </table>
     </div>
 </div>
+
 </html>

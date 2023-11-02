@@ -111,4 +111,22 @@ public class FreeBoardController {
         }
     }
 
+    @GetMapping("/{freeBoardId}/edit")
+    public String editFreeBoardForm(@PathVariable("freeBoardId") Long freeBoardId, Model model) {
+
+        FreeBoard one = freeBoardService.findOne(freeBoardId);
+
+        model.addAttribute("freeBoard", one);
+
+        return "freeBoard/editContent";
+    }
+
+    @PostMapping("/{freeBoardId}/edit")
+    public String editFreeBoard(@PathVariable("freeBoardId") Long freeBoardId, @ModelAttribute("freeBoard") FreeBoardFormDto freeBoardFormDto) {
+
+        FreeBoard one = freeBoardService.findOne(freeBoardId);
+        freeBoardService.editContent(one, freeBoardFormDto);
+
+        return "redirect:/freeBoard/" + freeBoardId;
+    }
 }

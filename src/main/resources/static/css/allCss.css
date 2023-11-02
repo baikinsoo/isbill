@@ -1,0 +1,897 @@
+/* CSS 코드를 billForm 클래스에 적용 */
+.billForm {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    background-color: #f9f9f9;
+}
+
+.billForm form {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.billForm .form-group {
+    margin-bottom: 15px;
+}
+
+.billForm label {
+    display: block;
+    font-weight: bold;
+}
+
+.billForm .custom-input {
+    width: 100%;
+    padding: 8px;
+    margin-top: 4px;
+    margin-bottom: 4px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.billForm .errors {
+    color: red;
+    font-size: 12px;
+}
+
+.billForm .custom-button {
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.billForm .custom-button:hover {
+    background-color: #2980b9;
+}
+
+/* FBContent 클래스에 대한 CSS */
+.FBContent {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    background-color: #f9f9f9;
+}
+
+.FBContent .content-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.FBContent .content-table th {
+    background-color: #3498db;
+    color: #fff;
+    text-align: left;
+    padding: 10px;
+}
+
+.FBContent .content-table td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.FBContent .long-content-div {
+    max-width: 100%;
+    border: 1px solid #ddd;
+    padding: 10px;
+}
+
+.FBContent .long-content {
+    word-wrap: break-word;
+}
+
+.FBContent .comments-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.FBContent .comments-table th {
+    background-color: #3498db;
+    color: #fff;
+    text-align: left;
+    padding: 10px;
+}
+
+.FBContent .comments-table td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.FBContent .comment-author {
+    font-weight: bold;
+    color: #3498db;
+    font-size: 12px;
+}
+
+.FBContent .comment-content {
+    word-wrap: break-word;
+    font-size: 14px;
+}
+
+.FBContent .text-area {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    resize: vertical;
+    min-height: 200px;
+}
+
+.FBContent .errors {
+    color: #d9534f;
+}
+
+/* 댓글 입력 버튼 스타일 */
+.FBContent button[type="submit"] {
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.FBContent button[type="submit"]:hover {
+    background-color: #2980b9;
+}
+
+/* 삭제 버튼 스타일 */
+.FBContent .delete-button {
+    background-color: #d9534f;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.FBContent .delete-button:hover {
+    background-color: #c9302c;
+}
+
+/* 삭제 버튼 스타일 */
+.FBContent button[onclick^="deleteContent"] {
+    background-color: #d9534f;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.FBContent button[onclick^="deleteContent"]:hover {
+    background-color: #c9302c;
+}
+
+.FBContent .comment-delete-button {
+    background-color: #d9534f; /* 배경색 설정 */
+    color: #fff; /* 글자색 설정 */
+    border: none; /* 테두리 없음 */
+    padding: 5px 10px; /* 패딩 설정 */
+    cursor: pointer; /* 포인터 커서 설정 */
+    border-radius: 5px; /* 테두리 모서리 둥글게 설정 */
+}
+
+.FBContent .comment-delete-button:hover {
+    background-color: #c9302c; /* 호버 시 배경색 변경 */
+}
+
+
+/* freeBoardList 클래스 스타일링 */
+.freeBoardList {
+    background-color: #f0f0f0;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* 버튼 컨테이너 스타일링 */
+.freeBoardList .button-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+/* 버튼 스타일링 */
+.freeBoardList .custom-button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.freeBoardList .custom-button:hover {
+    background-color: #0056b3;
+}
+
+/* 표 스타일링 */
+.freeBoardList .content-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+/* 표 헤더 스타일링 */
+.freeBoardList .content-table th {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px;
+    text-align: left;
+}
+
+/* 표 데이터 열 스타일링 */
+.freeBoardList .content-table td {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+/* 짝수 행 배경색 설정 */
+.freeBoardList .content-table tr:nth-child(even) {
+    background-color: #f5f5f5;
+}
+
+/* 링크 스타일링 */
+.freeBoardList a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.freeBoardList a:hover {
+    text-decoration: underline;
+}
+
+
+
+/* FBnewContent 클래스 스타일링 */
+.FBnewContent {
+    /* 여기에 원하는 스타일을 추가하세요 */
+    background-color: #f0f0f0; /* 배경색 설정 */
+    padding: 20px; /* 패딩 설정 */
+    border-radius: 10px; /* 테두리 모서리 둥글게 설정 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
+}
+
+/* 제목 입력란 스타일링 */
+.custom-input {
+    /* 여기에 원하는 스타일을 추가하세요 */
+    width: 100%; /* 너비를 100%로 설정하여 부모 요소에 맞추세요 */
+    padding: 10px; /* 패딩 설정 */
+    border: 1px solid #ccc; /* 테두리 설정 */
+    border-radius: 5px; /* 테두리 모서리 둥글게 설정 */
+}
+
+/* 내용 입력란 스타일링 */
+.text-area {
+    /* 여기에 원하는 스타일을 추가하세요 */
+    width: 100%; /* 너비를 100%로 설정하여 부모 요소에 맞추세요 */
+    padding: 10px; /* 패딩 설정 */
+    border: 1px solid #ccc; /* 테두리 설정 */
+    border-radius: 5px; /* 테두리 모서리 둥글게 설정 */
+    resize: vertical; /* 세로 리사이즈 가능하도록 설정 */
+}
+
+/* 오류 메시지 스타일링 */
+.errors {
+    /* 여기에 원하는 스타일을 추가하세요 */
+    color: red; /* 빨간색으로 오류 메시지 스타일링 */
+}
+
+/* 저장 버튼 스타일링 */
+.custom-button {
+    /* 여기에 원하는 스타일을 추가하세요 */
+    background-color: #007bff; /* 배경색 설정 */
+    color: #fff; /* 글자색 설정 */
+    padding: 10px 20px; /* 패딩 설정 */
+    border: none; /* 테두리 없음 */
+    border-radius: 5px; /* 테두리 모서리 둥글게 설정 */
+    cursor: pointer; /* 포인터 커서 설정 */
+}
+
+.custom-button:hover {
+    /* 버튼에 호버 시 스타일 변경 */
+    background-color: #0056b3; /* 배경색 변경 */
+}
+
+
+/* moneyForm 클래스 스타일링 */
+.moneyForm {
+    /* 여기에 원하는 스타일을 추가하세요 */
+    background-color: #f0f0f0; /* 배경색 설정 */
+    padding: 20px; /* 패딩 설정 */
+    border-radius: 10px; /* 테두리 모서리 둥글게 설정 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
+}
+
+/* 입력란 스타일링 */
+.custom-input {
+    /* 여기에 원하는 스타일을 추가하세요 */
+    width: 100%; /* 너비를 100%로 설정하여 부모 요소에 맞추세요 */
+    padding: 10px; /* 패딩 설정 */
+    border: 1px solid #ccc; /* 테두리 설정 */
+    border-radius: 5px; /* 테두리 모서리 둥글게 설정 */
+    margin-bottom: 10px; /* 하단 여백 추가 */
+}
+
+/* 버튼 스타일링 */
+.custom-button {
+    /* 여기에 원하는 스타일을 추가하세요 */
+    background-color: #007bff; /* 배경색 설정 */
+    color: #fff; /* 글자색 설정 */
+    padding: 10px 20px; /* 패딩 설정 */
+    border: none; /* 테두리 없음 */
+    border-radius: 5px; /* 테두리 모서리 둥글게 설정 */
+    cursor: pointer; /* 포인터 커서 설정 */
+}
+
+.custom-button:hover {
+    /* 버튼에 호버 시 스타일 변경 */
+    background-color: #0056b3; /* 배경색 변경 */
+}
+
+
+/* moneyListForm 클래스 스타일링 */
+.moneyListForm {
+    /* 여기에 원하는 스타일을 추가하세요 */
+    background-color: #f0f0f0; /* 배경색 설정 */
+    padding: 20px; /* 패딩 설정 */
+    border-radius: 10px; /* 테두리 모서리 둥글게 설정 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
+}
+
+/* 표 스타일링 */
+table {
+    width: 100%; /* 표 너비를 100%로 설정하여 부모 요소에 맞추세요 */
+    border-collapse: collapse; /* 테두리 겹치게 설정 */
+    margin-top: 20px; /* 상단 여백 추가 */
+}
+
+/* 표 헤더 스타일링 */
+th {
+    background-color: #007bff; /* 헤더 배경색 설정 */
+    color: #fff; /* 헤더 글자색 설정 */
+    padding: 10px; /* 헤더 패딩 설정 */
+    text-align: left; /* 텍스트를 왼쪽 정렬로 설정 */
+}
+
+/* 표 데이터 열 스타일링 */
+td {
+    padding: 10px; /* 데이터 열 패딩 설정 */
+    border-bottom: 1px solid #ccc; /* 아래쪽 테두리 설정 */
+}
+
+/* 짝수 행 배경색 설정 */
+tr:nth-child(even) {
+    background-color: #f5f5f5;
+}
+
+
+/* PnewContent 클래스 스타일링 */
+.PnewContent {
+    /* 여기에 원하는 스타일을 추가하세요 */
+    background-color: #f0f0f0; /* 배경색 설정 */
+    padding: 20px; /* 패딩 설정 */
+    border-radius: 10px; /* 테두리 모서리 둥글게 설정 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
+}
+
+/* 입력란 스타일링 */
+.PnewContent-input {
+    /* 여기에 원하는 스타일을 추가하세요 */
+    margin-bottom: 20px; /* 하단 여백 추가 */
+}
+
+/* 제목 입력란 스타일링 */
+.PnewContent-input input[type="text"] {
+    /* 여기에 원하는 스타일을 추가하세요 */
+    width: 100%; /* 너비를 100%로 설정하여 부모 요소에 맞추세요 */
+    padding: 10px; /* 패딩 설정 */
+    border: 1px solid #ccc; /* 테두리 설정 */
+    border-radius: 5px; /* 테두리 모서리 둥글게 설정 */
+}
+
+/* 내용 입력란 스타일링 */
+.PnewContent-input textarea.text-area {
+    /* 여기에 원하는 스타일을 추가하세요 */
+    width: 100%; /* 너비를 100%로 설정하여 부모 요소에 맞추세요 */
+    padding: 10px; /* 패딩 설정 */
+    border: 1px solid #ccc; /* 테두리 설정 */
+    border-radius: 5px; /* 테두리 모서리 둥글게 설정 */
+    resize: vertical; /* 세로 리사이즈 가능하도록 설정 */
+}
+
+/* 오류 메시지 스타일링 */
+.errors {
+    /* 여기에 원하는 스타일을 추가하세요 */
+    color: red; /* 빨간색으로 오류 메시지 스타일링 */
+}
+
+/* 저장 버튼 스타일링 */
+.PnewContent-button button {
+    /* 여기에 원하는 스타일을 추가하세요 */
+    background-color: #007bff; /* 배경색 설정 */
+    color: #fff; /* 글자색 설정 */
+    padding: 10px 20px; /* 패딩 설정 */
+    border: none; /* 테두리 없음 */
+    border-radius: 5px; /* 테두리 모서리 둥글게 설정 */
+    cursor: pointer; /* 포인터 커서 설정 */
+}
+
+.PnewContent-button button:hover {
+    /* 버튼에 호버 시 스타일 변경 */
+    background-color: #0056b3; /* 배경색 변경 */
+}
+
+
+/* patchBoardList 클래스 스타일링 */
+.patchBoardList {
+    /* 여기에 원하는 스타일을 추가하세요 */
+    background-color: #f0f0f0; /* 배경색 설정 */
+    padding: 20px; /* 패딩 설정 */
+    border-radius: 10px; /* 테두리 모서리 둥글게 설정 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
+}
+
+/* 버튼 스타일링 */
+.custom-button {
+    /* 여기에 원하는 스타일을 추가하세요 */
+    background-color: #007bff; /* 배경색 설정 */
+    color: #fff; /* 글자색 설정 */
+    padding: 10px 20px; /* 패딩 설정 */
+    border: none; /* 테두리 없음 */
+    border-radius: 5px; /* 테두리 모서리 둥글게 설정 */
+    cursor: pointer; /* 포인터 커서 설정 */
+}
+
+.custom-button:hover {
+    /* 버튼에 호버 시 스타일 변경 */
+    background-color: #0056b3; /* 배경색 변경 */
+}
+
+/* 표 스타일링 */
+table {
+    width: 100%; /* 표 너비를 100%로 설정하여 부모 요소에 맞추세요 */
+    border-collapse: collapse; /* 테두리 겹치게 설정 */
+    margin-top: 20px; /* 상단 여백 추가 */
+}
+
+/* 표 헤더 스타일링 */
+th {
+    background-color: #007bff; /* 헤더 배경색 설정 */
+    color: #fff; /* 헤더 글자색 설정 */
+    padding: 10px; /* 헤더 패딩 설정 */
+    text-align: left; /* 텍스트를 왼쪽 정렬로 설정 */
+}
+
+/* 표 데이터 열 스타일링 */
+td {
+    padding: 10px; /* 데이터 열 패딩 설정 */
+    border-bottom: 1px solid #ccc; /* 아래쪽 테두리 설정 */
+}
+
+/* 짝수 행 배경색 설정 */
+tr:nth-child(even) {
+    background-color: #f5f5f5;
+}
+
+
+/* PBContent 클래스 스타일링 */
+.PBContent {
+    /* 여기에 원하는 스타일을 추가하세요 */
+    background-color: #f0f0f0; /* 배경색 설정 */
+    padding: 20px; /* 패딩 설정 */
+    border-radius: 10px; /* 테두리 모서리 둥글게 설정 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
+}
+
+/* 표 스타일링 */
+table {
+    width: 100%; /* 표 너비를 100%로 설정하여 부모 요소에 맞추세요 */
+    border-collapse: collapse; /* 테두리 겹치게 설정 */
+    margin-top: 20px; /* 상단 여백 추가 */
+}
+
+/* 표 헤더 스타일링 */
+th {
+    background-color: #007bff; /* 헤더 배경색 설정 */
+    color: #fff; /* 헤더 글자색 설정 */
+    padding: 10px; /* 헤더 패딩 설정 */
+    text-align: left; /* 텍스트를 왼쪽 정렬로 설정 */
+}
+
+/* 표 데이터 열 스타일링 */
+td {
+    padding: 10px; /* 데이터 열 패딩 설정 */
+    border-bottom: 1px solid #ccc; /* 아래쪽 테두리 설정 */
+}
+
+/* 짝수 행 배경색 설정 */
+tr:nth-child(even) {
+    background-color: #f5f5f5;
+}
+
+/* 긴 내용 표시 영역 스타일링 */
+.long-content-div {
+    margin-top: 20px; /* 상단 여백 추가 */
+}
+
+.long-content {
+    /* 여기에 원하는 스타일을 추가하세요 */
+    white-space: pre-wrap; /* 텍스트 줄 바꿈 설정 */
+    font-family: Arial, sans-serif; /* 폰트 설정 (원하는 폰트로 변경하세요) */
+    font-size: 14px; /* 글꼴 크기 설정 */
+    line-height: 1.5; /* 줄 높이 설정 */
+}
+
+
+/* registreMain 클래스 스타일링 */
+.registreMain {
+    /* 여기에 원하는 스타일을 추가하세요 */
+    background-color: #f0f0f0; /* 배경색 설정 */
+    padding: 20px; /* 패딩 설정 */
+    border-radius: 10px; /* 테두리 모서리 둥글게 설정 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
+}
+
+/* 표 스타일링 */
+table {
+    width: 100%; /* 표 너비를 100%로 설정하여 부모 요소에 맞추세요 */
+    border-collapse: collapse; /* 테두리 겹치게 설정 */
+    margin-top: 20px; /* 상단 여백 추가 */
+}
+
+/* 표 헤더 스타일링 */
+th {
+    background-color: #007bff; /* 헤더 배경색 설정 */
+    color: #fff; /* 헤더 글자색 설정 */
+    padding: 10px; /* 헤더 패딩 설정 */
+    text-align: left; /* 텍스트를 왼쪽 정렬로 설정 */
+}
+
+/* 표 데이터 열 스타일링 */
+td {
+    padding: 10px; /* 데이터 열 패딩 설정 */
+    border-bottom: 1px solid #ccc; /* 아래쪽 테두리 설정 */
+}
+
+/* 짝수 행 배경색 설정 */
+tr:nth-child(even) {
+    background-color: #f5f5f5;
+}
+
+/* 확인 링크 스타일링 */
+a {
+    /* 여기에 원하는 스타일을 추가하세요 */
+    color: #007bff; /* 링크 색상 설정 */
+    text-decoration: none; /* 링크 밑줄 제거 */
+}
+
+a:hover {
+    /* 링크에 호버 시 스타일 변경 */
+    text-decoration: underline; /* 링크 밑줄 추가 */
+}
+
+
+/* UBnewContent 클래스 스타일링 */
+.UBnewContent {
+    /* 여기에 원하는 스타일을 추가하세요 */
+    background-color: #f0f0f0; /* 배경색 설정 */
+    padding: 20px; /* 패딩 설정 */
+    border-radius: 10px; /* 테두리 모서리 둥글게 설정 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
+}
+
+/* 입력란 스타일링 */
+.UBnewContent-input {
+    /* 여기에 원하는 스타일을 추가하세요 */
+    margin-bottom: 20px; /* 하단 여백 추가 */
+}
+
+/* 제목 입력란 스타일링 */
+.UBnewContent-input input[type="text"] {
+    /* 여기에 원하는 스타일을 추가하세요 */
+    width: 100%; /* 너비를 100%로 설정하여 부모 요소에 맞추세요 */
+    padding: 10px; /* 패딩 설정 */
+    border: 1px solid #ccc; /* 테두리 설정 */
+    border-radius: 5px; /* 테두리 모서리 둥글게 설정 */
+}
+
+/* 내용 입력란 스타일링 */
+.UBnewContent-input textarea.text-area {
+    /* 여기에 원하는 스타일을 추가하세요 */
+    width: 100%; /* 너비를 100%로 설정하여 부모 요소에 맞추세요 */
+    padding: 10px; /* 패딩 설정 */
+    border: 1px solid #ccc; /* 테두리 설정 */
+    border-radius: 5px; /* 테두리 모서리 둥글게 설정 */
+    resize: vertical; /* 세로 리사이즈 가능하도록 설정 */
+}
+
+/* 오류 메시지 스타일링 */
+.errors {
+    /* 여기에 원하는 스타일을 추가하세요 */
+    color: red; /* 빨간색으로 오류 메시지 스타일링 */
+}
+
+/* 저장 버튼 스타일링 */
+.UBnewContent-button button {
+    /* 여기에 원하는 스타일을 추가하세요 */
+    background-color: #007bff; /* 배경색 설정 */
+    color: #fff; /* 글자색 설정 */
+    padding: 10px 20px; /* 패딩 설정 */
+    border: none; /* 테두리 없음 */
+    border-radius: 5px; /* 테두리 모서리 둥글게 설정 */
+    cursor: pointer; /* 포인터 커서 설정 */
+}
+
+.UBnewContent-button button:hover {
+    /* 버튼에 호버 시 스타일 변경 */
+    background-color: #0056b3; /* 배경색 변경 */
+}
+
+/* UBContent 클래스 스타일링 */
+.UBContent {
+    /* 여기에 원하는 스타일을 추가하세요 */
+    background-color: #f0f0f0; /* 배경색 설정 */
+    padding: 20px; /* 패딩 설정 */
+    border-radius: 10px; /* 테두리 모서리 둥글게 설정 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
+}
+
+/* 표 스타일링 */
+.UBContent-table {
+    width: 100%; /* 표 너비를 100%로 설정하여 부모 요소에 맞추세요 */
+    border-collapse: collapse; /* 테두리 겹치게 설정 */
+    margin-bottom: 20px; /* 하단 여백 추가 */
+}
+
+/* 표 헤더 스타일링 */
+.UBContent-table th {
+    background-color: #007bff; /* 헤더 배경색 설정 */
+    color: #fff; /* 헤더 글자색 설정 */
+    padding: 10px; /* 헤더 패딩 설정 */
+    text-align: left; /* 텍스트를 왼쪽 정렬로 설정 */
+}
+
+/* 표 데이터 열 스타일링 */
+.UBContent-table td {
+    padding: 10px; /* 데이터 열 패딩 설정 */
+    border-bottom: 1px solid #ccc; /* 아래쪽 테두리 설정 */
+}
+
+/* 짝수 행 배경색 설정 */
+.UBContent-table tr:nth-child(even) {
+    background-color: #f5f5f5;
+}
+
+/* 긴 내용 표시 영역 스타일링 */
+.long-content-div {
+    margin-top: 20px; /* 상단 여백 추가 */
+}
+
+.long-content {
+    /* 여기에 원하는 스타일을 추가하세요 */
+    white-space: pre-wrap; /* 텍스트 줄 바꿈 설정 */
+    font-family: Arial, sans-serif; /* 폰트 설정 (원하는 폰트로 변경하세요) */
+    font-size: 14px; /* 글꼴 크기 설정 */
+    line-height: 1.5; /* 줄 높이 설정 */
+}
+
+/* 삭제 버튼 스타일 */
+.UBContent .delete-button {
+    background-color: #d9534f;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.UBContent .delete-button:hover {
+    background-color: #c9302c;
+}
+
+/* 삭제 버튼 스타일 */
+.UBContent button[onclick^="deleteContent"] {
+    background-color: #d9534f;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.UBContent button[onclick^="deleteContent"]:hover {
+    background-color: #c9302c;
+}
+
+
+/* upBoardList 클래스 스타일링 */
+.upBoardList {
+    /* 여기에 원하는 스타일을 추가하세요 */
+    background-color: #f0f0f0; /* 배경색 설정 */
+    padding: 20px; /* 패딩 설정 */
+    border-radius: 10px; /* 테두리 모서리 둥글게 설정 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
+}
+
+/* 버튼 컨테이너 스타일링 */
+.button-container {
+    /* 여기에 원하는 스타일을 추가하세요 */
+    display: flex; /* 버튼을 가로로 나란히 배치 */
+    justify-content: space-between; /* 버튼을 좌우로 분산 배치 */
+    align-items: center; /* 버튼을 수직 중앙 정렬 */
+    margin-bottom: 20px; /* 하단 여백 추가 */
+}
+
+/* 버튼 스타일링 */
+.custom-button {
+    /* 여기에 원하는 스타일을 추가하세요 */
+    background-color: #007bff; /* 배경색 설정 */
+    color: #fff; /* 글자색 설정 */
+    padding: 10px 20px; /* 패딩 설정 */
+    border: none; /* 테두리 없음 */
+    border-radius: 5px; /* 테두리 모서리 둥글게 설정 */
+    cursor: pointer; /* 포인터 커서 설정 */
+    transition: background-color 0.3s; /* 배경색 변경 애니메이션 설정 */
+}
+
+.custom-button:hover {
+    /* 버튼에 호버 시 스타일 변경 */
+    background-color: #0056b3; /* 배경색 변경 */
+}
+
+/* 표 스타일링 */
+.upBoardList-table {
+    width: 100%; /* 표 너비를 100%로 설정하여 부모 요소에 맞추세요 */
+    border-collapse: collapse; /* 테두리 겹치게 설정 */
+}
+
+/* 표 헤더 스타일링 */
+.upBoardList-table th {
+    background-color: #007bff; /* 헤더 배경색 설정 */
+    color: #fff; /* 헤더 글자색 설정 */
+    padding: 10px; /* 헤더 패딩 설정 */
+    text-align: left; /* 텍스트를 왼쪽 정렬로 설정 */
+}
+
+/* 표 데이터 열 스타일링 */
+.upBoardList-table td {
+    padding: 10px; /* 데이터 열 패딩 설정 */
+    border-bottom: 1px solid #ccc; /* 아래쪽 테두리 설정 */
+}
+
+/* 짝수 행 배경색 설정 */
+.upBoardList-table tr:nth-child(even) {
+    background-color: #f5f5f5;
+}
+
+/* 링크 스타일링 */
+a {
+    /* 여기에 원하는 스타일을 추가하세요 */
+    color: #007bff; /* 링크 색상 설정 */
+    text-decoration: none; /* 링크 밑줄 제거 */
+}
+
+a:hover {
+    /* 링크에 호버 시 스타일 변경 */
+    text-decoration: underline; /* 링크 밑줄 추가 */
+}
+
+
+/* upgradeList 클래스 스타일링 */
+.upgradeList {
+    /* 여기에 원하는 스타일을 추가하세요 */
+    background-color: #f0f0f0; /* 배경색 설정 */
+    padding: 20px; /* 패딩 설정 */
+    border-radius: 10px; /* 테두리 모서리 둥글게 설정 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
+}
+
+/* 표 스타일링 */
+.upgradeList-table {
+    width: 100%; /* 표 너비를 100%로 설정하여 부모 요소에 맞추세요 */
+    border-collapse: collapse; /* 테두리 겹치게 설정 */
+}
+
+/* 표 헤더 스타일링 */
+.upgradeList-table th {
+    background-color: #007bff; /* 헤더 배경색 설정 */
+    color: #fff; /* 헤더 글자색 설정 */
+    padding: 10px; /* 헤더 패딩 설정 */
+    text-align: left; /* 텍스트를 왼쪽 정렬로 설정 */
+}
+
+/* 표 데이터 열 스타일링 */
+.upgradeList-table td {
+    padding: 10px; /* 데이터 열 패딩 설정 */
+    border-bottom: 1px solid #ccc; /* 아래쪽 테두리 설정 */
+}
+
+/* 등업 버튼 스타일링 */
+.upgrade-button {
+    /* 여기에 원하는 스타일을 추가하세요 */
+    background-color: #28a745; /* 배경색 설정 */
+    color: #fff; /* 글자색 설정 */
+    padding: 5px 10px; /* 패딩 설정 */
+    border: none; /* 테두리 없음 */
+    border-radius: 5px; /* 테두리 모서리 둥글게 설정 */
+    cursor: pointer; /* 포인터 커서 설정 */
+    transition: background-color 0.3s; /* 배경색 변경 애니메이션 설정 */
+}
+
+.upgrade-button:hover {
+    /* 버튼에 호버 시 스타일 변경 */
+    background-color: #218838; /* 배경색 변경 */
+}
+
+/* HomeList 클래스 스타일링 */
+.HomeList {
+    background-color: #f5f5f5;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* 내 장부 확인 버튼 스타일링 */
+.nav-item {
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+.nav-link {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 20px;
+}
+
+.nav-item:hover {
+    background-color: #0056b3;
+}
+
+/* 표 스타일링 */
+.table-container {
+    overflow-x: auto;
+}
+
+.HomeList-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+/* 표 헤더 스타일링 */
+.HomeList-table th {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px;
+    text-align: left;
+}
+
+/* 표 데이터 열 스타일링 */
+.HomeList-table td {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+/* 링크 스타일링 */
+a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+

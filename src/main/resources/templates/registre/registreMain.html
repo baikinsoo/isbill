@@ -4,49 +4,11 @@
       layout:decorate="~{layouts/layout1}">
 
 <head>
-    <style>
-        /* Apply custom CSS styles here */
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-        }
+    <link rel="stylesheet" type="text/css" href="/css/allCss.css"/>
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-
-        th, td {
-            padding: 10px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-
-        th {
-            background-color: #3498db;
-            color: #fff;
-        }
-
-        td:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-
-        td a {
-            text-decoration: none;
-            color: #3498db;
-            font-weight: bold;
-        }
-
-        td a:hover {
-            color: #2980b9;
-        }
-    </style>
 </head>
 
-<div layout:fragment="content">
+<div layout:fragment="content" class="registreMain">
     <div>
         <table>
             <thead>
@@ -63,10 +25,10 @@
                 <td th:text="${MoneyList.getBorrowMoneyAll()}">총 빌린 돈</td>
                 <td th:text="${MoneyList.getPayMoneyAll()}">총 갚은 돈</td>
                 <td th:text="${MoneyList.getRemainMoney()}">갚아야 할 돈</td>
-                <!--        중간에 수정이나 삭제하게되면 어떻게 되는거지...? -->
                 <td><a th:href="@{'/money/list/' + ${MoneyList.getRegistreBill().getId()}}">확인</a></td>
             </tr>
         </table>
     </div>
 </div>
+
 </html>

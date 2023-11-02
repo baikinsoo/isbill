@@ -42,4 +42,10 @@ public class FreeBoardService {
     public void delete(Long id) {
         freeBoardRepository.deleteById(id);
     }
+
+    public void editContent(FreeBoard freeBoard, FreeBoardFormDto freeBoardFormDto) {
+        freeBoard.setTitle(freeBoardFormDto.getTitle());
+        freeBoard.setContent(freeBoardFormDto.getContent());
+        freeBoardRepository.save(freeBoard);
+    }
 }

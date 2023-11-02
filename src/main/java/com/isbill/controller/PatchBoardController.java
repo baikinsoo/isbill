@@ -3,6 +3,7 @@ package com.isbill.controller;
 import com.isbill.constant.Role;
 import com.isbill.domain.Member;
 import com.isbill.domain.PatchBoard;
+import com.isbill.domain.UpBoard;
 import com.isbill.dto.PatchBoardFormDto;
 import com.isbill.dto.UpBoardFormDto;
 import com.isbill.repository.PatchBoardRepository;
@@ -15,10 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.security.Principal;
@@ -77,5 +75,32 @@ public class PatchBoardController {
         model.addAttribute("patch", one);
 
         return "patch/PBContent";
+    }
+
+    @DeleteMapping("/{patchId}/delete")
+    public ResponseEntity<String> delete(@PathVariable("patchId") Long patchId) {
+
+        patchBoardService.delete(patchId);
+        return ResponseEntity.ok("삭제되었습니다.");
+
+    }
+
+    @GetMapping("/{patchId}/edit")
+    public String editFreeBoardForm(@PathVariable("patchId") Long patchId, Model model) {
+
+        PatchBoard one = patchBoardService.findOne(patchId);
+
+        model.addAttribute("patch", one);
+
+        return "upBoard/editContent";
+    }
+
+    @PostMapping("/{patchId}/edit")
+    public String editFreeBoard(@PathVariable("patchId") Long patchId, @ModelAttribute("patch") PatchBoardFormDto patchBoardFormDto) {
+
+        PatchBoard one = patchBoardService.findOne(patchId);
+        patchBoardService.editContent(one, patchBoardFormDto);
+
+        return "redirect:/patch/" + patchId;
     }
 }

@@ -2,9 +2,11 @@ package com.isbill.service;
 
 import com.isbill.constant.Role;
 import com.isbill.constant.Upgrade;
+import com.isbill.domain.FreeBoard;
 import com.isbill.domain.Registre;
 import com.isbill.domain.UpBoard;
 import com.isbill.domain.Member;
+import com.isbill.dto.FreeBoardFormDto;
 import com.isbill.dto.UpBoardFormDto;
 import com.isbill.dto.UpgradeDto;
 import com.isbill.repository.MemberRepository;
@@ -28,6 +30,12 @@ public class UpBoardService {
     private final UpBoardRepository upBoardRepository;
     private final MemberRepository memberRepository;
     private final RegistreRepository registreRepository;
+
+    public void editContent(UpBoard upBoard, UpBoardFormDto upBoardFormDto) {
+        upBoard.setTitle(upBoardFormDto.getTitle());
+        upBoard.setContent(upBoardFormDto.getContent());
+        upBoardRepository.save(upBoard);
+    }
 
     public void saveContent(UpBoardFormDto upBoardFormDto, Member member) {
 
@@ -60,5 +68,9 @@ public class UpBoardService {
     public void changeYes(Member member) {
         member.setUpgrade(Upgrade.YES);
         memberRepository.save(member);
+    }
+
+    public void delete(Long id) {
+        upBoardRepository.deleteById(id);
     }
 }

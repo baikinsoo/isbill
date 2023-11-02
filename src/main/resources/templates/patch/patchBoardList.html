@@ -8,65 +8,13 @@
     <meta name="_csrf" th:content="${_csrf.token}"/>
     <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
 
-    <style>
-        /* Custom CSS styles */
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-        }
+    <link rel="stylesheet" type="text/css" href="/css/allCss.css"/>
 
-        .button-container {
-            margin-top: 20px;
-            display: flex; /* 버튼을 가로로 정렬하기 위한 스타일 */
-        }
-
-        button {
-            background-color: #3498db;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            margin-right: 10px;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #2980b9;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-
-        th, td {
-            padding: 10px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-
-        th {
-            background-color: #3498db;
-            color: #fff;
-        }
-
-        td a {
-            text-decoration: none;
-            color: #3498db;
-            font-weight: bold;
-        }
-
-        td a:hover {
-            color: #2980b9;
-        }
-    </style>
 </head>
 
-<div layout:fragment="content">
+<div layout:fragment="content" class="patchBoardList">
     <div sec:authorize="hasAnyAuthority('ROLE_ADMIN')">
-        <button onclick="location.href='/patch/new'">게시글 작성</button>
+        <button class="custom-button" onclick="location.href='/patch/new'">게시글 작성</button>
     </div>
     <div>
         <table>
@@ -85,4 +33,5 @@
         </table>
     </div>
 </div>
+
 </html>

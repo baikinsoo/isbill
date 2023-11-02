@@ -4,64 +4,15 @@
       layout:decorate="~{layouts/layout1}">
 
 <head>
-    <style>
-        /* Apply custom CSS styles here */
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-        }
-
-        form {
-            background-color: #fff;
-            padding: 20px;
-            border: 1px solid #ddd;
-            margin-top: 20px;
-            width: 300px;
-            margin: 0 auto;
-        }
-
-        form div {
-            margin-bottom: 10px;
-        }
-
-        form span {
-            display: block;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-
-        select, input[type="text"], input[type="number"] {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-        }
-
-        span.errors {
-            color: #d9534f;
-        }
-
-        .button {
-            background-color: #3498db;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            cursor: pointer;
-        }
-
-        .button:hover {
-            background-color: #2980b9;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="/css/allCss.css"/>
 </head>
 
-<div layout:fragment="content">
+<div layout:fragment="content" class="moneyForm">
     <div>
-        <form role="form" method="post" th:object="${moneyFormDto}">
+        <form role="form" method="post" th:object="${moneyFormDto}" class="moneyForm">
             <div>
                 <span>채무자</span>
-                <select th:field="*{billId}">
+                <select th:field="*{billId}" class="custom-input">
                     <option value="">채무자 선택</option>
                     <option th:each="bill : ${bills}"
                             th:value="${bill.id}"
@@ -71,28 +22,28 @@
             </div>
             <div>
                 <span>빌린 사유</span>
-                <input type="text" th:field="*{borrowItemName}" placeholder="빌린 사유를 입력해주세요"/>
+                <input type="text" th:field="*{borrowItemName}" placeholder="빌린 사유를 입력해주세요" class="custom-input">
                 <span th:if="${#fields.hasErrors('borrowItemName')}" th:errors="*{borrowItemName}"></span>
             </div>
             <div>
                 <span>빌린 돈</span>
-                <input type="number" th:field="*{borrowMoney}" placeholder="빌린 돈을 입력해주세요"/>
+                <input type="number" th:field="*{borrowMoney}" placeholder="빌린 돈을 입력해주세요" class="custom-input">
                 <span th:if="${#fields.hasErrors('borrowMoney')}" th:errors="*{borrowMoney}"></span>
             </div>
             <div>
                 <span>갚은 사유</span>
-                <input type="text" th:field="*{payItemName}" placeholder="빌린 사유를 입력해주세요"/>
+                <input type="text" th:field="*{payItemName}" placeholder="빌린 사유를 입력해주세요" class="custom-input">
                 <span th:if="${#fields.hasErrors('payItemName')}" th:errors="*{payItemName}"></span>
             </div>
             <div>
                 <span>갚은 돈</span>
-                <input type="number" th:field="*{payMoney}" placeholder="갚은 돈을 입력해주세요"/>
+                <input type="number" th:field="*{payMoney}" placeholder="갚은 돈을 입력해주세요" class="custom-input">
                 <span th:if="${#fields.hasErrors('payMoney')}" th:errors="*{payMoney}"></span>
             </div>
 
             <div>
-                <!--            <button type="submit" class="button">저장</button>-->
-                <button type="button" class="button" onclick="showConfirmation()">저장</button>
+                <!-- 버튼을 누르면 JavaScript 함수가 호출됩니다. -->
+                <button type="button" class="custom-button" onclick="showConfirmation()">저장</button>
             </div>
             <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
         </form>
@@ -119,4 +70,6 @@
         document.querySelector('input[name="payMoney"]').value = 0;
     </script>
 </div>
+
+
 </html>
