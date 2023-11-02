@@ -58,7 +58,11 @@
   <div th:if="${#authentication.name == patch.getMember().getEmail()}">
     <button th:onclick="'deleteContent(' + ${patch.getId()} + ')'" >삭제</button>
   </div>
-  <a th:href="@{/patch/{id}/edit(id=${patch.getId()})}">수정</a>
+  <div th:if="${#authentication.name == patch.getMember().getEmail()}">
+    <a th:href="@{/patch/{id}/edit(id=${patch.getId()})}">
+      <button>수정</button>
+    </a>
+  </div>
 </div>
 
 </html>

@@ -108,7 +108,12 @@
     <div th:if="${#authentication.name == freeBoard.getMember().getEmail()}">
         <button th:onclick="'deleteContent(' + ${freeBoard.getId()} + ')'" >삭제</button>
     </div>
-    <a th:href="@{/freeBoard/{id}/edit(id=${freeBoard.getId()})}">수정</a>
+
+    <div th:if="${#authentication.name == freeBoard.getMember().getEmail()}">
+        <a th:href="@{/freeBoard/{id}/edit(id=${freeBoard.getId()})}">
+            <button>수정</button>
+        </a>
+    </div>
 
 </div>
 

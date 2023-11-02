@@ -47,7 +47,7 @@ public class UpBoardController {
         String name = principal.getName();
         Member member = memberRepository.findByEmail(name);
         upBoardService.changeYes(member);
-        return "redirect:/upBoard";
+        return "redirect:upBoard";
     }
 
     @GetMapping("/new")

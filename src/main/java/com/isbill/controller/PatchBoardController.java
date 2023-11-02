@@ -92,7 +92,7 @@ public class PatchBoardController {
 
         model.addAttribute("patch", one);
 
-        return "upBoard/editContent";
+        return "patch/editContent";
     }
 
     @PostMapping("/{patchId}/edit")

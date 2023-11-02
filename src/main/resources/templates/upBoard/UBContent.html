@@ -59,7 +59,11 @@
     <div th:if="${#authentication.name == upBoard.getMember().getEmail()}">
         <button th:onclick="'deleteContent(' + ${upBoard.getId()} + ')'" >삭제</button>
     </div>
-    <a th:href="@{/upBoard/{id}/edit(id=${upBoard.getId()})}">수정</a>
+    <div th:if="${#authentication.name == upBoard.getMember().getEmail()}">
+        <a th:href="@{/upBoard/{id}/edit(id=${upBoard.getId()})}">
+            <button>수정</button>
+        </a>
+    </div>
 </div>
 
 </html>
