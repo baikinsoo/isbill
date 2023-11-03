@@ -36,9 +36,9 @@
     </script>
 </th:block>
 
-<div layout:fragment="content" class="UBContent">
+<div layout:fragment="content" class="AllContent">
     <div>
-        <table class="UBContent-table">
+        <table class="content-table">
             <thead>
             <tr>
                 <th>작성자</th>
@@ -55,15 +55,17 @@
         <!-- DB에서 받아온 내용을 <pre> 태그를 사용하여 그대로 표시 -->
         <pre th:text="${upBoard.getContent()}" class="long-content"></pre>
     </div>
+    <div class="flex-container">
+        <div th:if="${#authentication.name == upBoard.getMember().getEmail()}">
+            <button th:onclick="'deleteContent(' + ${upBoard.getId()} + ')'" class="delete-button">삭제</button>
+        </div>
+        <div th:if="${#authentication.name == upBoard.getMember().getEmail()}">
+            <a th:href="@{/upBoard/{id}/edit(id=${upBoard.getId()})}">
+                <button class="edit-button">수정</button>
+            </a>
+        </div>
+    </div>
 
-    <div th:if="${#authentication.name == upBoard.getMember().getEmail()}">
-        <button th:onclick="'deleteContent(' + ${upBoard.getId()} + ')'" >삭제</button>
-    </div>
-    <div th:if="${#authentication.name == upBoard.getMember().getEmail()}">
-        <a th:href="@{/upBoard/{id}/edit(id=${upBoard.getId()})}">
-            <button>수정</button>
-        </a>
-    </div>
 </div>
 
 </html>

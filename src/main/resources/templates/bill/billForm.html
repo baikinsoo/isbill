@@ -7,20 +7,19 @@
     <link rel="stylesheet" type="text/css" href="/css/allCss.css"/>
 </head>
 
-<div layout:fragment="content" class="billForm">
+<div layout:fragment="content" class="AllNewContent">
     <div>
-        <form role="form" method="post" th:object="${billFormDto}">
-            <div class="form-group">
-                <label for="name">채무자</label>
-                <input type="text" th:field="*{name}" id="name" placeholder="채무자 이름을 입력해주세요" class="custom-input">
+        <form role="form" method="post" th:object="${billFormDto}" class="AllNewContent-form">
+            <div class="AllNewContent-input">
+                <span class="Input-Title">채무자</span>
+                <input type="text" th:field="*{name}" id="name" placeholder="채무자 이름을 입력해주세요">
                 <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="errors"></span>
             </div>
-            <div>
+            <div class="AllNewContent-button">
                 <button type="submit" class="custom-button">저장</button>
             </div>
             <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
         </form>
     </div>
 </div>
-
 </html>

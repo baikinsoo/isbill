@@ -12,12 +12,12 @@
 
 </head>
 
-<div layout:fragment="content" class="patchBoardList">
-    <div sec:authorize="hasAnyAuthority('ROLE_ADMIN')">
+    <div layout:fragment="content" class="AllList">
+    <div sec:authorize="hasAnyAuthority('ROLE_ADMIN')" class="button-container">
         <button class="custom-button" onclick="location.href='/patch/new'">게시글 작성</button>
     </div>
     <div>
-        <table>
+        <table class="content-table">
             <thead>
             <tr>
                 <th>작성자</th>

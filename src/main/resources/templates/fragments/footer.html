@@ -1,11 +1,27 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thmeleaf.org">
-
+<head>
+    <style>
+        .footer {
+            position: relative; /* 상대 위치 지정 */
+            width: 100%; /* 전체 너비를 차지하도록 설정 */
+            background-color: cyan; /* 배경색을 cyan으로 설정 (선택사항) */
+            color: white; /* 글자 색상을 흰색으로 설정 (선택사항) */
+            text-align: center; /* 텍스트 가운데 정렬 (선택사항) */
+            padding: 10px 0; /* 상하 여백을 추가 (선택사항) */
+            min-height: 100px; /* 최소 높이 설정 (선택사항) */
+            margin-top: 20px; /* content와의 여백을 조정 (조절 가능) */
+        }
+    </style>
+</head>
+<body>
 <div class="footer" th:fragment="footer">
-    <footer class="page-footer font-small cyan darken-3">
+    <footer class="page-footer font-small">
         <div class="footer-copyright text-center py-3">
             2023 돈 갚아라 by BIS WebSite
         </div>
     </footer>
 </div>
+</div>
+</body>
 </html>

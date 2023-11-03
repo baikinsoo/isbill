@@ -7,23 +7,23 @@
     <link rel="stylesheet" type="text/css" href="/css/allCss.css"/>
 </head>
 
-<div layout:fragment="content" class="UBnewContent">
+<div layout:fragment="content" class="AllNewContent">
     <div>
-        <form role="form" method="post" th:object="${upBoard}">
+        <form role="form" method="post" th:object="${upBoard}" class="AllNewContent-form">
             <!-- 제목 입력란 -->
-            <div>
-                <span>제목</span>
-                <input type="text" th:field="*{title}" placeholder="제목을 입력해주세요" class="custom-input">
+            <div class="AllNewContent-input">
+                <span class="Input-Title">제목</span>
+                <input type="text" th:field="*{title}" placeholder="제목을 입력해주세요">
                 <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="errors"></span>
             </div>
 
             <!-- 내용 입력란 -->
-            <div>
-                <span>내용</span>
+            <div class="AllNewContent-input">
+                <span class="Input-Title">내용</span>
                 <textarea th:field="*{content}" placeholder="내용을 입력해주세요" class="text-area"></textarea>
                 <span th:if="${#fields.hasErrors('content')}" th:errors="*{content}" class="errors"></span>
             </div>
-            <div>
+            <div class="AllNewContent-button">
                 <button type="submit" class="custom-button">수정</button>
             </div>
             <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">

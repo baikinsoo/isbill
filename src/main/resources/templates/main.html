@@ -42,12 +42,14 @@
 </script>
 </th:block>
 
-<div layout:fragment="content" class="HomeList">
-    <button class="nav-item" sec:authorize="hasAnyAuthority('ROLE_USER')">
-        <a class="nav-link" onclick="myRegistre()">내 장부 확인</a>
-    </button>
-    <div class="table-container">
-        <table class="HomeList-table">
+<div layout:fragment="content" class="AllList">
+    <div class="button-container">
+        <button class="custom-button" sec:authorize="hasAnyAuthority('ROLE_USER')">
+            <a onclick="myRegistre()">내 장부 확인</a>
+        </button>
+    </div>
+    <div>
+        <table class="content-table">
             <thead>
             <tr>
                 <th>장부</th>
@@ -61,7 +63,4 @@
         </table>
     </div>
 </div>
-
-
-
 </html>

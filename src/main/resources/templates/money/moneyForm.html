@@ -7,11 +7,11 @@
     <link rel="stylesheet" type="text/css" href="/css/allCss.css"/>
 </head>
 
-<div layout:fragment="content" class="moneyForm">
+<div layout:fragment="content" class="AllNewContent">
     <div>
-        <form role="form" method="post" th:object="${moneyFormDto}" class="moneyForm">
-            <div>
-                <span>채무자</span>
+        <form role="form" method="post" th:object="${moneyFormDto}" class="AllNewContent-form">
+            <div class="AllNewContent-input">
+                <span class="Input-Title">채무자</span>
                 <select th:field="*{billId}" class="custom-input">
                     <option value="">채무자 선택</option>
                     <option th:each="bill : ${bills}"
@@ -20,28 +20,28 @@
                 </select>
                 <span th:if="${#fields.hasErrors('billId')}" th:errors="*{billId}"></span>
             </div>
-            <div>
-                <span>빌린 사유</span>
-                <input type="text" th:field="*{borrowItemName}" placeholder="빌린 사유를 입력해주세요" class="custom-input">
-                <span th:if="${#fields.hasErrors('borrowItemName')}" th:errors="*{borrowItemName}"></span>
+            <div class="AllNewContent-input">
+                <span class="Input-Title">빌린 사유</span>
+                <input type="text" th:field="*{borrowItemName}" placeholder="빌린 사유를 입력해주세요">
+                <span th:if="${#fields.hasErrors('borrowItemName')}" th:errors="*{borrowItemName}" class="errors"></span>
             </div>
-            <div>
-                <span>빌린 돈</span>
-                <input type="number" th:field="*{borrowMoney}" placeholder="빌린 돈을 입력해주세요" class="custom-input">
-                <span th:if="${#fields.hasErrors('borrowMoney')}" th:errors="*{borrowMoney}"></span>
+            <div class="AllNewContent-input">
+                <span class="Input-Title">빌린 돈</span>
+                <input type="number" th:field="*{borrowMoney}" placeholder="빌린 돈을 입력해주세요">
+                <span th:if="${#fields.hasErrors('borrowMoney')}" th:errors="*{borrowMoney}" class="errors"></span>
             </div>
-            <div>
-                <span>갚은 사유</span>
-                <input type="text" th:field="*{payItemName}" placeholder="빌린 사유를 입력해주세요" class="custom-input">
-                <span th:if="${#fields.hasErrors('payItemName')}" th:errors="*{payItemName}"></span>
+            <div class="AllNewContent-input">
+                <span class="Input-Title">갚은 사유</span>
+                <input type="text" th:field="*{payItemName}" placeholder="빌린 사유를 입력해주세요">
+                <span th:if="${#fields.hasErrors('payItemName')}" th:errors="*{payItemName}" class="errors"></span>
             </div>
-            <div>
-                <span>갚은 돈</span>
-                <input type="number" th:field="*{payMoney}" placeholder="갚은 돈을 입력해주세요" class="custom-input">
-                <span th:if="${#fields.hasErrors('payMoney')}" th:errors="*{payMoney}"></span>
+            <div class="AllNewContent-input">
+                <span class="Input-Title">갚은 돈</span>
+                <input type="number" th:field="*{payMoney}" placeholder="갚은 돈을 입력해주세요">
+                <span th:if="${#fields.hasErrors('payMoney')}" th:errors="*{payMoney}" class="errors"></span>
             </div>
 
-            <div>
+            <div class="AllNewContent-button">
                 <!-- 버튼을 누르면 JavaScript 함수가 호출됩니다. -->
                 <button type="button" class="custom-button" onclick="showConfirmation()">저장</button>
             </div>
