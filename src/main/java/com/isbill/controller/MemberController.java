@@ -1,18 +1,23 @@
 package com.isbill.controller;
 
 import com.isbill.domain.Member;
+import com.isbill.dto.MemberEditFormDto;
 import com.isbill.dto.MemberFormDto;
 import com.isbill.service.MemberService;
+import com.isbill.service.PrincipalService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
+import java.security.Principal;
 
 @RequestMapping("/members")
 @Controller
@@ -21,6 +26,7 @@ public class MemberController {
 
     private final MemberService memberService;
     private final PasswordEncoder passwordEncoder;
+    private final PrincipalService principalService;
 
     @GetMapping("/new")
     public String memberForm(Model model) {
@@ -55,4 +61,21 @@ public class MemberController {
         return "member/memberLoginForm";
     }
 
+    @GetMapping("/edit")
+    public String editMemberForm(Model model) {
+        model.addAttribute("member", new MemberEditFormDto());
+        return "member/memberEditForm";
+    }
+
+    @PostMapping("/edit")
+    public String editMember(@Validated @ModelAttribute("member") MemberEditFormDto memberEditFormDto, Principal principal) {
+
+        Member member = principalService.findMember(principal);
+
+        Member.editMember(member, memberEditFormDto, passwordEncoder);
+
+        memberService.editMember(member);
+
+        return "redirect:/";
+    }
 }

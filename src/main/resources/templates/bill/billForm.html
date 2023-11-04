@@ -12,7 +12,7 @@
         <form role="form" method="post" th:object="${billFormDto}" class="AllNewContent-form">
             <div class="AllNewContent-input">
                 <span class="Input-Title">채무자</span>
-                <input type="text" th:field="*{name}" id="name" placeholder="채무자 이름을 입력해주세요">
+                <input type="text" th:field="*{name}" placeholder="채무자 이름을 입력해주세요">
                 <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="errors"></span>
             </div>
             <div class="AllNewContent-button">

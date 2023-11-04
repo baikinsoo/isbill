@@ -14,7 +14,7 @@
             <!-- 제목 입력란 -->
             <div class="AllNewContent-input">
                 <span class="Input-Title">제목</span>
-                <input type="text" th:field="*{title}" placeholder="제목을 입력해주세요">
+                <textarea th:field="*{title}" placeholder="제목을 입력해주세요" class="text-area"></textarea>
                 <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="errors"></span>
             </div>
 

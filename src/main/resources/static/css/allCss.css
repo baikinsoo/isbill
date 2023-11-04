@@ -11,13 +11,13 @@
 /* 확인 링크 스타일링 */
 a {
     /* 여기에 원하는 스타일을 추가하세요 */
-    color: #007bff; /* 링크 색상 설정 */
+    color: #b3a297; /* 링크 색상 설정 */
     text-decoration: none; /* 링크 밑줄 제거 */
 }
 
 /* 내 장부 확인 버튼 스타일링 */
 .nav-item {
-    background-color: #007bff;
+    background-color: #b3a297;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -33,7 +33,7 @@ a {
 }
 
 .nav-item:hover {
-    background-color: #0056b3;
+    background-color: #b3a297;
 }
 
 /*맨 아래 버튼 정렬 */
@@ -65,7 +65,7 @@ a {
 }
 
 .AllContent .content-table th {
-    background-color: #3498db;
+    background-color: #b3a297;
     color: #fff;
     text-align: left;
     padding: 10px;
@@ -96,7 +96,7 @@ a {
 }
 
 .AllContent .comments-table th {
-    background-color: #3498db;
+    background-color: #b3a297;
     color: #fff;
     text-align: left;
     padding: 10px;
@@ -109,7 +109,7 @@ a {
 
 .AllContent .comment-author {
     font-weight: bold;
-    color: #3498db;
+    color: #b3a297;
     font-size: 12px;
 }
 
@@ -132,7 +132,7 @@ a {
 
 /* 댓글 입력 버튼 스타일 */
 .AllContent button[type="submit"] {
-    background-color: #3498db;
+    background-color: #b3a297;
     color: #fff;
     border: none;
     padding: 10px 20px;
@@ -142,7 +142,7 @@ a {
 }
 
 .AllContent button[type="submit"]:hover {
-    background-color: #2980b9;
+    background-color: #b3a297;
 }
 
 /* 삭제 버튼 스타일 */
@@ -191,7 +191,7 @@ a {
 /* 저장 버튼 스타일링 */
 .AllContent .custom-button {
     /* 여기에 원하는 스타일을 추가하세요 */
-    background-color: #007bff; /* 배경색 설정 */
+    background-color: #b3a297; /* 배경색 설정 */
     color: #fff; /* 글자색 설정 */
     padding: 10px 20px; /* 패딩 설정 */
     border: none; /* 테두리 없음 */
@@ -238,7 +238,7 @@ a {
 /* 저장 버튼 스타일링 */
 .AllNewContent-button button {
     /* 여기에 원하는 스타일을 추가하세요 */
-    background-color: #007bff; /* 배경색 설정 */
+    background-color: #b3a297; /* 배경색 설정 */
     color: #fff; /* 글자색 설정 */
     padding: 10px 20px; /* 패딩 설정 */
     border: none; /* 테두리 없음 */
@@ -248,21 +248,22 @@ a {
 
 .AllNewContent-button button:hover {
     /* 버튼에 호버 시 스타일 변경 */
-    background-color: #0056b3; /* 배경색 변경 */
+    background-color: #b3a297; /* 배경색 변경 */
 }
 
 /* 제목 입력란 스타일링 */
 .AllNewContent .custom-input {
     /* 여기에 원하는 스타일을 추가하세요 */
-    width: 100%; /* 너비를 100%로 설정하여 부모 요소에 맞추세요 */
-    padding: 10px; /* 패딩 설정 */
     border: 1px solid #ccc; /* 테두리 설정 */
-    border-radius: 5px; /* 테두리 모서리 둥글게 설정 */
+    width: 200px; /* 원하는 폭으로 조절 */
+    padding: 5px; /* 상하 여백 조절 */
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
 
 .AllNewContent .custom-button {
     /* 여기에 원하는 스타일을 추가하세요 */
-    background-color: #007bff; /* 배경색 설정 */
+    background-color: #b3a297; /* 배경색 설정 */
     color: #fff; /* 글자색 설정 */
     padding: 10px 20px; /* 패딩 설정 */
     border: none; /* 테두리 없음 */
@@ -274,7 +275,29 @@ a {
 .AllNewContent .Input-Title {
     font-size: 20px; /* 글자 크기 설정 */
     font-weight: bold; /* 글자 굵기 설정 */
-    color: #3498db; /* 글자 색상 설정 */
+    color: #b3a297; /* 글자 색상 설정 */
+}
+
+/* 입력 요소 스타일링 */
+.AllNewContent input[type="text"] {
+    width: 250px; /* 원하는 폭으로 조절 */
+    padding: 5px; /* 상하 여백 조절 */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.AllNewContent input[type="email"] {
+    width: 250px; /* 원하는 폭으로 조절 */
+    padding: 5px; /* 상하 여백 조절 */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.AllNewContent input[type="password"] {
+    width: 250px; /* 원하는 폭으로 조절 */
+    padding: 5px; /* 상하 여백 조절 */
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
 
 
@@ -301,7 +324,7 @@ a {
 
 /* 버튼 스타일링 */
 .AllList .custom-button {
-    background-color: #007bff;
+    background-color: #b3a297;
     color: #fff;
     padding: 10px 20px;
     border: none;
@@ -311,7 +334,7 @@ a {
 }
 
 .AllList .custom-button:hover {
-    background-color: #0056b3;
+    background-color: #b3a297;
 }
 
 /* 표 스타일링 */
@@ -322,7 +345,7 @@ a {
 
 /* 표 헤더 스타일링 */
 .AllList .content-table th {
-    background-color: #007bff;
+    background-color: #b3a297;
     color: #fff;
     padding: 10px;
     text-align: left;
@@ -341,10 +364,17 @@ a {
 
 /* 링크 스타일링 */
 .AllList a {
-    color: #007bff;
+    color: #b3a297;
     text-decoration: none;
 }
 
 .AllList a:hover {
     text-decoration: underline;
 }
+
+/*bootStrap nav-var 색상 변경*/
+
+.bg-primary {
+    background-color: #b3a297 !important;
+}
+

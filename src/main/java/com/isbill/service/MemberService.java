@@ -1,6 +1,8 @@
 package com.isbill.service;
 
 import com.isbill.domain.Member;
+import com.isbill.dto.MemberEditFormDto;
+import com.isbill.dto.MemberFormDto;
 import com.isbill.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.User;
@@ -41,5 +43,9 @@ public class MemberService implements UserDetailsService {
                 .password(member.getPassword())
                 .roles(member.getRole().toString())
                 .build();
+    }
+
+    public void editMember(Member member) {
+        memberRepository.save(member);
     }
 }

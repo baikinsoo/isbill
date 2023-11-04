@@ -2,6 +2,7 @@ package com.isbill.domain;
 
 import com.isbill.constant.Role;
 import com.isbill.constant.Upgrade;
+import com.isbill.dto.MemberEditFormDto;
 import com.isbill.dto.MemberFormDto;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -42,6 +43,13 @@ public class Member {
         member.setPassword(password);
         member.setRole(Role.NONE);
         member.setUpgrade(Upgrade.NO);
+        return member;
+    }
+
+    public static Member editMember(Member member, MemberEditFormDto memberEditFormDto, PasswordEncoder passwordEncoder) {
+        member.setName(memberEditFormDto.getName());
+        String password = passwordEncoder.encode(memberEditFormDto.getPassword());
+        member.setPassword(password);
         return member;
     }
 }
