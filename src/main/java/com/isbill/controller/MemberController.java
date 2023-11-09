@@ -5,6 +5,7 @@ import com.isbill.dto.MemberEditFormDto;
 import com.isbill.dto.MemberFormDto;
 import com.isbill.service.MemberService;
 import com.isbill.service.PrincipalService;
+import groovy.util.logging.Slf4j;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -22,6 +23,7 @@ import java.security.Principal;
 @RequestMapping("/members")
 @Controller
 @RequiredArgsConstructor
+
 public class MemberController {
 
     private final MemberService memberService;
@@ -53,6 +55,7 @@ public class MemberController {
     @GetMapping("/login")
     public String loginMember() {
         return "member/memberLoginForm";
+
     }
 
     @GetMapping("/login/error")
