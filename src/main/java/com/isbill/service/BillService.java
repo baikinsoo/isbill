@@ -3,6 +3,7 @@ package com.isbill.service;
 import com.isbill.domain.Bill;
 import com.isbill.domain.Member;
 import com.isbill.dto.BillFormDto;
+import com.isbill.dto.BillSearchDto;
 import com.isbill.repository.BillRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -50,4 +51,8 @@ public class BillService {
         }
     }
 
+    @Transactional(readOnly = true)
+    public List<Bill> getMainBillPage(BillSearchDto billSearchDto) {
+        return billRepository.getBillList(billSearchDto);
+    }
 }

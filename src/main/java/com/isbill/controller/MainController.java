@@ -1,7 +1,12 @@
 package com.isbill.controller;
 
+import com.isbill.domain.Bill;
 import com.isbill.domain.Registre;
+import com.isbill.dto.BillSearchDto;
+import com.isbill.dto.RegistreSearchDto;
 import com.isbill.repository.RegistreRepository;
+import com.isbill.service.BillService;
+import com.isbill.service.RegistreService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -16,11 +21,13 @@ import java.util.List;
 public class MainController {
 
     private final RegistreRepository registreRepository;
+    private final RegistreService registreService;
 
     @GetMapping("/")
-    public String main(Model model) {
+    public String main(RegistreSearchDto registreSearchDto, Model model) {
         List<Registre> registres = registreRepository.findAll();
-        model.addAttribute("registres", registres);
+        List<Registre> mainPage = registreService.getMainPage(registreSearchDto);
+        model.addAttribute("registres", mainPage);
         return "main";
     }
 }

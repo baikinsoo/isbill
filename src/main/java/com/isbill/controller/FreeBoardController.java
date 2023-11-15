@@ -5,11 +5,15 @@ import com.isbill.domain.FreeBoard;
 import com.isbill.domain.FreeComment;
 import com.isbill.domain.Member;
 import com.isbill.dto.FreeBoardFormDto;
+import com.isbill.dto.FreeBoardSearchDto;
 import com.isbill.dto.FreeCommentDto;
 import com.isbill.service.FreeBoardService;
 import com.isbill.service.FreeCommentService;
 import com.isbill.service.PrincipalService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -20,6 +24,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
@@ -31,9 +36,16 @@ public class FreeBoardController {
     private final FreeCommentService freeCommentService;
 
     @GetMapping()
-    public String freeBoard(Model model) {
-        List<FreeBoard> freeBoardList = freeBoardService.findAll();
-        model.addAttribute("freeBoardList", freeBoardList);
+    public String freeBoard(FreeBoardSearchDto freeBoardSearchDto, Optional<Integer> page, Model model) {
+
+        Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 5);
+        Page<FreeBoard> freeBoards = freeBoardService.pagingFindAll(pageable);
+        Page<FreeBoard> freeBoardPage = freeBoardService.getFreeBoardPage(freeBoardSearchDto, pageable);
+
+//        List<FreeBoard> freeBoardList = freeBoardService.findAll();
+        model.addAttribute("freeBoardSearchDto", freeBoardSearchDto);
+        model.addAttribute("freeBoardList", freeBoardPage);
+        model.addAttribute("maxPage", 5);
         return "freeBoard/freeBoardList";
     }
 

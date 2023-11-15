@@ -114,6 +114,20 @@
                     <a class="nav-link" href="/members/logout">로그아웃</a>
                 </li>
             </ul>
+
+            <div style="margin-right: 20px;">
+                <form class="form-inline my-2 my-lg-0" th:action="@{/freeBoard}" method="get">
+                    <input name="searchQuery" class="form-control mr-sm-2" type="search" placeholder="게시판 검색" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </div>
+            <div>
+                <form class="form-inline my-2 my-lg-0" th:action="@{/}" method="get">
+                    <input name="searchQuery" class="form-control mr-sm-2" type="search" placeholder="장부 검색" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </div>
+
         </div>
     </nav>
 </div>

@@ -62,9 +62,41 @@
             <tr th:each="List : ${freeBoardList}">
                 <td th:text="${List.getMember().getName()}">작성자</td>
                 <td th:text="${List.getTitle()}">제목</td>
-                <td><a th:href="@{'/freeBoard/' + ${List.getId()}}">확인</a></td>
+                <td><a th:href="@{'/freeBoard/' + ${ List.getId()}}">확인</a></td>
             </tr>
         </table>
+    </div>
+
+    <input type="hidden" name="searchQuery" th:value="${freeBoardSearchDto.searchQuery}">
+    <!--3. 쇼핑몰 오른쪽 상단의 Search 기능을 이용해서 상품을 검색할 때 페이징 처리 시
+    해당 검색어를 유지하기 위해서 hidden 값으로 검색어를 유지한다.-->
+    <div th:if="${not #strings.isEmpty(freeBoardSearchDto.searchQuery)}" class="center">
+<!--        <p class="h3 font-weight-bold" th:text="${freeBoardSearchDto.searchQuery} + '검색 결과'"></p>-->
+        <!--4. 상품을 검색했을 때 어떤 검색어로 조회된 결과인지를 보여준다.-->
+    </div>
+
+    <div th:with="start=${(freeBoardList.number/maxPage)*maxPage + 1},
+                  end=(${(freeBoardList.totalPages == 0) ? 1 : (start + (maxPage - 1) < freeBoardList.totalPages ? start + (maxPage - 1) : freeBoardList.totalPages)})" >
+        <ul class="pagination justify-content-center">
+
+            <li class="page-item" th:classappend="${freeBoardList.number eq 0}?'disabled':''">
+                <a th:href="@{'/freeBoard' + '?searchQuery=' + ${freeBoardSearchDto.searchQuery} + '&page=' + ${freeBoardList.number-1}}" aria-label='Previous' class="page-link">
+                    <span aria-hidden='true'>Previous</span>
+                </a>
+            </li>
+
+            <li class="page-item" th:each="page: ${#numbers.sequence(start, end)}"
+                th:classappend="${freeBoardList.number eq page-1}?'active':''">
+                <a th:href="@{'/freeBoard' + '?searchQuery=' + ${freeBoardSearchDto.searchQuery} + '&page=' + ${page-1}}" th:inline="text" class="page-link">[[${page}]]</a>
+            </li>
+
+            <li class="page-item" th:classappend="${freeBoardList.number+1 ge freeBoardList.totalPages}?'disabled':''">
+                <a th:href="@{'/freeBoard' + '?searchQuery=' + ${freeBoardSearchDto.searchQuery} + '&page=' + ${freeBoardList.number+1}}" aria-label='Next' class="page-link">
+                    <span aria-hidden='true'>Next</span>
+                </a>
+            </li>
+
+        </ul>
     </div>
 </div>
 
