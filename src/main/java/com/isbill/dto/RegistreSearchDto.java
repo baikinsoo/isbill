@@ -7,5 +7,5 @@ import lombok.Setter;
 @Setter
 public class RegistreSearchDto {
 
-    public String searchQuery;
+    public String searchQuery = "";
 }

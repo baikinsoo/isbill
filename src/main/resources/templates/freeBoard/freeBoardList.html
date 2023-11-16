@@ -50,6 +50,15 @@
     <div class="button-container">
         <button class="custom-button" onclick="newContent()">게시글 작성</button>
     </div>
+
+    <input type="hidden" name="searchQuery" th:value="${freeBoardSearchDto.searchQuery}">
+    <!--3. 쇼핑몰 오른쪽 상단의 Search 기능을 이용해서 상품을 검색할 때 페이징 처리 시
+    해당 검색어를 유지하기 위해서 hidden 값으로 검색어를 유지한다.-->
+    <div th:if="${not #strings.isEmpty(freeBoardSearchDto.searchQuery)}" class="center">
+        <p class="h3 font-weight-bold" th:text="${freeBoardSearchDto.searchQuery} + ' : 관련 제목 결과'"></p>
+        <!--4. 상품을 검색했을 때 어떤 검색어로 조회된 결과인지를 보여준다.-->
+    </div>
+
     <div>
         <table class="content-table">
             <thead>
@@ -65,14 +74,6 @@
                 <td><a th:href="@{'/freeBoard/' + ${ List.getId()}}">확인</a></td>
             </tr>
         </table>
-    </div>
-
-    <input type="hidden" name="searchQuery" th:value="${freeBoardSearchDto.searchQuery}">
-    <!--3. 쇼핑몰 오른쪽 상단의 Search 기능을 이용해서 상품을 검색할 때 페이징 처리 시
-    해당 검색어를 유지하기 위해서 hidden 값으로 검색어를 유지한다.-->
-    <div th:if="${not #strings.isEmpty(freeBoardSearchDto.searchQuery)}" class="center">
-<!--        <p class="h3 font-weight-bold" th:text="${freeBoardSearchDto.searchQuery} + '검색 결과'"></p>-->
-        <!--4. 상품을 검색했을 때 어떤 검색어로 조회된 결과인지를 보여준다.-->
     </div>
 
     <div th:with="start=${(freeBoardList.number/maxPage)*maxPage + 1},

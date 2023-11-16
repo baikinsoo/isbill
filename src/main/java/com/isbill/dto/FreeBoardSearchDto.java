@@ -7,5 +7,5 @@ import lombok.Setter;
 @Setter
 public class FreeBoardSearchDto {
 
-    public String searchQuery;
+    public String searchQuery = "";
 }

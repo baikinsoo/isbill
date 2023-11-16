@@ -48,6 +48,15 @@
             <a onclick="myRegistre()">내 장부 확인</a>
         </button>
     </div>
+
+    <input type="hidden" name="searchQuery" th:value="${registreSearchDto.searchQuery}">
+    <!--3. 쇼핑몰 오른쪽 상단의 Search 기능을 이용해서 상품을 검색할 때 페이징 처리 시
+    해당 검색어를 유지하기 위해서 hidden 값으로 검색어를 유지한다.-->
+    <div th:if="${not #strings.isEmpty(registreSearchDto.searchQuery)}" class="center">
+        <p class="h3 font-weight-bold" th:text="${registreSearchDto.searchQuery} + ' : 관련 장부 결과'"></p>
+        <!--4. 상품을 검색했을 때 어떤 검색어로 조회된 결과인지를 보여준다.-->
+    </div>
+
     <div>
         <table class="content-table">
             <thead>
@@ -61,6 +70,28 @@
                 <td><a th:href="@{'/registre/list/' + ${Registres.getId()}}">확인</a></td>
             </tr>
         </table>
+    </div>
+
+    <div th:with="start=${(registres.number/maxPage)*maxPage + 1},
+                  end=(${(registres.totalPages == 0) ? 1 : (start + (maxPage - 1) < registres.totalPages ? start + (maxPage - 1) : registres.totalPages)})" >
+        <ul class="pagination justify-content-center">
+            <li class="page-item" th:classappend="${registres.number eq 0}?'disabled':''">
+                <a th:href="@{'/' + '?searchQuery=' + ${registreSearchDto.searchQuery} + '&page=' + ${registres.number-1}}" aria-label='Previous' class="page-link">
+                    <span aria-hidden='true'>Previous</span>
+                </a>
+            </li>
+
+            <li class="page-item" th:each="page: ${#numbers.sequence(start, end)}"
+                th:classappend="${registres.number eq page-1}?'active':''">
+                <a th:href="@{'/' + '?searchQuery=' + ${registreSearchDto.searchQuery} + '&page=' + ${page-1}}" th:inline="text" class="page-link">[[${page}]]</a>
+            </li>
+
+            <li class="page-item" th:classappend="${registres.number+1 ge registres.totalPages}?'disabled':''">
+                <a th:href="@{'/' + '?searchQuery=' + ${registreSearchDto.searchQuery} + '&page=' + ${registres.number+1}}" aria-label='Next' class="page-link">
+                    <span aria-hidden='true'>Next</span>
+                </a>
+            </li>
+        </ul>
     </div>
 </div>
 </html>

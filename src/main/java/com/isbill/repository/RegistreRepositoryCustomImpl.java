@@ -7,6 +7,9 @@ import com.querydsl.core.QueryResults;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.util.StringUtils;
 
 import java.util.List;
@@ -22,13 +25,18 @@ public class RegistreRepositoryCustomImpl implements RegistreRepositoryCustom{
     }
 
     @Override
-    public List<Registre> getRegistreList(RegistreSearchDto registreSearchDto) {
-        QueryResults<Registre> registreQueryResults = jpaQueryFactory.selectFrom(QRegistre.registre)
+    public Page<Registre> getRegistreList(RegistreSearchDto registreSearchDto, Pageable pageable) {
+
+        QueryResults<Registre> registreQueryResults = jpaQueryFactory
+                .selectFrom(QRegistre.registre)
                 .where(registreName(registreSearchDto.getSearchQuery()))
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
                 .fetchResults();
 
-        List<Registre> results = registreQueryResults.getResults();
+        List<Registre> content = registreQueryResults.getResults();
+        long total = registreQueryResults.getTotal();
 
-        return results;
+        return new PageImpl<>(content, pageable, total);
     }
 }
