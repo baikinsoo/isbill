@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.util.StringUtils;
 
 import java.util.List;
@@ -39,6 +40,7 @@ public class FreeBoardRepositoryCustomImpl implements FreeBoardRepositoryCustom{
 //                .where(freeBoardMemberLike(freeBoardSearchDto.getSearchQuery()))
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
+                .orderBy(QFreeBoard.freeBoard.id.desc())
                 .fetchResults();
 
         List<FreeBoard> content = freeBoardQueryResults.getResults();

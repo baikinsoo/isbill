@@ -2,7 +2,10 @@ package com.isbill.controller;
 
 import com.isbill.domain.FreeBoard;
 import com.isbill.domain.QFreeBoard;
+import com.isbill.dto.FreeBoardSearchDto;
 import com.isbill.repository.FreeBoardRepository;
+import com.isbill.service.FreeBoardService;
+import com.isbill.service.RegistreBillService;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.extern.slf4j.Slf4j;
@@ -13,6 +16,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.test.context.TestPropertySource;
 
 import javax.persistence.EntityManager;
@@ -30,6 +34,9 @@ class FreeBoardControllerTest {
 
     @Autowired
     FreeBoardRepository freeBoardRepository;
+
+    @Autowired
+    FreeBoardService freeBoardService;
 
     @Test
     @DisplayName("게시글 저장 테스트")
@@ -98,6 +105,31 @@ class FreeBoardControllerTest {
 
         for (FreeBoard x : freeBoardList) {
             log.info("{}", x);
+        }
+    }
+
+    @Test
+    @DisplayName("페이징 정렬 결과 테스트")
+    public void test10() {
+        IntStream.rangeClosed(1, 100).forEach(i -> {
+            FreeBoard freeBoard = new FreeBoard();
+            freeBoard.setTitle("Title" + i);
+
+            FreeBoard save = freeBoardRepository.save(freeBoard);
+            log.info("{}", save.getTitle());
+        });
+
+        FreeBoardSearchDto freeBoardSearchDto = new FreeBoardSearchDto();
+        freeBoardSearchDto.setSearchQuery("Title");
+
+        Pageable pageable = PageRequest.of(0, 10);
+//        Pageable pageable = PageRequest.of(0, 10);
+
+        Page<FreeBoard> freeBoardPage = freeBoardService.getFreeBoardPage(freeBoardSearchDto, pageable);
+
+        Page<FreeBoard> all = freeBoardRepository.findAll(pageable);
+        for (FreeBoard x : freeBoardPage) {
+            log.info(x.getTitle());
         }
     }
 }
