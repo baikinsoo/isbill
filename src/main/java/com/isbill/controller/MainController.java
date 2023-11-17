@@ -35,6 +35,7 @@ public class MainController {
         model.addAttribute("registreSearchDto", registreSearchDto);
         model.addAttribute("registres", mainPage);
         model.addAttribute("maxPage", 5);
+        log.info("/ GetMapping 정상 동작------------------------------------------------------");
         return "main";
     }
 }

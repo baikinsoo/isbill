@@ -46,11 +46,14 @@ public class MoneyController {
 
         model.addAttribute("bills", bills);
         model.addAttribute("moneyFormDto", new MoneyFormDto());
+        log.info("/money/new GetMapping 정상 동작------------------------------------------------------");
+
         return "money/moneyForm";
     }
 
     @PostMapping("/new")
     public String moneyNew(@Valid @ModelAttribute MoneyFormDto moneyFormDto, BindingResult bindingResult, Model model, Principal principal) {
+        log.info("/money/new PostMapping 정상 동작------------------------------------------------------");
 
         if (bindingResult.hasErrors()) {
             List<Bill> bills = billService.findMemberBills(principal);
@@ -60,9 +63,7 @@ public class MoneyController {
         String name = principal.getName();
 
         Member member = memberRepository.findByEmail(name);
-        log.info("{}", member.getName());
         Registre registre = registreRepository.findByMemberId(member.getId());
-        log.info("{}", registre.getMember().getName());
         Bill bill = billRepository.findById(moneyFormDto.getBillId())
                 .orElseThrow(RuntimeException::new);
         RegistreBill registreBill = null;
@@ -71,6 +72,8 @@ public class MoneyController {
             registreBillService.saveRB(registre, bill);
         }
         moneyService.saveMoney(moneyFormDto, registre, bill);
+        log.info("/money/new PostMapping 정상 동작------------------------------------------------------");
+
         return "redirect:/";
     }
 

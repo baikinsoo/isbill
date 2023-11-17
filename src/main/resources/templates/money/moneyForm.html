@@ -9,7 +9,7 @@
 
 <div layout:fragment="content" class="AllNewContent">
     <div>
-        <form role="form" method="post" th:object="${moneyFormDto}" class="AllNewContent-form">
+        <form role="form" th:action="@{/money/new}" method="post" th:object="${moneyFormDto}" class="AllNewContent-form" id="moneyFrom">
             <div class="AllNewContent-input">
                 <span class="Input-Title">채무자</span>
                 <select th:field="*{billId}" class="custom-input">
@@ -43,11 +43,13 @@
 
             <div class="AllNewContent-button">
                 <!-- 버튼을 누르면 JavaScript 함수가 호출됩니다. -->
+<!--                <button type="submit" class="custom-button">저장</button>-->
                 <button type="button" class="custom-button" onclick="showConfirmation()">저장</button>
             </div>
             <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
         </form>
     </div>
+
     <script>
         function showConfirmation() {
             const billIdSelect = document.querySelector('#billId');
@@ -60,8 +62,11 @@
 
             const message = `채무자: ${selectedBillName}\n빌린 사유: ${borrowItemName}\n빌린 돈: ${borrowMoney}\n갚은 사유: ${payItemName}\n갚은 돈: ${payMoney}`;
 
+            const moneyForm = document.querySelector('#moneyFrom'); // ID가 "moneyForm"인 form 요소를 선택합니다.
+
             if (confirm(message)) {
-                document.querySelector('form').submit();
+                console.log("얘까지 정상적으로 출력된다---------------------------------");
+                moneyForm.submit();
             } else {
                 window.location.reload();
             }
@@ -69,8 +74,5 @@
         document.querySelector('input[name="borrowMoney"]').value = 0;
         document.querySelector('input[name="payMoney"]').value = 0;
     </script>
-
 </div>
-
-
 </html>
