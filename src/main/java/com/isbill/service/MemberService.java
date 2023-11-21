@@ -12,6 +12,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -47,5 +49,13 @@ public class MemberService implements UserDetailsService {
 
     public void editMember(Member member) {
         memberRepository.save(member);
+    }
+
+    public Member findByEmail(String name) {
+        return memberRepository.findByEmail(name);
+    }
+
+    public List<Member> findAll() {
+        return memberRepository.findAll();
     }
 }

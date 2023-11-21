@@ -9,6 +9,8 @@ import com.isbill.dto.FreeBoardFormDto;
 import com.isbill.dto.UpBoardFormDto;
 import com.isbill.dto.UpgradeDto;
 import com.isbill.repository.MemberRepository;
+import com.isbill.service.MemberService;
+import com.isbill.service.MoneyService;
 import com.isbill.service.UpBoardService;
 import com.isbill.service.PrincipalService;
 import lombok.RequiredArgsConstructor;
@@ -31,9 +33,11 @@ import java.util.List;
 @Slf4j
 public class UpBoardController {
 
+//    private final MemberRepository memberRepository;
+
     private final UpBoardService upBoardService;
     private final PrincipalService principalService;
-    private final MemberRepository memberRepository;
+    private final MemberService memberService;
 
     @GetMapping()
     public String upBoard(Model model) {
@@ -45,7 +49,8 @@ public class UpBoardController {
     @PostMapping()
     public String upgrade(Principal principal) {
         String name = principal.getName();
-        Member member = memberRepository.findByEmail(name);
+//        Member member = memberRepository.findByEmail(name);
+        Member member = memberService.findByEmail(name);
         upBoardService.changeYes(member);
         return "redirect:upBoard";
     }
@@ -102,7 +107,8 @@ public class UpBoardController {
     @GetMapping("/admin")
     public String upgrade(Model model) {
         ArrayList<Member> members = new ArrayList<>();
-        List<Member> all = memberRepository.findAll();
+//        List<Member> all = memberRepository.findAll();
+        List<Member> all = memberService.findAll();
         for (Member x : all) {
             if (x.getRole()==Role.NONE && x.getUpgrade() == Upgrade.YES) {
                 members.add(x);

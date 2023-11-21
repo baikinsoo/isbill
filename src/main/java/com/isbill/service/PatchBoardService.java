@@ -11,6 +11,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 @Getter
@@ -42,5 +44,9 @@ public class PatchBoardService {
         patchBoard.setTitle(patchBoardFormDto.getTitle());
         patchBoard.setContent(patchBoardFormDto.getContent());
         patchBoardRepository.save(patchBoard);
+    }
+
+    public List<PatchBoard> findAll() {
+        return patchBoardRepository.findAll();
     }
 }

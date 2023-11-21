@@ -25,4 +25,8 @@ public class RegistreService {
     public Page<Registre> getMainPage(RegistreSearchDto registreSearchDto, Pageable pageable) {
         return registreRepository.getRegistreList(registreSearchDto, pageable);
     }
+
+    public Registre findMember(Long id) {
+        return registreRepository.findByMemberId(id);
+    }
 }

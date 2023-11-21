@@ -1,9 +1,6 @@
 package com.isbill.service;
 
-import com.isbill.domain.Bill;
-import com.isbill.domain.Money;
-import com.isbill.domain.Registre;
-import com.isbill.domain.RegistreBill;
+import com.isbill.domain.*;
 import com.isbill.dto.MoneyFormDto;
 import com.isbill.repository.MoneyRepository;
 import com.isbill.repository.RegistreBillRepository;

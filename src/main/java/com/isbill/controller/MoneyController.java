@@ -7,10 +7,7 @@ import com.isbill.repository.BillRepository;
 import com.isbill.repository.MemberRepository;
 import com.isbill.repository.RegistreBillRepository;
 import com.isbill.repository.RegistreRepository;
-import com.isbill.service.BillService;
-import com.isbill.service.MoneyService;
-import com.isbill.service.PrincipalService;
-import com.isbill.service.RegistreBillService;
+import com.isbill.service.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -30,12 +27,15 @@ import java.util.List;
 @Slf4j
 public class MoneyController {
 
+//    private final BillRepository billRepository;
+//    private final MemberRepository memberRepository;
+//    private final RegistreRepository registreRepository;
+//    private final RegistreBillRepository registreBillRepository;
+
     private final MoneyService moneyService;
     private final BillService billService;
-    private final MemberRepository memberRepository;
-    private final RegistreRepository registreRepository;
-    private final RegistreBillRepository registreBillRepository;
-    private final BillRepository billRepository;
+    private final MemberService memberService;
+    private final RegistreService registreService;
     private final RegistreBillService registreBillService;
     private final PrincipalService principalService;
 
@@ -59,14 +59,16 @@ public class MoneyController {
         }
         String name = principal.getName();
 
-        Member member = memberRepository.findByEmail(name);
-        log.info("{}", member.getName());
-        Registre registre = registreRepository.findByMemberId(member.getId());
-        log.info("{}", registre.getMember().getName());
-        Bill bill = billRepository.findById(moneyFormDto.getBillId())
-                .orElseThrow(RuntimeException::new);
+//        Member member = memberRepository.findByEmail(name);
+        Member member = memberService.findByEmail(name);
+//        Registre registre = registreRepository.findByMemberId(member.getId());
+        Registre registre = registreService.findMember(member.getId());
+//        Bill bill = billRepository.findById(moneyFormDto.getBillId())
+//                .orElseThrow(RuntimeException::new);
+        Bill bill = billService.findById(moneyFormDto.getBillId());
         RegistreBill registreBill = null;
-        registreBill = registreBillRepository.findByRegistre_IdAndBill_Id(registre.getId(), bill.getId());
+//        registreBill = registreBillRepository.findByRegistre_IdAndBill_Id(registre.getId(), bill.getId());
+        registreBill = registreBillService.findRegistreBill(registre.getId(), bill.getId());
         if (registreBill == null) {
             registreBillService.saveRB(registre, bill);
         }

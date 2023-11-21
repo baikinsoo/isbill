@@ -27,14 +27,15 @@ import java.util.List;
 @RequestMapping("/patch")
 public class PatchBoardController {
 
-    private final PatchBoardRepository patchBoardRepository;
+//    private final PatchBoardRepository patchBoardRepository;
+
     private final PatchBoardService patchBoardService;
     private final PrincipalService principalService;
 
     @GetMapping()
     public String patchBoard(Model model) {
 
-        List<PatchBoard> all = patchBoardRepository.findAll();
+        List<PatchBoard> all = patchBoardService.findAll();
 
         model.addAttribute("patchBoard", all);
 

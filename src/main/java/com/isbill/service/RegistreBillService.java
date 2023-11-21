@@ -11,6 +11,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @Getter
 @Setter
@@ -27,5 +29,13 @@ public class RegistreBillService {
         RegistreBill save = registreBillRepository.save(registreBill);
         Money money = Money.createMoney(save);
         moneyRepository.save(money);
+    }
+
+    public List<RegistreBill> findAllByRegistreId(Long id) {
+        return registreBillRepository.findAllByRegistre_Id(id);
+    }
+
+    public RegistreBill findRegistreBill(Long registreId, Long billId) {
+        return registreBillRepository.findByRegistre_IdAndBill_Id(registreId, billId);
     }
 }

@@ -24,13 +24,14 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class MainController {
 
-    private final RegistreRepository registreRepository;
+//    private final RegistreRepository registreRepository;
+
     private final RegistreService registreService;
 
     @GetMapping("/")
     public String main(RegistreSearchDto registreSearchDto, Optional<Integer> page, Model model) {
         Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 5);
-        List<Registre> registres = registreRepository.findAll();
+//        List<Registre> registres = registreRepository.findAll();
         Page<Registre> mainPage = registreService.getMainPage(registreSearchDto, pageable);
         model.addAttribute("registreSearchDto", registreSearchDto);
         model.addAttribute("registres", mainPage);

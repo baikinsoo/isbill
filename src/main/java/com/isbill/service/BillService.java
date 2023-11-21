@@ -55,4 +55,8 @@ public class BillService {
     public List<Bill> getMainBillPage(BillSearchDto billSearchDto) {
         return billRepository.getBillList(billSearchDto);
     }
+
+    public Bill findById(Long id) {
+        return billRepository.findById(id).orElseThrow(RuntimeException::new);
+    }
 }
