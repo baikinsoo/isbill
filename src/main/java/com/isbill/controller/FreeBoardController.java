@@ -10,6 +10,7 @@ import com.isbill.dto.FreeCommentDto;
 import com.isbill.service.FreeBoardService;
 import com.isbill.service.FreeCommentService;
 import com.isbill.service.PrincipalService;
+import com.isbill.service.S3UploadService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -22,6 +23,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
@@ -34,6 +36,7 @@ public class FreeBoardController {
     private final FreeBoardService freeBoardService;
     private final PrincipalService principalService;
     private final FreeCommentService freeCommentService;
+    private final S3UploadService s3UploadService;
 
     @GetMapping()
     public String freeBoard(FreeBoardSearchDto freeBoardSearchDto, Optional<Integer> page, Model model) {
@@ -60,15 +63,17 @@ public class FreeBoardController {
     @PostMapping("/new")
     public String saveContent(@Validated FreeBoardFormDto freeBoardFormDto,
                               BindingResult bindingResult,
-                              Principal principal, Model model) {
+                              Principal principal, Model model) throws IOException {
 
         if (bindingResult.hasErrors()) {
             return "freeBoard/newContent";
         }
 
+        String url = s3UploadService.saveFile(freeBoardFormDto.getAttachFile());
+
         Member member = principalService.findMember(principal);
 
-        freeBoardService.saveContent(freeBoardFormDto, member);
+        freeBoardService.saveContent(freeBoardFormDto, member, url);
 
         return "redirect:/freeBoard";
     }
@@ -128,16 +133,18 @@ public class FreeBoardController {
 
         FreeBoard one = freeBoardService.findOne(freeBoardId);
 
+        model.addAttribute("freeBoardFormDto", new FreeBoardFormDto());
         model.addAttribute("freeBoard", one);
 
         return "freeBoard/editContent";
     }
 
     @PostMapping("/{freeBoardId}/edit")
-    public String editFreeBoard(@PathVariable("freeBoardId") Long freeBoardId, @ModelAttribute("freeBoard") FreeBoardFormDto freeBoardFormDto) {
+    public String editFreeBoard(@PathVariable("freeBoardId") Long freeBoardId, @ModelAttribute("freeBoard") FreeBoardFormDto freeBoardFormDto) throws IOException {
 
+        String url = s3UploadService.saveFile(freeBoardFormDto.getAttachFile());
         FreeBoard one = freeBoardService.findOne(freeBoardId);
-        freeBoardService.editContent(one, freeBoardFormDto);
+        freeBoardService.editContent(one, freeBoardFormDto, url);
 
         return "redirect:/freeBoard/" + freeBoardId;
     }

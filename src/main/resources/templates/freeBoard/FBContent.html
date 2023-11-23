@@ -75,6 +75,9 @@
             </tr>
         </table>
     </div>
+    <div th:if="${freeBoard.getAWSUrl() != null}">
+        <img th:src="${freeBoard.getAWSUrl()}" width="200" height="200"/>
+    </div>
     <div class="long-content-div">
         <!-- DB에서 받아온 내용을 <pre> 태그를 사용하여 그대로 표시 -->
         <pre th:text="${freeBoard.getContent()}" class="long-content"></pre>

@@ -27,11 +27,6 @@ import java.util.List;
 @Slf4j
 public class MoneyController {
 
-//    private final BillRepository billRepository;
-//    private final MemberRepository memberRepository;
-//    private final RegistreRepository registreRepository;
-//    private final RegistreBillRepository registreBillRepository;
-
     private final MoneyService moneyService;
     private final BillService billService;
     private final MemberService memberService;
@@ -46,6 +41,7 @@ public class MoneyController {
 
         model.addAttribute("bills", bills);
         model.addAttribute("moneyFormDto", new MoneyFormDto());
+
         return "money/moneyForm";
     }
 
@@ -57,34 +53,34 @@ public class MoneyController {
             model.addAttribute("bills", bills);
             return "money/moneyForm";
         }
-        String name = principal.getName();
 
-//        Member member = memberRepository.findByEmail(name);
+        String name = principal.getName();
         Member member = memberService.findByEmail(name);
-//        Registre registre = registreRepository.findByMemberId(member.getId());
         Registre registre = registreService.findMember(member.getId());
-//        Bill bill = billRepository.findById(moneyFormDto.getBillId())
-//                .orElseThrow(RuntimeException::new);
         Bill bill = billService.findById(moneyFormDto.getBillId());
         RegistreBill registreBill = null;
-//        registreBill = registreBillRepository.findByRegistre_IdAndBill_Id(registre.getId(), bill.getId());
         registreBill = registreBillService.findRegistreBill(registre.getId(), bill.getId());
+
         if (registreBill == null) {
             registreBillService.saveRB(registre, bill);
         }
         moneyService.saveMoney(moneyFormDto, registre, bill);
+
         return "redirect:/";
     }
 
     @GetMapping("list/{registreBillId}")
     public String moneyList(@PathVariable("registreBillId") Long registreBillId, Model model) {
+
         List<Money> moneyList = moneyService.findMoneyList(registreBillId);
         model.addAttribute("moneyList", moneyList);
+
         return "money/moneyListForm";
     }
 
     @GetMapping("moneyNew")
     public ResponseEntity billNew(Principal principal) {
+
         Member member = null;
         if (principal != null) {
             member = principalService.findMember(principal);

@@ -9,7 +9,12 @@
 
 <div layout:fragment="content" class="AllNewContent">
     <div>
-        <form role="form" method="post" th:object="${freeBoardFormDto}" class="AllNewContent-form">
+        <form role="form" method="post" th:object="${freeBoardFormDto}" class="AllNewContent-form" enctype="multipart/form-data">
+
+<!--            첨부파일 등록-->
+            <div>
+                이미지 : <input type="file" th:field="*{attachFile}" accept="image/*">
+            </div>
             <!-- 제목 입력란 -->
             <div class="AllNewContent-input">
                 <span class="Input-Title">제목</span>

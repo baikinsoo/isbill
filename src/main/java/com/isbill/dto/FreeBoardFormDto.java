@@ -3,6 +3,7 @@ package com.isbill.dto;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.Lob;
 import javax.validation.constraints.NotBlank;
@@ -17,4 +18,6 @@ public class FreeBoardFormDto {
     @Lob
     @NotBlank(message = "내용을 입력해주세요.")
     private String content;
+
+    private MultipartFile attachFile;
 }
