@@ -39,6 +39,7 @@ public class FreeBoardRepositoryCustomImpl implements FreeBoardRepositoryCustom{
 //                .where(freeBoardMemberLike(freeBoardSearchDto.getSearchQuery()))
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
+                .orderBy(QFreeBoard.freeBoard.id.desc())
                 .fetchResults();
 
         List<FreeBoard> content = freeBoardQueryResults.getResults();
