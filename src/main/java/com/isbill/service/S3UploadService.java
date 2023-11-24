@@ -19,6 +19,14 @@ public class S3UploadService {
 
     private final AmazonS3 amazonS3;
 
+    public void deleteFile(String name) {
+        if (name != null) {
+            int i = name.lastIndexOf("/");
+            String substring = name.substring(i + 1);
+            amazonS3.deleteObject(bucket, substring);
+        }
+    }
+
     public String saveFile(MultipartFile multipartFile) throws IOException {
 
         if (multipartFile.isEmpty()) {
@@ -32,7 +40,7 @@ public class S3UploadService {
         metadata.setContentType(multipartFile.getContentType());
 
         amazonS3.putObject(bucket, storeFileName, multipartFile.getInputStream(), metadata);
-        String string = amazonS3.getUrl(bucket, originalFilename).toString();
+        String string = amazonS3.getUrl(bucket, storeFileName).toString();
         return string;
     }
 

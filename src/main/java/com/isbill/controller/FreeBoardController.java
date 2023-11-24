@@ -12,6 +12,7 @@ import com.isbill.service.FreeCommentService;
 import com.isbill.service.PrincipalService;
 import com.isbill.service.S3UploadService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -22,6 +23,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.security.Principal;
@@ -31,6 +33,7 @@ import java.util.Optional;
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/freeBoard")
+@Slf4j
 public class FreeBoardController {
 
     private final FreeBoardService freeBoardService;
@@ -128,6 +131,14 @@ public class FreeBoardController {
         }
     }
 
+    @GetMapping("/{freeBoardId}/deleteFile")
+    public ResponseEntity<String> deleteFile(@PathVariable("freeBoardId") Long freeBoardId) {
+        FreeBoard one = freeBoardService.findOne(freeBoardId);
+        FreeBoard freeBoard = freeBoardService.deleteUrl(one);
+        s3UploadService.deleteFile(one.getAWSUrl());
+        return ResponseEntity.ok("삭제되었습니다.");
+    }
+
     @GetMapping("/{freeBoardId}/edit")
     public String editFreeBoardForm(@PathVariable("freeBoardId") Long freeBoardId, Model model) {
 
@@ -142,10 +153,15 @@ public class FreeBoardController {
     @PostMapping("/{freeBoardId}/edit")
     public String editFreeBoard(@PathVariable("freeBoardId") Long freeBoardId, @ModelAttribute("freeBoard") FreeBoardFormDto freeBoardFormDto) throws IOException {
 
-        String url = s3UploadService.saveFile(freeBoardFormDto.getAttachFile());
-        FreeBoard one = freeBoardService.findOne(freeBoardId);
-        freeBoardService.editContent(one, freeBoardFormDto, url);
-
+        if (freeBoardFormDto.getAttachFile().isEmpty()) {
+            FreeBoard one = freeBoardService.findOne(freeBoardId);
+            freeBoardService.editContent(one, freeBoardFormDto, null);
+        } else {
+            String url = s3UploadService.saveFile(freeBoardFormDto.getAttachFile());
+            FreeBoard one = freeBoardService.findOne(freeBoardId);
+            s3UploadService.deleteFile(one.getAWSUrl());
+            freeBoardService.editContent(one, freeBoardFormDto, url);
+        }
         return "redirect:/freeBoard/" + freeBoardId;
     }
 }

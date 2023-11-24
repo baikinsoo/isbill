@@ -20,4 +20,6 @@ public class FreeBoardFormDto {
     private String content;
 
     private MultipartFile attachFile;
+
+    private String imgName;
 }

@@ -7,13 +7,88 @@
     <link rel="stylesheet" type="text/css" href="/css/allCss.css"/>
 </head>
 
+<!-- 사용자 스크립트 추가 -->
+<th:block layout:fragment="script">
+
+    <script th:inline="javascript">
+        $(document).ready(function() {
+            // 여기에 코드를 배치합니다.
+            bindDomEvent();
+        });
+        function bindDomEvent(){
+            $(".fileInput").on("change", function() {
+                var val = $(this).val();
+                console.log(val);
+
+                var fileName = $(this).val().split("\\").pop();  // 이미지 파일명
+                console.log(fileName);
+                var fileExt = fileName.substring(fileName.lastIndexOf(".")+1);
+                fileExt = fileExt.toLowerCase();
+
+                if (fileExt != "jpg" && fileExt != "jpeg" &&
+                    fileExt != "gif" && fileExt != "png" && fileExt != "bmp") {
+                    alert("이미지 파일만 등록이 가능합니다.");
+                    return;
+                }
+
+                // 파일 이름을 <span> 요소에 설정
+                $(this).closest(".AllNewContent-form").find(".fileName").html(fileName);
+            });
+        }
+
+        function deleteFile(freeBoardId){
+            var token = $("meta[name='_csrf']").attr("content");
+            var header = $("meta[name='_csrf_header']").attr("content");
+
+            var currentUrl = window.location.href;
+
+            var url = "/freeBoard/" + freeBoardId + "/deleteFile";
+
+            $.ajax({
+                url      : url,
+                type     : "GET", // HTTP DELETE 메서드 사용
+                beforeSend : function(xhr){
+                    /* 데이터를 전송하기 전에 헤더에 csrf값을 설정 */
+                    xhr.setRequestHeader(header, token);
+                },
+                cache   : false,
+                success  : function(result, status){
+                    location.href = currentUrl;
+                },
+                error : function(jqXHR, status, error){
+                }
+            });
+        }
+
+
+
+    </script>
+
+</th:block>
+
+<th:block layout:fragment="css">
+    <style>
+        .input-file-button{
+            padding: 6px 25px;
+            background-color:#FF6600;
+            border-radius: 4px;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+</th:block>
+
 <div layout:fragment="content" class="AllNewContent">
     <div>
         <form role="form" method="post" th:object="${freeBoard}" class="AllNewContent-form" enctype="multipart/form-data">
 
-            <div>
-                <!-- 파일 업로드 입력 필드 -->
-                이미지 : <input type="file" th:field="${freeBoardFormDto.attachFile}" accept="image/*">
+
+            <input type="file" id="selectedFile" style="display: none;" class="fileInput" th:field="${freeBoardFormDto.attachFile}" />
+            <input type="button" value="이미지 파일 선택" onclick="document.getElementById('selectedFile').click();" />
+
+            <div style="width: 300px;">
+                <span th:text="*{imgName}" class="fileName"></span>
+                <button th:onclick="'deleteFile(' + ${freeBoard.getId()} + ')'" class="delete-button">삭제</button>
             </div>
 
             <!-- 제목 입력란 -->

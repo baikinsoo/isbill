@@ -29,4 +29,6 @@ public class FreeBoard {
     private Member member;
 
     private String AWSUrl;
+
+    private String imgName;
 }
