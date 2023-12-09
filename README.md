@@ -1,17 +1,18 @@
-isbill - 돈 갚아라 Project
+# 돈 갚아라 Project
+##### 웹 애플리케이션 url 주소 : <http://bismoney.xyz>
+##### 사용 기술 : JAVA, Spring, Spring Security, Spring JPA, Querydsl, Gradle, MySQL, AWS
 
-웹 애플리케이션 url 주소 : <http://bismoney.xyz>
 
-Use : JAVA, Spring, Spring Security, Spring JPA, Querydsl, Gradle, MySQL, AWS
+### What is 돈 갚아라
+##### 프로젝트 돈 갚아라는 평소 친구들과의 가벼운 채무관계에 있어 기록과 동시에 계산을 편리하게 하기 위해 만든 서비스다.
+##### 그 외 게시판 항목을 추가하여 채무 관계에 관한 이야기나 자유롭게 이야기를 나눌 수 있도록 만든 서비스다.
 
-프로젝트 돈 갚아라
-
-1. 프로젝트 돈 갚아라는 평소 친구들과의 가벼운 채무관계에 있어 기록과 동시에 계산을 편리하게 하기 위해 만든 서비스다.
-2. 그 외 게시판 항목을 추가하여 채무 관계에 관한 이야기나 자유롭게 이야기를 나눌 수 있도록 만든 서비스다.
-
+# 프로젝트 기능 설명
+  
+### 역할 별 기능
 서비스의 기능은 1. 일반 사용자 2. 회원 3. 관리자 총 3개의 역할로 나누어져 있고 해당 역할마다 사용 가능한 기능들이 전부 다르다.
 
-- 일반 사용자
+일반 사용자
 1. 일반 사용자의 경우 장부, 게시판 글만 확인이 가능하며, 권한이 필요한 페이지의 경우 로그인 페이지로 이동 시킨다.
    
 ![Animation](https://github.com/baikinsoo/isbill/assets/48581772/1efd1c8d-85b6-4815-8510-221ae4d981c6)
