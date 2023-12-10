@@ -6,10 +6,20 @@
 ### What is 돈 갚아라
 돈 갚아라 Project는 평소 친구들과의 가벼운 채무관계에 있어 기록과 동시에 계산을 편리하게 하기 위해 만들었고, 추가적으로 게시판을 통해 소통 할 수 있는 서비스다.
 
+### 목차
+1. 프로젝트 설명  
+  1.1. ERD  
+  1.2. 역할 설명  
+  1.3. 기능 설명
+   
+
 &nbsp;
 # 프로젝트 설명
 
-## 1. 역할 설명
+## 1. ERD
+![image](https://github.com/baikinsoo/isbill/assets/48581772/04f4f813-e130-4f14-bb4f-5dff6681beed)
+
+## 2. 역할 설명
   
 ### 역할 별 기능
 서비스의 기능은 **1. 일반 사용자 2. 회원 3. 관리자** 총 3개의 역할로 나누어져 있고 해당 역할마다 사용 가능한 기능들이 전부 다르다.  
@@ -35,7 +45,7 @@
 
 ![Animation](https://github.com/baikinsoo/isbill/assets/48581772/54e1c9cd-ba3f-4368-bfce-515943239f3b)
 
-## 2. 기능 설명  
+## 3. 기능 설명  
 
 **1. 채무자 등록, 금액 입력 및 확인**
 1. 등업이 완료된 회원의 경우 장부가 생성되며, 채무자를 등록, 채무자에 대한 빌린 돈, 갚은 돈을 입력 할 수 있다.
@@ -67,11 +77,10 @@
 ![Animation](https://github.com/baikinsoo/isbill/assets/48581772/f1f61a68-9552-44b7-8630-947e01f64bce)
 
 **5. 장부, 게시판 검색**
-1. 장부에 원하는 이름을 검색할 수 있다.
+1. 원하는 장부 이름을 검색할 수 있다.
    
 ![Animation](https://github.com/baikinsoo/isbill/assets/48581772/b57e988a-370b-4a6a-ae51-35a191afeb2f)  
 
 2. 원하는 게시글 제목을 검색할 수 있다. (페이징도 검색 기준이 유지되는 상태에서 적용된다.)
 
 ![Animation](https://github.com/baikinsoo/isbill/assets/48581772/39effbe0-943a-4c4b-9b0d-47acd309fa39)
-
