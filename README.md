@@ -1,4 +1,4 @@
-# 돈 갚아라 Project
+![image](https://github.com/baikinsoo/isbill/assets/48581772/8e2fcf68-5a32-4122-a6bf-abb4625b901a)# 돈 갚아라 Project
 **웹 애플리케이션 url 주소 : <http://bismoney.xyz>**  
   
 **사용 기술 : JAVA, Spring, Spring Security, Spring JPA, Querydsl, Gradle, MySQL, AWS**
@@ -35,4 +35,24 @@
 
 ![Animation](https://github.com/baikinsoo/isbill/assets/48581772/54e1c9cd-ba3f-4368-bfce-515943239f3b)
 
-## 2. 기능 설명
+## 2. 기능 설명  
+
+**1. 채무자 등록, 금액 입력 및 확인**
+1. 등업이 완료된 회원의 경우 장부가 생성되며, 채무자를 등록, 채무자에 대한 빌린 돈, 갚은 돈을 입력 할 수 있다.
+2. 금액을 입력하게 되면 장부에 자동으로 저장되며, 빌린 돈과 갚은 돈을 계산하여 갚아야 할 최종 금액을 보여준다.
+     
+![Animation](https://github.com/baikinsoo/isbill/assets/48581772/8029d244-c333-4ba3-80a2-9a0b6f348ebf)
+
+**2. 게시판 작업 (글 작성, 수정, 삭제, 댓글 작성, 삭제, 첨부 파일 등록)**
+1. 등업이 완료된 회원의 경우 첨부 파일 등록이 가능한 게시글 작성이 가능하다. (첨부파일 수정, 삭제 / 게시글 수정, 삭제도 가능하다.)
+   
+![Animation](https://github.com/baikinsoo/isbill/assets/48581772/3dc19530-3129-4ac2-b4c1-13d079d976b9)  
+2. 게시글의 경우 자신의 글이 아니면 수정, 삭제 버튼이 보이지 않는다.  
+  
+  (1) 자신의 게시글일 경우
+  ![image](https://github.com/baikinsoo/isbill/assets/48581772/2b87b9fd-249b-4ba4-8fe4-c7decfb433da)
+
+  (2) 자신의 게시글이 아닐 경우
+  ![image](https://github.com/baikinsoo/isbill/assets/48581772/e14e29d9-3ef6-47d0-8082-2cafa9efc24d)
+
+
