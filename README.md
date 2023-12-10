@@ -1,7 +1,7 @@
 # 돈 갚아라 Project
 **웹 애플리케이션 url 주소 : <http://bismoney.xyz>**  
   
-**사용 기술 : JAVA, Spring, Spring Security, Spring JPA, Querydsl, Gradle, MySQL, AWS**
+**USE : JAVA, Spring, Spring Security, Spring JPA, Querydsl, Gradle, MySQL, AWS**
 &nbsp;
 ### What is 돈 갚아라
 돈 갚아라 Project는 평소 친구들과의 가벼운 채무관계에 있어 기록과 동시에 계산을 편리하게 하기 위해 만들었고, 추가적으로 게시판을 통해 소통 할 수 있는 서비스다.
