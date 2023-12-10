@@ -43,7 +43,7 @@
      
 ![Animation](https://github.com/baikinsoo/isbill/assets/48581772/8029d244-c333-4ba3-80a2-9a0b6f348ebf)
 
-**2. 게시판 작업 (글 작성, 수정, 삭제, 댓글 작성, 삭제, 첨부 파일 등록)**
+**2. 게시판 글 작성 (글 작성, 수정, 삭제, 댓글 작성, 삭제, 첨부 파일 등록)**
 1. 등업이 완료된 회원의 경우 첨부 파일 등록이 가능한 게시글 작성이 가능하다. (첨부파일 수정, 삭제 / 게시글 수정, 삭제도 가능하다.)
    
 ![Animation](https://github.com/baikinsoo/isbill/assets/48581772/3dc19530-3129-4ac2-b4c1-13d079d976b9)  
@@ -55,4 +55,23 @@
   (2) 자신의 게시글이 아닐 경우
   ![image](https://github.com/baikinsoo/isbill/assets/48581772/e14e29d9-3ef6-47d0-8082-2cafa9efc24d)
 
+**3. 댓글 작성 (댓글 작성, 삭제)**
+1. 게시글에 댓글을 작성, 삭제가 가능하다.
+   ![Animation](https://github.com/baikinsoo/isbill/assets/48581772/14fdefe0-a700-4c6c-a2a5-6486b953bde8)
+2. 댓글도 마찬가지로 자신이 쓴 댓글만 삭제 버튼이 보이고 삭제가 가능하다.
+   ![image](https://github.com/baikinsoo/isbill/assets/48581772/7afff8c4-30b5-46ff-85fa-f638f46d8d46)
+
+**4. 이름, 비밀번호 변경**
+1. 최초 회원 가입 이후 마이페이지를 통해 비밀번호 변경이 가능하다.
+   
+![Animation](https://github.com/baikinsoo/isbill/assets/48581772/f1f61a68-9552-44b7-8630-947e01f64bce)
+
+**5. 장부, 게시판 검색**
+1. 장부에 원하는 이름을 검색할 수 있다.
+   
+![Animation](https://github.com/baikinsoo/isbill/assets/48581772/b57e988a-370b-4a6a-ae51-35a191afeb2f)  
+
+2. 원하는 게시글 제목을 검색할 수 있다. (페이징도 검색 기준이 유지되는 상태에서 적용된다.)
+
+![Animation](https://github.com/baikinsoo/isbill/assets/48581772/39effbe0-943a-4c4b-9b0d-47acd309fa39)
 
