@@ -1,4 +1,4 @@
-![image](https://github.com/baikinsoo/isbill/assets/48581772/8e2fcf68-5a32-4122-a6bf-abb4625b901a)# 돈 갚아라 Project
+# 돈 갚아라 Project
 **웹 애플리케이션 url 주소 : <http://bismoney.xyz>**  
   
 **사용 기술 : JAVA, Spring, Spring Security, Spring JPA, Querydsl, Gradle, MySQL, AWS**
