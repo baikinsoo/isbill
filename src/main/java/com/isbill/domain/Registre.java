@@ -33,4 +33,8 @@ public class Registre {
         return registre;
     }
 
+    public Registre changeName(String name) {
+        this.name = name + "의 장부";
+        return this;
+    }
 }

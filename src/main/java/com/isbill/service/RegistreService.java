@@ -29,4 +29,10 @@ public class RegistreService {
     public Registre findMember(Long id) {
         return registreRepository.findByMemberId(id);
     }
+
+    public void changeName(Long id, String name) {
+        Registre registre = registreRepository.findByMemberId(id);
+        registre.changeName(name);
+        registreRepository.save(registre);
+    }
 }

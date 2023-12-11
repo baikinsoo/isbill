@@ -9,7 +9,7 @@
 
 <div layout:fragment="content" class="AllNewContent">
     <div>
-        <form role="form" method="post" th:object="${moneyFormDto}" class="AllNewContent-form">
+        <form role="form" th:action="@{/money/new}" method="post" th:object="${moneyFormDto}" class="AllNewContent-form" id="moneyFrom">
             <div class="AllNewContent-input">
                 <span class="Input-Title">채무자</span>
                 <select th:field="*{billId}" class="custom-input">
@@ -32,7 +32,7 @@
             </div>
             <div class="AllNewContent-input">
                 <span class="Input-Title">갚은 사유</span>
-                <input type="text" th:field="*{payItemName}" placeholder="빌린 사유를 입력해주세요">
+                <input type="text" th:field="*{payItemName}" placeholder="갚은 사유를 입력해주세요">
                 <span th:if="${#fields.hasErrors('payItemName')}" th:errors="*{payItemName}" class="errors"></span>
             </div>
             <div class="AllNewContent-input">
@@ -60,8 +60,10 @@
 
             const message = `채무자: ${selectedBillName}\n빌린 사유: ${borrowItemName}\n빌린 돈: ${borrowMoney}\n갚은 사유: ${payItemName}\n갚은 돈: ${payMoney}`;
 
+            const moneyForm = document.querySelector('#moneyFrom'); // ID가 "moneyForm"인 form 요소를 선택합니다.
             if (confirm(message)) {
-                document.querySelector('form').submit();
+                // document.querySelector('form').submit();
+                moneyForm.submit();
             } else {
                 window.location.reload();
             }

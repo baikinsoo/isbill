@@ -1,10 +1,12 @@
 package com.isbill.controller;
 
 import com.isbill.domain.Member;
+import com.isbill.domain.Registre;
 import com.isbill.dto.MemberEditFormDto;
 import com.isbill.dto.MemberFormDto;
 import com.isbill.service.MemberService;
 import com.isbill.service.PrincipalService;
+import com.isbill.service.RegistreService;
 import groovy.util.logging.Slf4j;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -29,6 +31,7 @@ public class MemberController {
     private final MemberService memberService;
     private final PasswordEncoder passwordEncoder;
     private final PrincipalService principalService;
+    private final RegistreService registreService;
 
     @GetMapping("/new")
     public String memberForm(Model model) {
@@ -78,6 +81,8 @@ public class MemberController {
         Member.editMember(member, memberEditFormDto, passwordEncoder);
 
         memberService.editMember(member);
+
+        registreService.changeName(member.getId(), memberEditFormDto.getName());
 
         return "redirect:/";
     }
