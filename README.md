@@ -78,7 +78,7 @@
    ![image](https://github.com/baikinsoo/isbill/assets/48581772/7afff8c4-30b5-46ff-85fa-f638f46d8d46)
 
 **4. 이름, 비밀번호 변경**
-1. 최초 회원 가입 이후 마이페이지를 통해 비밀번호 변경이 가능하다.
+1. 최초 회원 가입 이후 마이페이지를 통해 이름, 비밀번호 변경이 가능하다.
    
 ![Animation](https://github.com/baikinsoo/isbill/assets/48581772/f1f61a68-9552-44b7-8630-947e01f64bce)
 
