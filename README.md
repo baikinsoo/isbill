@@ -12,7 +12,12 @@
   1.2. 역할 설명  
   1.3. 기능 설명
 2. 프로젝트 상세 설명
-   
+  2.1. 역할 관련
+  2.2. 채무자 등록, 금액 입력 및 확인
+  2.3. 게시판 글 작성 (글 작성, 수정, 삭제, 댓글 작성, 삭제, 첨부 파일 등록)
+  2.4. 회원 이름, 비밀번호 변경
+  2.5. 장부, 게시판 검색
+3. 개선 사항
 
 &nbsp;
 # 프로젝트 설명
@@ -117,7 +122,7 @@ http.authorizeRequests()
 <a class="nav-link" href="/members/logout">로그아웃</a>
 </li>
 ```
-3. ajax를 통해 특정 URL에 대해 요청, 응답을 받는다.
+3. ajax를 통해 특정 URL에 대해 요청, 응답을 받는다. (여기서 URL에 대한 요청은 해당 사용자의 로그인 여부 및 등급에 대한 여부를 판단한다.)
 ```
 function billNew() {
   var token = $("meta[name='_csrf']").attr("content");
@@ -148,7 +153,8 @@ function billNew() {
   });
 }
 ```
-4. ResponseEntity를 이용하여 ajax로 넘어온 요청에 대한 응답을 전달한다.
+4. ResponseEntity를 이용하여 ajax로 넘어온 요청에 대한 응답을 전달한다
+5. Principal 객체를 통해 로그인이 되었는지 아닌지 로그인이 된 경우 해당 사용자의 역할에 대해 조회하고 경우에 따른 응답을 전달한다.
 ```
 @GetMapping("billNew")
     public ResponseEntity billNew(Principal principal) {
@@ -412,3 +418,104 @@ public String saveFile(MultipartFile multipartFile) throws IOException {
         return ResponseEntity.ok("삭제되었습니다.");
     }
 ```
+
+## 4. 회원 이름, 비밀번호 변경
+1. 마이페이지를 통해 회원의 이름, 비밀번호 변경이 가능하다. 마이페이지 버튼 또한 회원일 경우에만 필요한 버튼이기 때문에 역할이 검증된 회원에게만 보이도록 설정한다.
+2. Principal 객체를 통해 로그인한 회원의 엔티티를 가져온다. 전달 받은 이름, 비밀번호의 정보로 변경한 뒤 DB에 다시 저장한다.
+3. 회원 이름과 연관된 DB의 모든 데이터를 변경한다.
+```
+@PostMapping("/edit")
+    public String editMember(@Validated @ModelAttribute("member") MemberEditFormDto memberEditFormDto, Principal principal) {
+
+        Member member = principalService.findMember(principal);
+
+        Member.editMember(member, memberEditFormDto, passwordEncoder);
+
+        memberService.editMember(member);
+
+        registreService.changeName(member.getId(), memberEditFormDto.getName());
+
+        return "redirect:/";
+    }
+```
+## 5. 장부, 게시판 검색
+- 검색 조건은 동적 쿼리가 필요하기 때문에 Querydsl을 통해 원하는 원하는 검색 조건 쿼리를 작성한다.
+
+1. 홈페이지 상단에 장부 검색 버튼을 누르게 되면 '[주소]/'의 경로로 입력된 데이터가 전달된다.
+```
+<div style="margin-right: 20px;">
+  <form class="form-inline my-2 my-lg-0" th:action="@{/}" method="get">
+    <input name="searchQuery" class="form-control mr-sm-2" type="search" placeholder="장부 검색" aria-label="Search">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+  </form>
+</div>
+```
+2. / 경로로 데이터가 전달되면, 반환값이 Page<>인 getMainPage 메서드를 호출한다.
+```
+@GetMapping("/")
+    public String main(RegistreSearchDto registreSearchDto, Optional<Integer> page, Model model) {
+        Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 5);
+        Page<Registre> mainPage = registreService.getMainPage(registreSearchDto, pageable);
+        model.addAttribute("registreSearchDto", registreSearchDto);
+        model.addAttribute("registres", mainPage);
+        model.addAttribute("maxPage", 5);
+        return "main";
+    }
+```
+3. getMainPage는 Repository의 getRegistreList를 호출하게 되고, getRegistreList는 CustomRepository에 해당하고, 해당 커스텀 Repository는 Querydsl을 사용하여 동적 쿼리를 사용한다.
+```
+@RequiredArgsConstructor
+public class RegistreRepositoryCustomImpl implements RegistreRepositoryCustom{
+
+    private final JPAQueryFactory jpaQueryFactory;
+
+    private BooleanExpression registreName(String searchQuery) {
+        return StringUtils.isEmpty(searchQuery) ? null :
+                QRegistre.registre.name.like("%" + searchQuery + "%");
+    }
+
+    @Override
+    public Page<Registre> getRegistreList(RegistreSearchDto registreSearchDto, Pageable pageable) {
+
+        QueryResults<Registre> registreQueryResults = jpaQueryFactory
+                .selectFrom(QRegistre.registre)
+                .where(registreName(registreSearchDto.getSearchQuery()))
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
+                .fetchResults();
+
+        List<Registre> content = registreQueryResults.getResults();
+        long total = registreQueryResults.getTotal();
+
+        return new PageImpl<>(content, pageable, total);
+    }
+}
+```
+4. JPAQueryFactory를 통해 Querydsl를 사용하며, BooleanExpression를 통해 쿼리 조건을 작성한다.
+5. getRegistreList 메서드를 통해 원하는 동적 쿼리를 실행 시켜 원하는 조건의 데이터를 Page<>로 반환한다.
+6. 위 코드의 경우 String 즉, 검색명이 전달되면 해당 이름이 포함되어 있는 장부(registre)를 검색하여 페이징 조건에 맞게 반환한다.
+7. 페이징을 통해 각 페이지가 지정되어 있을 때 검색 조건이 유지 될 수 있도록 쿼리 파라미터로 검색어를 지속적으로 전달한다.
+```
+<input type="hidden" name="searchQuery" th:value="${registreSearchDto.searchQuery}">
+```
+8. 페이징 된 결과를 페이지별로 출력하고, 각 페이지 번호를 클릭하게 되면, 위의 hidden을 통해 입력된 검색 조건과, 페이지 번호가 / 경로의 GET 요청을 보내게 되고, 해당 요청을 받게 되면 위의 커스텀 Repository를 호출하는 방식을 반복하며 원하는 검색 조건을 유지하며 페이징된 결과를 보여준다.
+```
+<li class="page-item" th:classappend="${registres.number eq 0}?'disabled':''">
+  <a th:href="@{'/' + '?searchQuery=' + ${registreSearchDto.searchQuery} + '&page=' + ${registres.number-1}}" aria-label='Previous' class="page-link">
+    <span aria-hidden='true'>Previous</span>
+  </a>
+</li>
+```
+-  게시판 검색도 장부 검색과 동일한 방식으로 검색된다.
+
+&nbsp;
+# 개선 사항
+  
+## 1. 기능
+1. 예외처리 부분에 있어서 부족한 부분이 많다. 기본적인 데이터 전달은 @Validation 같은 검증을 통해 사전 방지를 했지만, 그 외 사용자가 일으킬 수 있는 예외에 대한 처리가 필요해 보인다. 
+## 2. 보안
+
+## 3. 성능
+
+## 4. 코드
+1. 코드 부분에서 Controller <-> Service <-> Repository 관계에서 데이터를 주고 받을 때 Controller <-> Service 간에 데이터를 주고 받을 때 엔티티가 직접 사용되는 코드가 부분 부분 있다. 엔티티가 직접 사용되는 부분이 없도록 수정해야 할 것 같다.
