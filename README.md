@@ -3,9 +3,8 @@
   
 **USE : JAVA, Spring, Spring Security, Spring JPA, Querydsl, Thymleaf, Gradle, MySQL, AWS**  
 
-&nbsp;
 ### What is 돈 갚아라
-돈 갚아라 Project는 평소 친구들과의 가벼운 채무관계에 있어 기록과 동시에 계산을 편리하게 하기 위해 만들었고, 추가적으로 게시판을 통해 소통 할 수 있는 서비스다.
+- 돈 갚아라 Project는 평소 친구들과의 가벼운 채무관계에 있어 기록과 동시에 계산을 편리하게 하기 위해 만들었고, 추가적으로 게시판을 통해 소통 할 수 있는 서비스다.
 
 ### 목차
 1. 프로젝트 설명  
@@ -167,6 +166,7 @@ function billNew() {
 ```
 
 ## 2. 채무자 등록, 금액 입력 및 확인
+**1. 채무자 등록**  
 1. @Validated, BindingResult를 통해 데이터에 대해 검증을 거친 뒤, findBill을 통해 기존에 존재하는 채무자인지 2차 검증이 이루어진다. 2가지 검증을 통과하게 되면, 새로운 채무자가 등록된다.
 2. 1차 데이터 검증에 실패하게 되면, BindingResult에 오류와 관련된 데이터를 포함하고, DB를 조회하여 이미 존재하는 채무자인지 검증한다.
 3. Principal을 통해 현재 로그인한 회원을 인식하여 DB에 해당 회원에 대한 데이터가 저장된다.
@@ -190,7 +190,8 @@ function billNew() {
         return "redirect:/";
     }
 ```
-4. 금액 입력의 경우, Principal을 통해 회원을 인식하고, 해당 회원에 대한 채무자와 장부 DB를 가져온 뒤 사용자가 입력한 금액 데이터를 전달 받아 DB에 저장한다.
+**2. 금액 입력 및 확인**
+1. 금액 입력의 경우, Principal을 통해 회원을 인식하고, 해당 회원에 대한 채무자와 장부 DB를 가져온 뒤 사용자가 입력한 금액 데이터를 전달 받아 DB에 저장한다.
 ```
 @PostMapping("/new")
     public String moneyNew(@Valid @ModelAttribute MoneyFormDto moneyFormDto, BindingResult bindingResult, Model model, Principal principal) {
@@ -215,7 +216,7 @@ function billNew() {
         return "redirect:/";
     }
 ```
-5. 조회에 필요한 데이터를 가져온 뒤 saveMoney 로직을 통해 금액을 입력하고, DB에 저장된 최종 계산 금액에 입력된 데이터를 + - 하여 사용자가 금액을 입력하게 되면, 내부에서 계산된 금액을 계속해서 반환하게 된다. 
+2. 조회에 필요한 데이터를 가져온 뒤 saveMoney 로직을 통해 금액을 입력하고, DB에 저장된 최종 계산 금액에 입력된 데이터를 + - 하여 사용자가 금액을 입력하게 되면, 내부에서 계산된 금액을 계속해서 반환하게 된다. 
 ```
 public void saveMoney(MoneyFormDto moneyFormDto, Registre registre, Bill bill) {
 
@@ -234,4 +235,180 @@ public void saveMoney(MoneyFormDto moneyFormDto, Registre registre, Bill bill) {
         Long remainMoney = lastMoney.getRemainMoney();
         Long borrowMoneyAll = lastMoney.getBorrowMoneyAll();
         Long payMoneyAll = lastMoney.getPayMoneyAll();
+```
+## 3. 게시판 글 작성 (글 작성, 수정, 삭제, 댓글 작성, 삭제, 첨부 파일 등록)
+**1. 게시글 목록**
+1. 게시글 목록의 경우 Spring Paging을 이용하여 데이터를 5개씩 보이도록 한다.
+```
+Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 5);
+
+Page<FreeBoard> freeBoardPage = freeBoardService.getFreeBoardPage(freeBoardSearchDto, pageable);
+
+model.addAttribute("freeBoardSearchDto", freeBoardSearchDto);
+model.addAttribute("freeBoardList", freeBoardPage);
+model.addAttribute("maxPage", 5);
+return "freeBoard/freeBoardList";
+```
+**2. 게시글 작성 (첨부 파일 AWS Bucket 저장)**
+1. 게시글 작성에는 첨부파일 등록, 제목, 글 데이터가 넘어오게 된다.
+```
+@PostMapping("/new")
+    public String saveContent(@Validated FreeBoardFormDto freeBoardFormDto,
+                              BindingResult bindingResult,
+                              Principal principal, Model model) throws IOException {
+
+        if (bindingResult.hasErrors()) {
+            return "freeBoard/newContent";
+        }
+
+        String url = s3UploadService.saveFile(freeBoardFormDto.getAttachFile());
+
+        Member member = principalService.findMember(principal);
+
+        freeBoardService.saveContent(freeBoardFormDto, member, url);
+
+        return "redirect:/freeBoard";
+    }
+```
+2. freeBoardFormDto를 통해 데이터가 넘어오고, 그 중 첨부파일을 가져오기 위해 MultipartFile 객체를 가져오고, S3UploadService 즉, AWS Bucket에 첨부파일을 저장하기 위한 Service 코드에 해당한다.
+```
+@PostMapping("/new")
+    public String saveContent(@Validated FreeBoardFormDto freeBoardFormDto,
+                              BindingResult bindingResult,
+                              Principal principal, Model model) throws IOException {
+
+        if (bindingResult.hasErrors()) {
+            return "freeBoard/newContent";
+        }
+
+        String url = s3UploadService.saveFile(freeBoardFormDto.getAttachFile());
+
+        Member member = principalService.findMember(principal);
+
+        freeBoardService.saveContent(freeBoardFormDto, member, url);
+
+        return "redirect:/freeBoard";
+    }
+```
+- 첨부파일 AWS Bucket 저장
+3. 첨부 파일을 AWS Bucket에 저장하기 위해선 gradle을 통해 AWS 의존성을 주입하고, Bucket에 대한 정보를 설정해준다.
+4. 아래 key 정보와, region, bucket의 이름과 같은 구체적인 정보들은 application.yml 파일에 작성한 뒤 불러온다.
+```
+cloud:
+  aws:
+    s3:
+      bucket: spring-bucket-bis
+    stack.auto: false
+    region.static: ap-northeast-2
+    credentials:
+      accessKey: AKIAWEAMPDQHPEFNKQS2
+      secretKey: 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
+```
+```
+@Configuration
+public class S3Config {
+
+    @Value("${cloud.aws.credentials.accessKey}")
+    private String accessKey;
+
+    @Value("${cloud.aws.credentials.secretKey}")
+    private String secretKey;
+
+    @Value("${cloud.aws.region.static}")
+    private String region;
+
+    @Bean
+    public AmazonS3 amazonS3Client() {
+
+        AWSCredentials credentials = new BasicAWSCredentials(accessKey, secretKey);
+
+        return AmazonS3ClientBuilder
+                .standard()
+                .withCredentials(new AWSStaticCredentialsProvider(credentials))
+                .withRegion(region)
+                .build();
+    }
+}
+```
+5. saveFile 메서드가 호출되면, MultipartFile 객체를 전달 받아 AWS Bucket에 연결하여 저장한다. amazonS3 객체의 putObject를 통해 연결된 Bucket에 첨부파일을 저장한다.
+```
+public String saveFile(MultipartFile multipartFile) throws IOException {
+
+        if (multipartFile.isEmpty()) {
+            return null;
+        }
+        String originalFilename = multipartFile.getOriginalFilename();
+        String storeFileName = createStoreFileName(originalFilename);
+
+        ObjectMetadata metadata = new ObjectMetadata();
+        metadata.setContentLength(multipartFile.getSize());
+        metadata.setContentType(multipartFile.getContentType());
+
+        amazonS3.putObject(bucket, storeFileName, multipartFile.getInputStream(), metadata);
+        String string = amazonS3.getUrl(bucket, storeFileName).toString();
+        return string;
+    }
+```
+**3. 게시글 수정 삭제**
+1. 기존의 입력된 첨부파일, 제목, 글을 그대로 가져 온 뒤, 게시글 작성 로직과 유사하게 수정 로직도 작성한다.
+2. 첨부파일의 경우 수정, 삭제의 상황을 구분하여 로직을 작성해준다.
+- 첨부파일의 경우 수정이되거나, 삭제가 될 경우 AWS Bucket에서도 해당 객체를 삭제하도록 코드를 작성한다. (만약 수정, 삭제 시 해당 객체가 Bucket에서 사라지지 않게 되면 Bucket에 무수히 많은 객체들이 쌓이기 때문이다.)
+```
+@PostMapping("/{freeBoardId}/edit")
+    public String editFreeBoard(@PathVariable("freeBoardId") Long freeBoardId, @ModelAttribute("freeBoard") FreeBoardFormDto freeBoardFormDto) throws IOException {
+
+        if (freeBoardFormDto.getAttachFile().isEmpty()) {
+            FreeBoard one = freeBoardService.findOne(freeBoardId);
+            freeBoardService.editContent(one, freeBoardFormDto, null);
+        } else {
+            String url = s3UploadService.saveFile(freeBoardFormDto.getAttachFile());
+            FreeBoard one = freeBoardService.findOne(freeBoardId);
+            s3UploadService.deleteFile(one.getAWSUrl());
+            freeBoardService.editContent(one, freeBoardFormDto, url);
+        }
+        return "redirect:/freeBoard/" + freeBoardId;
+    }
+```
+3. 삭제의 경우 해당 엔티티를 찾아서 삭제한다.
+```
+@DeleteMapping("/{freeBoardId}/delete")
+    public ResponseEntity<String> delete(@PathVariable("freeBoardId") Long freeBoardId) {
+        freeCommentService.deleteFBComment(freeBoardId);
+        try {
+            freeBoardService.delete(freeBoardId);
+            return ResponseEntity.ok("삭제되었습니다.");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("삭제에 실패했습니다.");
+        }
+    }
+```
+**4. 게시글 댓글 입력, 삭제**
+1. 게시글 댓글의 경우 해당 게시글에 대한 인덱스, 현재 로그인 중인 회원 정보가 필요하다.
+2. 댓글 입력칸의 경우 현재 로그인 및 역할이 부여된 회원에게만 보여준다. Principal을 통해 현재 로그인한 회원 정보를 가져오고, @PathVariable을 통해 현재 게시글에 대한 인덱스 정보를 통해 게시글 엔티티를 가져온다.
+3. 게시글 엔티티와 로그인한 회원 정보를 토대로 댓글 작성 한다.
+```
+@PostMapping("/{freeBoardId}")
+    public String comment(@PathVariable("freeBoardId") Long freeBoardId,
+                          @Validated @ModelAttribute("freeCommentDto") FreeCommentDto freeCommentDto,
+                          Principal principal) {
+
+        FreeBoard one = freeBoardService.findOne(freeBoardId);
+        Member member = principalService.findMember(principal);
+        freeCommentService.saveComment(one, member, freeCommentDto);
+
+        return "redirect:/freeBoard/" + freeBoardId;
+    }
+```
+4. 삭제의 경우 현재 로그인한 회원의 정보와 댓글 작성자와 일치 할 경우 삭제 버튼이 보이게 되고, 버튼을 누르게 되면 해당 인덱스에 해당하는 댓글이 삭제된다.
+```
+<td><div th:if="${#authentication.name == Comments.getMember().getEmail()}">
+  <button th:onclick="'deleteComment(' + ${Comments.getId()} + ',' + ${freeBoard.getId()} + ')'" class="comment-delete-button" >삭제</button>
+</div></td>
+```
+```
+@DeleteMapping("/{commentId}/delete")
+    public ResponseEntity<String> delete(@PathVariable("commentId") Long commentId) {
+        freeCommentService.deleteOne(commentId);
+        return ResponseEntity.ok("삭제되었습니다.");
+    }
 ```
