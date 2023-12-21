@@ -95,7 +95,8 @@
 # 프로젝트 상세 설명
 
 ## 1. 역할 관련  
-1. Spring Security에 의해 특정 URL에 접근 허용할 역할을 지정한다.
+1. Spring Security에 의해 특정 URL에 접근 허용할 역할을 지정한다.  
+   1.1. antMatchers와 mvcMatchers를 통해 단순 URL과 mvc Controller의 경로에 대해 접근 역항르 구분짓는다.
 ```
 http.authorizeRequests()
 .mvcMatchers("/**","/css/**", "/js/**").permitAll()
@@ -105,6 +106,7 @@ http.authorizeRequests()
 .anyRequest().authenticated();
 ```
 2. HTML에 Spring Security를 적용하여 화면 선택 가능 역할에 대해 구분한다.  
+   2.1. sec:authorize의 hasAnyAuthority, isAnonymous(), isAuthenticated() 메서드를 이용하여 상황에 맞게 접근 권한을 구분 할 수 있다.
 ```
 <li class="nav-item" sec:authorize="true">
 <a class="nav-link" href="/patch">패치 노트</a>
@@ -123,6 +125,7 @@ http.authorizeRequests()
 </li>
 ```
 3. ajax를 통해 특정 URL에 대해 요청, 응답을 받는다. (여기서 URL에 대한 요청은 해당 사용자의 로그인 여부 및 등급에 대한 여부를 판단한다.)
+   3.1. ajax에 url, type(HTTP 메서드), success(요청 성공시), error(요청 실패시) 필드들을 이용하여, 비동기적으로 페이지 전체를 새로고침하지 않고 서버와 데이터를 교환한다.
 ```
 function billNew() {
   var token = $("meta[name='_csrf']").attr("content");
@@ -244,7 +247,8 @@ public void saveMoney(MoneyFormDto moneyFormDto, Registre registre, Bill bill) {
 ```
 ## 3. 게시판 글 작성 (글 작성, 수정, 삭제, 댓글 작성, 삭제, 첨부 파일 등록)
 **1. 게시글 목록**
-1. 게시글 목록의 경우 Spring Paging을 이용하여 데이터를 5개씩 보이도록 한다.
+1. 게시글 목록의 경우 Spring JPA의 Paging 기능을 이용하여 데이터를 5개씩 보이도록 한다.
+   1.1. pageable은 Page 인터페이스의 메서드 파라미터로 주로 사용되며 페이지에 관련된 내용들을 포함한다.
 ```
 Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 5);
 
@@ -256,7 +260,8 @@ model.addAttribute("maxPage", 5);
 return "freeBoard/freeBoardList";
 ```
 **2. 게시글 작성 (첨부 파일 AWS Bucket 저장)**
-1. 게시글 작성에는 첨부파일 등록, 제목, 글 데이터가 넘어오게 된다.
+1. 게시글 작성에는 첨부파일 등록, 제목, 글 데이터가 넘어오게 된다. (MultipartFile을 통해 바이너리 데이터가 담겨져서 넘어온다.)
+   1.1. 첨부파일의 제공자를 Principal을 통해 구분하고, 제공자 및 파일 경로를 저장소에 저장한다.
 ```
 @PostMapping("/new")
     public String saveContent(@Validated FreeBoardFormDto freeBoardFormDto,
@@ -337,6 +342,7 @@ public class S3Config {
 }
 ```
 5. saveFile 메서드가 호출되면, MultipartFile 객체를 전달 받아 AWS Bucket에 연결하여 저장한다. amazonS3 객체의 putObject를 통해 연결된 Bucket에 첨부파일을 저장한다.
+   5.1. createStoreFileName() 메서드는 Bucket에 저장되는 파일명이 중복되지 않도록 변경하는 메서드에 해당한다.(코드는 별도로 구현되어 있다.)
 ```
 public String saveFile(MultipartFile multipartFile) throws IOException {
 
@@ -516,6 +522,8 @@ public class RegistreRepositoryCustomImpl implements RegistreRepositoryCustom{
 ## 2. 보안
 
 ## 3. 성능
-
+1. 현재 하나의 서버에서 동작하는 프로젝트이기 때문에 추후에 사용자가 많아지게 되면, 서버를 여러대 돌릴 상황까지 고려해야 한다.
+2. 추후 프록시 기술이나, redis 같은 동시성에 관련된 기술을 추가 하여 대용량 처리에 대해 대비해야 한다.
 ## 4. 코드
 1. 코드 부분에서 Controller <-> Service <-> Repository 관계에서 데이터를 주고 받을 때 Controller <-> Service 간에 데이터를 주고 받을 때 엔티티가 직접 사용되는 코드가 부분 부분 있다. 엔티티가 직접 사용되는 부분이 없도록 수정해야 할 것 같다.
+2. Controller 경로 명을 수정할 필요가 있다.(delete,edit과 같은 동사가 직접 사용되지 않도록 수정해야 한다.)
