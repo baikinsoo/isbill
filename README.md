@@ -23,7 +23,10 @@
 # 프로젝트 설명
 
 ## 1. ERD / API 명세서(Swagger)
+### ERD
 ![image](https://github.com/baikinsoo/isbill/assets/48581772/04f4f813-e130-4f14-bb4f-5dff6681beed)
+&nbsp;
+### API 명세서
 ![image](https://github.com/baikinsoo/isbill/assets/48581772/6640ab88-e8f6-441d-a40c-c3d943007e2c)
 ### Swagger 명세서 URL : http://bismoney.xyz/swagger-ui/index.html  
 &nbsp;
