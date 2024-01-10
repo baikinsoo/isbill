@@ -126,7 +126,7 @@ public class UpBoardController {
         return "redirect:/upBoard/admin";
     }
 
-    @DeleteMapping("/{upBoardId}/delete")
+    @DeleteMapping("/{upBoardId}")
     public ResponseEntity<String> delete(@PathVariable("upBoardId") Long upBoardId) {
 
         try {

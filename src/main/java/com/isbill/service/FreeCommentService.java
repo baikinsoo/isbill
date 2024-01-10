@@ -29,7 +29,7 @@ public class FreeCommentService {
         freeCommentRepository.save(freeComment);
     }
 
-    public List<FreeComment> findCotent(Long id) {
+    public List<FreeComment> findContent(Long id) {
         return freeCommentRepository.findByFreeBoard_Id(id);
     }
 

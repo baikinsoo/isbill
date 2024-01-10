@@ -17,7 +17,7 @@
                 var token = $("meta[name='_csrf']").attr("content");
                 var header = $("meta[name='_csrf_header']").attr("content");
 
-                var url = "/freeBoard/" + freeBoardId + "/delete";
+                var url = "/freeBoard/" + freeBoardId;
 
                 $.ajax({
                     url      : url,
@@ -39,7 +39,7 @@
                 var token = $("meta[name='_csrf']").attr("content");
                 var header = $("meta[name='_csrf_header']").attr("content");
 
-                var url = "/freeComment/" + commentId + "/delete";
+                var url = "/freeComment/" + commentId;
 
                 $.ajax({
                     url      : url,

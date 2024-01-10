@@ -47,7 +47,6 @@ public class MoneyController {
 
     @PostMapping("/new")
     public String moneyNew(@Valid @ModelAttribute MoneyFormDto moneyFormDto, BindingResult bindingResult, Model model, Principal principal) {
-        log.info("=============================");
 
         if (bindingResult.hasErrors()) {
             List<Bill> bills = billService.findMemberBills(principal);

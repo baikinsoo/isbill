@@ -20,8 +20,11 @@ spring:
       enabled: true
     livereload:
       enabled: true
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
 
-#  h2:
+  #  h2:
 #    console:
 #      enabled: true
 #      path: /h2-console
@@ -52,3 +55,4 @@ cloud:
     credentials:
       accessKey: AKIAWEAMPDQHPEFNKQS2
       secretKey: 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
+

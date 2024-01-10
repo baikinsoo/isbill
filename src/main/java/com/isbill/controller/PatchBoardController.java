@@ -78,7 +78,7 @@ public class PatchBoardController {
         return "patch/PBContent";
     }
 
-    @DeleteMapping("/{patchId}/delete")
+    @DeleteMapping("/{patchId}")
     public ResponseEntity<String> delete(@PathVariable("patchId") Long patchId) {
 
         patchBoardService.delete(patchId);

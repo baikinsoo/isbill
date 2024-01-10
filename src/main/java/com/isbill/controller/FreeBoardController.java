@@ -85,7 +85,7 @@ public class FreeBoardController {
     public String Content(@PathVariable("freeBoardId") Long freeBoardId, Model model) {
 
         FreeBoard freeBoard = freeBoardService.findOne(freeBoardId);
-        List<FreeComment> freeComments = freeCommentService.findCotent(freeBoardId);
+        List<FreeComment> freeComments = freeCommentService.findContent(freeBoardId);
 
         model.addAttribute("freeBoard", freeBoard);
         model.addAttribute("freeCommentDto", new FreeCommentDto());
@@ -120,7 +120,7 @@ public class FreeBoardController {
         }
     }
 
-    @DeleteMapping("/{freeBoardId}/delete")
+    @DeleteMapping("/{freeBoardId}")
     public ResponseEntity<String> delete(@PathVariable("freeBoardId") Long freeBoardId) {
         freeCommentService.deleteFBComment(freeBoardId);
         try {
@@ -150,6 +150,7 @@ public class FreeBoardController {
         return "freeBoard/editContent";
     }
 
+//    자유게시판 글 수정
     @PostMapping("/{freeBoardId}/edit")
     public String editFreeBoard(@PathVariable("freeBoardId") Long freeBoardId, @ModelAttribute("freeBoard") FreeBoardFormDto freeBoardFormDto) throws IOException {
 

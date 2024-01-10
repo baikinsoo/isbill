@@ -16,7 +16,7 @@ public class FreeCommentController {
 
     private final FreeCommentService freeCommentService;
 
-    @DeleteMapping("/{commentId}/delete")
+    @DeleteMapping("/{commentId}")
     public ResponseEntity<String> delete(@PathVariable("commentId") Long commentId) {
         freeCommentService.deleteOne(commentId);
         return ResponseEntity.ok("삭제되었습니다.");
