@@ -1,8 +1,9 @@
 package com.isbill.service;
 
-import com.isbill.domain.Registre;
-import com.isbill.dto.RegistreSearchDto;
-import com.isbill.repository.RegistreRepository;
+import com.isbill.Registre.infrastructure.Registre;
+import com.isbill.Registre.domain.RegistreSearchDto;
+import com.isbill.Registre.infrastructure.RegistreRepository;
+import com.isbill.Registre.service.RegistreService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -11,15 +12,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @Slf4j

@@ -1,8 +1,8 @@
 package com.isbill.controller;
 
-import com.isbill.domain.FreeBoard;
-import com.isbill.domain.QFreeBoard;
-import com.isbill.repository.FreeBoardRepository;
+import com.isbill.FreeBoard.infrastructure.FreeBoard;
+import com.isbill.FreeBoard.infrastructure.FreeBoardRepository;
+import com.isbill.FreeBoard.infrastructure.QFreeBoard;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.extern.slf4j.Slf4j;
