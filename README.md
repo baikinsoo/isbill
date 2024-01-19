@@ -1,4 +1,4 @@
-### **당신의 채무는? (개인 프로젝트)**
+# **당신의 채무는? (개인 프로젝트)**
 
 - 빈번한 채무 발생으로 인해 기억, 계산 및 정보 전달이 번거로웠던 상황에서, 이러한 어려움을 해결하고자 우리는 간편하게 채무를 기록하고 계산해주며, 한눈에 채무 관계를 확인할 수 있는 채무 관리 서비스를 개발하였습니다.
 
@@ -6,6 +6,8 @@
 **웹 애플리케이션 url 주소 : [http://bismoney.xyz](http://bismoney.xyz/)**
 
 **시연 영상 : https://youtu.be/ohXquAYAHeQ**
+
+<br>
 
 # 프로젝트
 
@@ -17,6 +19,7 @@
 
 **Swagger : http://bismoney.xyz/swagger-ui/index.html**
 
+<br>
 
 ### 역할 별 기능
 
@@ -27,6 +30,8 @@
 **Spring Security**의 **UserPrincipal**과  **hasAuthority**를 이용하여 역할별 보이는 화면을 구분하였습니다.
 
 회원가입시 DB에 저장된 Password가 노출되지 않도록 **PasswordEncoder**를 사용하여 암호화를 했습니다.
+
+<br>
 
 - 일반 사용자
 
@@ -104,6 +109,7 @@
 - AWS EC2를 통해 배포하였습니다.
 - Gabia를 통해 Domain을 구매하여 Router53을 통해 Domain을 연동하였습니다.
 
+<br>
+
 **사용 기술** : JAVA, Spring, Spring Security, Spring JPA, Querydsl, Thymleaf, Gradle, MySQL, AWS
 
-**GitHub** : https://github.com/baikinsoo/isbill
