@@ -1,5 +1,3 @@
----
-
 ### **당신의 채무는? (개인 프로젝트)**
 
 - 빈번한 채무 발생으로 인해 기억, 계산 및 정보 전달이 번거로웠던 상황에서, 이러한 어려움을 해결하고자 우리는 간편하게 채무를 기록하고 계산해주며, 한눈에 채무 관계를 확인할 수 있는 채무 관리 서비스를 개발하였습니다.
@@ -19,7 +17,6 @@
 
 **Swagger : http://bismoney.xyz/swagger-ui/index.html**
 
----
 
 ### 역할 별 기능
 
@@ -106,7 +103,6 @@
 ### 배포
 - AWS EC2를 통해 배포하였습니다.
 - Gabia를 통해 Domain을 구매하여 Router53을 통해 Domain을 연동하였습니다.
----
 
 **사용 기술** : JAVA, Spring, Spring Security, Spring JPA, Querydsl, Thymleaf, Gradle, MySQL, AWS
 
