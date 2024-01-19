@@ -7,6 +7,8 @@
 
 **시연 영상 : https://youtu.be/ohXquAYAHeQ**
 
+<br>
+
 **목차**
 1. 프로젝트 설명
 2. 프로젝트 구현 과정
